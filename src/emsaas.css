@@ -1,0 +1,87 @@
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.addressDetails .addressBox {
+    height: 375px;
+    overflow-y: auto;
+}
+
+full-calendar table tr td {
+    padding: 0px 8px !important;
+}
+
+.fc-daygrid-day-events {
+    min-height: 0px !important;
+
+}
+
+full-calendar.fc .fc-col-header-cell-cushion {
+    padding: 0px 0px;
+}
+
+.sideBar .sideBarMenu ul li img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="email"],
+.form-group input[type="time"] {
+    height: 48px;
+    padding: 12px 8px;
+    border-radius: 6px;
+    border: 1px solid #DADADA;
+    background: #FFF;
+}
+
+.form-group.with-icon input[type="text"] {
+    border-radius: 6px 0 0 6px;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="email"]:focus,
+input[type="time"]:focus {
+    border: 1px solid #0083FD;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 24px;
+    margin-right: 0px;
+}
+
+.row {
+    --bs-gutter-x: 1.5rem;
+}
+
+.p-calendar {
+    width: 100% !important;
+    min-width: 100%;
+}
+
+.form-group .common-select {
+    margin-bottom: 0px;
+}
+
+.sideBar .sideBarMenu {
+    overflow-y: auto;
+}
+
+.sideBar.show-sidebar:hover .sideBarMenu {
+    overflow-y: visible;
+}

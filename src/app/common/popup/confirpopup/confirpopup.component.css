@@ -1,0 +1,13 @@
+.confirmation-content {
+    padding: 1rem;
+  }
+  
+  .confirmation-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    background-color: blue;
+    margin-left: 67px;
+    margin-right: 75px;
+    height: 24px;
+  }

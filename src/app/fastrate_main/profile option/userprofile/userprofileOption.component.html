@@ -1,0 +1,522 @@
+<div class="horizontal-filter">
+  <div class="form-group">
+    <label for="code">Profile Option Code</label>
+    <input type="text" id="code" [(ngModel)]="filter.type" name="code">
+  </div>
+  <div class="form-group">
+    <label for="meaning">Application</label>
+    <input type="text" id="meaning" [(ngModel)]="filter.meaning" name="meaning">
+  </div>
+  <div class="form-group">
+    <label for="description">Profile Display Name</label>
+    <input type="text" id="description" [(ngModel)]="filter.description" name="description">
+  </div>
+  <div class="form-group">
+    <label for="model">Module</label>
+    <select style="
+    color: black;
+   " aria-label="Default select example" (change)="getModuleFeature($event)" [(ngModel)]="filter.model" class="common-select mb-0">
+       <option  selected value="">Select</option>
+       <option [value]="option.moduleID" *ngFor="let option of moduleList">{{option.description}} </option>
+     </select>
+    <!-- <label for="model">Status</label>
+    <select aria-label="Default select example" [(ngModel)]="filter.status" class="common-select mb-0">
+      <option selected value="">Select Status</option>
+      <option value="A">Active </option>
+      <option value="I">Inactive </option>
+    </select> -->
+
+  </div>
+  <div class="form-group">
+    <label for="model">Category</label>
+    <select  style="
+    color: black;
+   " aria-label="Default select example" [(ngModel)]="filter.moduleFeatureId" class="common-select mb-0">
+       <option  selected value="">Select</option>
+       <option [value]="option.applicationModuleFeatureId" *ngFor="let option of featureList">{{option.description}} </option>
+     </select>
+ 
+
+  </div>
+  <!-- <div class="form-group">
+    <label for="model">Module</label>
+    <select formControlName="moduleId" style="
+    color: black;
+   " aria-label="Default select example" [(ngModel)]="filter.model" class="common-input">
+       <option  selected [value]="">Select Module</option>
+       <option [value]="option.applicationModuleFeatureId" *ngFor="let option of moduleList">{{option.description}} </option>
+     </select>
+   
+  </div> -->
+  <div class="form-group no-flex">
+    <label for="model"></label>
+    <button class="common-btn btn-blue " style="min-width: 20px !important;" (click)="getAllLookup_type(1)"><img class="search-white-img m-r-0" src="../../../../assets/images/search-white.svg"> </button>
+  </div>
+  <div class="form-group no-flex">
+    <label for="model"></label>
+    <button class="common-btn btn-blue " style="min-width: 20px !important;" (click)="reset()">Reset </button>
+  </div>
+</div>
+
+
+<div class="user-add-section">
+  <div class="row">
+    <div class="col-md-5 col-sm-3 col-xs-3 d-flex align-items-center">
+      <div class="user-number">
+        <p><span>{{lookuptype_List.length}}</span> Profile Options  </p>
+      </div>
+      <!-- <div *ngIf="showstatus" class="status-drop-div">
+       <select style="border-radius: 42px;
+       border: 1px solid var(--line-color-1, #EBEDF1);" (change)="changestatus($event)">
+         <option>Select</option>
+         <option>Active</option>
+         <option>Inactive</option>
+       </select>
+      </div> -->
+    </div>
+    <div class="col-md-7 col-sm-9 col-xs-9">
+      <div class="add-user-btn">
+        <!-- <span><select (change)="tablesort($event)">
+          <option value="all">All</option>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select></span> -->
+        .
+        <!-- <select (change)="onChange($event)" id="mySelect"  class="no-border width-70-px small-select">
+          <option [defaultSelected]="true" value="Action" ng-reflect-value="all">Action</option>
+          <option value="ADD"  >Add</option>
+        
+        </select> -->
+
+
+        <!-- <div class="link-img-container app-tooltip">
+          <img (click)="openModal()" src="../../../../assets/images/plus.svg">
+          <p class="tooltiptext app-bottom ">Add New</p>
+        </div> -->
+
+
+        <!-- <svg (click)="openModal()" xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"
+            fill="none">
+            <path d="M8.0026 3.83301V13.1663M3.33594 8.49967H12.6693" stroke="#7B8390" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg> -->
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="user-details-section">
+
+  <table>
+
+    <thead>
+
+      <tr>
+        <th class="width-3"></th>
+        <th class="width-10">Profile Option Code</th>
+        <th class="width-10">Profile DIsplay Name</th>
+        <th class="width-10">Application</th>
+        <th class="width-10">Module</th>
+
+        <th class="width-10">Start Date</th>
+        <th class="width-10">End Date</th>
+        <th class="width-10">Description</th>
+        <!-- <th class="width-5 text-center action-data">Action</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let data of lookuptype_List;  let i = index">
+        <tr id="parent_{{i}}" [class.highlighted]="data.highlighted">
+          <td (click)="toggleSubTable(data)"><ng-container *ngIf="!data.subTableVisible">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                <path
+                  d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
+              </svg></ng-container> <ng-container *ngIf="data.subTableVisible"><svg xmlns="http://www.w3.org/2000/svg"
+                width="16" height="16" fill="currentColor" class="bi bi-dash-square-fill" viewBox="0 0 16 16">
+                <path
+                  d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z" />
+              </svg>
+            </ng-container></td>
+          <td> {{ data.lookupType }}
+
+          </td>
+          <td>{{ data.lookuptypeMeaning ? data.lookuptypeMeaning :"Gender Meaning" }}</td>
+          <td>{{ data.lookuptypDescription }}</td>
+          <td>{{ data.moduleFeatureName }}</td>
+
+
+          <td>{{ data.effectiveStartDate ? (data.effectiveStartDate | date: 'MM/dd/yyyy') :''}}</td>
+          <td>{{ data.effectiveEndDate ? (data.effectiveEndDate | date: 'MM/dd/yyyy') :'' }}</td>
+          <td>
+            <!-- <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" [checked]="data.status=='A'?true:false" (change)="changeStatus($event,data)" >
+            <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+          </div> -->
+          {{"Refresh the instrument list"}} 
+        </td>
+  
+          <!-- <td class="text-center action-data"><svg (click)="editlookuptype(data)" xmlns="http://www.w3.org/2000/svg"
+              width="25" height="24" viewBox="0 0 25 24" fill="none">
+              <path
+                d="M12.5 20.0002H21.5M17 3.50023C17.3978 3.1024 17.9374 2.87891 18.5 2.87891C18.7786 2.87891 19.0544 2.93378 19.3118 3.04038C19.5692 3.14699 19.803 3.30324 20 3.50023C20.197 3.69721 20.3532 3.93106 20.4598 4.18843C20.5665 4.4458 20.6213 4.72165 20.6213 5.00023C20.6213 5.2788 20.5665 5.55465 20.4598 5.81202C20.3532 6.06939 20.197 6.30324 20 6.50023L7.5 19.0002L3.5 20.0002L4.5 16.0002L17 3.50023Z"
+                stroke="#7B8390" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg></td> -->
+        </tr>
+        <tr *ngIf="data.subTableVisible">
+
+          <td colspan="9" class="highlighted">
+            <div class="add-user-btn">
+            
+              Action <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M4 6L8 10L12 6" stroke="#7B8390" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            
+              <svg (click)="openModalCode(data.lookupType,data.moduleFeatureId)" xmlns="http://www.w3.org/2000/svg"
+                width="16" height="17" viewBox="0 0 16 17" fill="none">
+                <path d="M8.0026 3.83301V13.1663M3.33594 8.49967H12.6693" stroke="#7B8390" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+         
+
+            </div>
+            <table class="sub-table">
+              <thead>
+                <tr>
+                  <th class="width-10">Profile Level</th>
+                  <th class="width-10">Product Name</th>
+                  <th class="width-15">User Name</th>
+
+                  <!-- <th>Tag</th> -->
+
+                  <th class="width-10">Profile Value</th>
+                 
+                   <th class="width-10"></th> 
+                </tr>
+              </thead>
+              <tbody>
+                <tr [class.highlighted]="data?.highlighted" *ngFor="let subRow of data.lookupCodes; let j = index">
+                  <td *ngIf="!subRow.isEditable">{{ subRow.code }}</td>
+                  <td *ngIf="!subRow.isEditable">{{ subRow.lookupcodeMeaning }}</td>
+                  <!-- <td *ngIf="!subRow.isEditable">{{ subRow.lookupcodeDescription }}</td> -->
+
+                  <!-- <td *ngIf="!subRow.isEditable">{{ "!"}}</td> -->
+
+                  <td *ngIf="!subRow.isEditable">{{ "Devon Lane" }}</td>
+                 <td>
+                  <select id="module"  style="
+                  color: black;
+                 " aria-label="Default select example"  class="common-select">
+                     <option selected value="">Select</option>
+                     <option  >Option1</option>
+                     <option  >Option2</option>
+                     <option  >Option3</option>
+                   </select>
+                 </td>
+                  <!-- <td *ngIf="!subRow.isEditable">{{ subRow.status}}</td> -->
+                  <td  >
+                    <!-- <span>
+                      
+                      <svg (click)="editlookupcode(subRow,data.lookupType,data.moduleFeatureId)"
+                        xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+                        <path
+                          d="M12.5 20.0002H21.5M17 3.50023C17.3978 3.1024 17.9374 2.87891 18.5 2.87891C18.7786 2.87891 19.0544 2.93378 19.3118 3.04038C19.5692 3.14699 19.803 3.30324 20 3.50023C20.197 3.69721 20.3532 3.93106 20.4598 4.18843C20.5665 4.4458 20.6213 4.72165 20.6213 5.00023C20.6213 5.2788 20.5665 5.55465 20.4598 5.81202C20.3532 6.06939 20.197 6.30324 20 6.50023L7.5 19.0002L3.5 20.0002L4.5 16.0002L17 3.50023Z"
+                          stroke="#7B8390" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+
+                    </span> -->
+                  </td>
+
+
+                </tr>
+                <tr>
+                  <td *ngIf="!data.lookupCodes">No Result found</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <div class="b-pagination-outer">
+    <div class="left-pagination">
+      <span>{{ (currentPage - 1) * itemsPerPage + 1 }} - {{ (currentPage - 1) * itemsPerPage + lookuptype_List.length }}
+        of {{totalRecords}}</span>
+    </div>
+    <div class="right-pagination">
+      <div class="show-result">
+        <p>Show results:</p>
+        <select class="custom-select" [(ngModel)]="itemsPerPage" (change)="getAllLookup_type(1)">
+          <option value="10">10</option>
+          <option value="20">20</option>
+        </select>
+      </div>
+      <ul id="border-pagination">
+        <li><a class="no-border" (click)="getAllLookup_type(1)"><img
+              src="../../../../assets/images/chevron-left.svg"></a></li>
+        <li *ngFor="let page of totalPagesArray"> <a (click)="getAllLookup_type(page)"
+            [class.active]="page == currentPage">{{page}}</a></li>
+        <!-- <li><a (click)="getAllLookup_type(2)" [class.active]="2 == currentPage"  >2</a></li>
+      <li><a (click)="getAllLookup_type(3)" [class.active]="3 === currentPage" >3</a></li>
+      <li><a (click)="getAllLookup_type(4)" [class.active]="4 === currentPage" >4</a></li>
+      <li><a (click)="getAllLookup_type(5)" [class.active]="5=== currentPage" >5</a></li>
+      <li><a (click)="getAllLookup_type(6)" [class.active]="6 === currentPage" >6</a></li>
+      <li><a (click)="getAllLookup_type(7)" [class.active]="7 === currentPage" >7</a></li> -->
+        <li><a class="no-border" (click)="getAllLookup_type(totalPages)"><img
+              src="../../../../assets/images/chevron-right.svg"></a></li>
+      </ul>
+    </div>
+
+
+  </div>
+</div>
+
+<div class="modalrole" [ngStyle]="{'display': showModal ? 'block' : 'none'}">
+  <div class="modal-role-content">
+    <div class="select-role-popup">
+
+      <div>
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 *ngIf="!edittable" class="modal-title" id="staticBackdropLabel">Add New Lookup</h1>
+              <h1 *ngIf="edittable" class="modal-title" id="staticBackdropLabel">Edit Lookup</h1>
+            </div>
+            <div class="modal-body">
+              <div class="form">
+                <form (ngSubmit)="addlookup_type()" [formGroup]="lookuptypeForm">
+                  <div class="form-group ">
+                    <label>Lookup Type<span style="color:red;">*</span></label>
+                    <input type="text" class="common-input" (keydown.space)="$event.preventDefault()"
+                      [readonly]="edittable" formControlName="type">
+                    <div *ngIf="submitted && f['type'].errors">
+
+                      <div *ngIf="f['type'].errors['required']" style="color: red;">Lookup Name is required</div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Module<span style="color:red;">*</span></label>
+                    <select id="module" formControlName="moduleId" style="
+                   color: black;
+                  " aria-label="Default select example" (change)="getModuleFeature($event)" class="common-select">
+                      <option selected value="">Select Module</option>
+                      <option [value]="option.moduleID" *ngFor="let option of moduleList">{{option.description}}
+                      </option>
+                    </select>
+                    <!-- <input type="text" class="common-input"  [readonly]="edittable" formControlName="moduleFeatureId" placeholder="Enter module"> -->
+                    <div *ngIf="submitted && f['moduleId'].errors">
+                      <div *ngIf="f['moduleId'].errors['required']" style="color: red;">Module is required</div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Module's Feature<span style="color:red;">*</span></label>
+                    <select id="feature" formControlName="moduleFeatureId" style="
+                   color: black;
+                  " aria-label="Default select example" (change)="getFeature($event)" class="common-select">
+                      <option selected value="">Select Module Feature</option>
+                      <option [value]="option.applicationModuleFeatureId" *ngFor="let option of featureList">
+                        {{option.description}} </option>
+                    </select>
+                    <!-- <input type="text" class="common-input"  [readonly]="edittable" formControlName="moduleFeatureId" placeholder="Enter module"> -->
+                    <div *ngIf="submitted && f['moduleFeatureId'].errors">
+                      <div *ngIf="f['moduleFeatureId'].errors['required']" style="color: red;">Module's Feature is
+                        required</div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Meaning<span style="color:red;">*</span></label>
+                    <input type="text" formControlName="meaning" class="common-input" >
+                    <div *ngIf="submitted && f['meaning'].errors">
+                      <div *ngIf="f['meaning'].errors['required']" style="color: red;">Meaning is required</div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Description<span style="color:red;">*</span></label>
+                    <input type="text" formControlName="description" class="common-input"
+                      >
+                    <div *ngIf="submitted && f['description'].errors">
+                      <div *ngIf="f['description'].errors['required']" style="color: red;">Description is required</div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Start Date<span style="color:red;">*</span></label>
+                    <input type="Date" formControlName="effectiveStartDate" (change)="lokup_setMaxDate($event)"
+                      [max]="lookupmax" class="common-input" placeholder="dd/mm/yyyy">
+                    <div *ngIf="submitted && f['effectiveStartDate'].errors">
+                      <div *ngIf="f['effectiveStartDate'].errors['required']" style="color: red;">Start Date is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>End Date</label>
+                    <input type="Date" formControlName="effectiveEndDate" (change)="lookup_setMinDate($event)"
+                      [min]="lookupmin" class="common-input" placeholder="dd/mm/yyyy">
+                    <!-- <div *ngIf="submitted && f['effectiveEndDate'].errors">
+                      <div *ngIf="f['effectiveEndDate'].errors['required']" style="color: red;">End Date is required</div>
+                    </div> -->
+                  </div>
+
+                  <div class="form-group">
+                    
+                    <label>Selected Status<span style="color:red;">*</span></label>
+                    <select formControlName="status" class="form-select common-select"
+                      aria-label="Default select example">
+                      <option value="">Select Status</option>
+                      <option value="A">Active</option>
+                      <option value="I">Inactive</option>
+                    </select>
+                    <div *ngIf="submitted && f['status'].errors">
+                      <div *ngIf="f['status'].errors['required']" style="color: red;">Status is required</div>
+                    </div>
+                  </div>
+
+
+                  <!-- <div class="form-group">
+                    <button  class="user-slct" type="button"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 5V19M5 12H19" stroke="#0083FD" stroke-width="1.5" stroke-linecap="round"
+                          stroke-linejoin="round" />
+                      </svg> Select Codes</button>
+                  </div> -->
+                  <div class="modal-footer">
+                    <button type="button" (click)="closeModal()" id="cncl" class="common-btn btn-light-red"
+                      data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="common-btn btn-blue">Save</button>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modalrole" [ngStyle]="{'display': showModal1 ? 'block' : 'none'}">
+  <div class="modal-role-content">
+    <div class="select-role-popup">
+
+      <div>
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title" id="staticBackdropLabel">Lookup Type {{lookup_type}}</h1>
+            </div>
+            <div class="modal-body">
+              <div class="form">
+                <form (ngSubmit)="lookup_Code_Form" [formGroup]="lookup_Code_Form">
+                  <div>
+                    <!-- <div *ngFor="let flashCard of flashCards.controls; index as i; first as isFirst"> -->
+                    <div>
+                      <!-- <div *ngIf="isRemovable()" class="button button5" (click)="removeFlashCard(i)">X</div> -->
+                      <div class="form-group">
+                        <label>Lookup Code<span style="color:red;">*</span></label>
+                        <input [readonly]="editcode" type="text" class="common-input" formControlName="code">
+                        <div *ngIf="submit && g['code'].errors">
+
+                          <div *ngIf="g['code'].errors['required']" class="text-danger">Lookup Code is required</div>
+                        </div>
+
+                      </div>
+
+
+                      <!-- <div class="form-group">
+                          <label>Module</label>
+                          <input type="text" class="common-input" formControlName="module"
+                            placeholder="Enter module">
+                            <div *ngIf="submit && g['module'].errors">
+
+                              <div *ngIf="g['module'].errors['required']" class="text-danger"> Module is required</div>
+                            </div>
+                         
+
+                        </div> -->
+                      <div class="form-group">
+                        <label>Meaning<span style="color:red;">*</span></label>
+                        <input type="text" formControlName="meaning" class="common-input">
+
+
+                        <div *ngIf="submit && g['meaning'].errors">
+
+                          <div *ngIf="g['meaning'].errors['required']" class="text-danger"> Meaning is required</div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>Description<span style="color:red;">*</span></label>
+                        <input type="text" formControlName="description" class="common-input">
+
+                        <div *ngIf="submit && g['description'].errors">
+
+                          <div *ngIf="g['description'].errors['required']" class="text-danger"> Description is required
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="form-group">
+                        <label>Display Sequence<span style="color:red;">*</span></label>
+                        <input type="text" formControlName="displaySequence" class="common-input">
+                        <div *ngIf="submit && g['displaySequence'].errors">
+
+                          <div *ngIf="g['displaySequence'].errors['required']" class="text-danger"> Display Sequence is
+                            required</div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>Start Date<span style="color:red;">*</span></label>
+                        <input type="Date" formControlName="effectiveStartDate" (change)="setcodeMaxDate($event)"
+                          [max]="lookupcodemax" class="common-input" placeholder="dd/mm/yyyy">
+                        <div *ngIf="submit && g['effectiveStartDate'].errors">
+
+                          <div *ngIf="g['effectiveStartDate'].errors['required']" class="text-danger"> Start Date is
+                            required</div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>End Date</label>
+                        <input type="Date" formControlName="effectiveEndDate" (change)="setcodeMinDate($event)"
+                          [min]="lookupcodemin" class="common-input" placeholder="dd/mm/yyyy">
+                        <!-- <div *ngIf="submit && g['effectiveEndDate'].errors">
+
+                              <div *ngIf="g['effectivEendDate'].errors['required']" class="text-danger">End Date is required</div>
+                            </div> -->
+                      </div>
+
+                      <div class="form-group">
+                        <label>Selected Status<span style="color:red;">*</span></label>
+                        <select formControlName="status"  class="form-select common-select" aria-label="Default select example">
+                          <option value="">Select Status</option>
+                          <option value="A">Active</option>
+                          <option value="I">Inactive</option>
+                        </select>
+                        <div *ngIf="submit && g['status'].errors">
+                          <div *ngIf="g['status'].errors['required']" style="color: red;">Status is required</div>
+                        </div>
+                      </div>
+
+
+
+                    </div>
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" (click)="closeModalCode()" id="cncl" class="common-btn btn-light-red"
+                     data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" (click)="addlookup_code()" class="common-btn btn-blue">Save</button>
+                    <!-- <button (click)="lookUpCodeAdd()" class="button button5">+</button> -->
+                  </div>
+
+                  <!-- </div> -->
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,286 @@
+<div class="user-add-section">
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-3 d-flex align-items-center">
+            <div class="user-number">
+                <!-- <p> {{totalRecords}} Message Codes</p> -->
+            </div>
+
+
+        </div>
+
+        <div class="col-md-9 col-sm-9 col-xs-9">
+            <div class="add-user-btn">
+
+
+
+                <!-- <div id="modelpop" class="link-img-container app-tooltip" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">
+                    <img (click)="afterModelOpen()" src="../../../../assets/images/plus.svg">
+                    <p class="tooltiptext app-bottom ">Add New</p>
+                </div> -->
+                <div (click)="showlist()">
+                    <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                            fill="none">
+                            <path d="M6.66667 2.6665H4V13.3332H6.66667V2.6665Z" stroke="#7B8390" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M12 2.6665H9.33333V13.3332H12V2.6665Z" stroke="#7B8390" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Manage Columns
+                    </span>
+                </div>
+
+                <div class="list" *ngIf="fieldList">
+                    <ul *ngFor="let data of lookupCodeData">
+                        <li><input type="checkbox" [(ngModel)]="data.selected"
+                                value="data.code">{{data.lookupcodeMeaning}}</li>
+
+                    </ul>
+                    <button type="button" class="common-btn btn-blue">Apply</button>
+                </div>
+
+
+                <span>
+                    <button (click)="afterModelOpen()" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5V19M5 12H19" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg> Add Role</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- List Of roles -->
+<div class="user-details-section">
+    <table id="tblrolelist">
+        <thead>
+            <tr>
+                <th>Role Code</th>
+                <th>Module Name</th>
+                <th>Feature Name</th>
+                <th>Role Name</th>
+                <th>Role Description</th>
+                <th>AD Role Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Permissions</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of rolesData;let i=index">
+                <td>{{data.roleCode}}</td>
+                <td>{{data.moduleText}} </td>
+
+                <td>{{data.moduleFeaturesText}}</td>
+                <td>{{data.roleName}}</td>
+                <td>{{data.roleDescription}}</td>
+                <td>{{data.adRoleName}}</td>
+                <td>{{ data.effectiveStartDate ? (newformatDates(data.effectiveStartDate)) :''}}</td>
+                <td>{{ data.effectiveEndDate ? (newformatDates(data.effectiveEndDate)) :''}}</td>
+                <td>{{data.totalPermission}}</td>
+                <td><svg (click)="Edit(data)" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <g clip-path="url(#clip0_229_9307)">
+                            <path
+                                d="M11.3334 2.00004C11.5085 1.82494 11.7163 1.68605 11.9451 1.59129C12.1739 1.49653 12.4191 1.44775 12.6667 1.44775C12.9143 1.44775 13.1595 1.49653 13.3883 1.59129C13.6171 1.68605 13.8249 1.82494 14 2.00004C14.1751 2.17513 14.314 2.383 14.4088 2.61178C14.5036 2.84055 14.5523 3.08575 14.5523 3.33337C14.5523 3.58099 14.5036 3.82619 14.4088 4.05497C14.314 4.28374 14.1751 4.49161 14 4.66671L5.00004 13.6667L1.33337 14.6667L2.33337 11L11.3334 2.00004Z"
+                                stroke="#344054" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                    </svg>
+                    <svg (click)="Delete(data)" xmlns="http://www.w3.org/2000/svg" width="16" height="17"
+                        viewBox="0 0 16 17" fill="none">
+                        <path
+                            d="M2 4.49967H3.33333M3.33333 4.49967H14M3.33333 4.49967V13.833C3.33333 14.1866 3.47381 14.5258 3.72386 14.7758C3.97391 15.0259 4.31304 15.1663 4.66667 15.1663H11.3333C11.687 15.1663 12.0261 15.0259 12.2761 14.7758C12.5262 14.5258 12.6667 14.1866 12.6667 13.833V4.49967H3.33333ZM5.33333 4.49967V3.16634C5.33333 2.81272 5.47381 2.47358 5.72386 2.22353C5.97391 1.97348 6.31304 1.83301 6.66667 1.83301H9.33333C9.68696 1.83301 10.0261 1.97348 10.2761 2.22353C10.5262 2.47358 10.6667 2.81272 10.6667 3.16634V4.49967M6.66667 7.83301V11.833M9.33333 7.83301V11.833"
+                            stroke="#7B8390" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </td>
+
+            </tr>
+            <tr *ngIf="rolesData.length==0">
+                <td>No Result found</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <div class="b-pagination-outer">
+        <div class="left-pagination">
+            <span>{{ (currentPage - 1) * itemsPerPage + 1 }} - {{ (currentPage - 1) * itemsPerPage +
+                rolesData.length }}
+                of {{totalRecords}}</span>
+        </div>
+        <div class="right-pagination">
+            <div class="show-result">
+                <p>Show results:</p>
+                <select class="custom-select" [(ngModel)]="itemsPerPage" (change)="getRoleList(1)">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                </select>
+            </div>
+            <ul id="border-pagination">
+                <li><a class="no-border" (click)="getRoleList(1)"><img
+                            src="../../../../assets/images/chevron-left.svg"></a></li>
+                <li *ngFor="let page of totalPagesArray"> <a (click)="getRoleList(page)"
+                        [class.active]="page == currentPage">{{page}}</a></li>
+                <li><a class="no-border" (click)="getRoleList(totalPages)"><img
+                            src="../../../../assets/images/chevron-right.svg"></a></li>
+            </ul>
+        </div>
+
+
+    </div>
+
+</div>
+<div class="add-user-popup">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="staticBackdropLabel">Add New Role</h1>
+                </div>
+                <div class="modal-body">
+                    <div class="form">
+                        <form (ngSubmit)="add()" [formGroup]="addForm">
+
+                            <div class="addNewRoleSection">
+                                <div class="form-group labelWhiteBg">
+                                    <input class="inputField" type="text" formControlName="roleCode" id="txtrolecode"
+                                        value="" name="code" (input)="onMessageCodeInput($event)">
+                                    <label class="inputLabel" for="code">Role Code <b style="color: red;">*</b></label>
+                                    <div *ngIf="issubmitted && addForm.get('roleCode').hasError('required')"
+                                        style="color: red;">
+                                        Role Code is required
+                                    </div>
+                                </div>
+                                <div class="form-group labelWhiteBg">
+                                    <label class="selectLabel">Module Name <b style="color: red;">*</b> </label>
+                                    <select id="module123" formControlName="moduleId" style="
+                                color: black;" class="common-select" placeholder="Select Module Name"
+                                        (change)="onModuleSelectionChange($event)">
+                                        <option value="" disabled selected>Select Module
+                                        </option>
+                                        <option *ngFor="let item of moduleData" [value]="item.moduleID">
+                                            {{item.description}}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="issubmitted && addForm.get('moduleId').hasError('required')"
+                                        style="color: red;">
+                                        Module Name is required
+                                    </div>
+                                </div>
+                                <div class="form-group labelWhiteBg">
+                                    <label class="selectLabel">Module Feature <b style="color: red;">*</b></label>
+                                    <select id="moduleFeatureID123" formControlName="moduleFeatureId" style="
+                                    color: black;" class="common-select" placeholder="Enter Module Feature">
+                                        <option value="" disabled selected>Select Module Feature</option>
+                                        <option *ngFor="let item of moduleFeatureData"
+                                            [value]="item.applicationModuleFeatureId">{{item.description}}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="issubmitted && addForm.get('moduleFeatureId')?.hasError('required')">
+                                        <div style="color: red;">
+                                            Module Feature is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group labelWhiteBg">
+                                    <input class="inputField" id="txtrolename" formControlName="roleName" type="text"
+                                        value="" name="">
+
+                                    <label class="inputLabel" for="code">Role Name <b style="color: red;">*</b></label>
+                                    <div *ngIf="issubmitted && addForm.get('roleName')?.hasError('required')">
+                                        <div style="color: red;">
+                                            Role Name is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group labelWhiteBg">
+                                    <input class="inputField" type="text" formControlName="roleDescription"
+                                        id="txtroledescription" value="" name="">
+                                    <label class="inputLabel" for="code">Role Description</label>
+                                </div>
+                                <div class="form-group labelWhiteBg">
+                                    <input class="inputField" type="text" formControlName="adRoleName"
+                                        id="txtadrolename" value="" name="">
+                                    <label class="inputLabel" for="code">Ad Role Name</label>
+                                </div>
+                                <div class="form-group labelWhiteBg">
+                                    <!-- <input class="inputField dateIconSmall" type="text" id="" value="" name="" required> -->
+                                    <input type="Date" id="datestartdate" formControlName="effectiveStartDate"
+                                        (change)="setMaxDate($event)" [max]="maxDate" class="inputField"
+                                        style="height: 46px;">
+
+                                    <label class="inputLabel" for="code">Effective Start Date <b
+                                            style="color: red;">*</b></label>
+                                </div>
+                                <div class="form-group labelWhiteBg">
+                                    <input type="Date" id="dateenddate" formControlName="effectiveEndDate"
+                                        (change)="setMinDate($event)" [min]="minDate" class="inputField"
+                                        style="height: 46px;">
+                                    <label class="inputLabel" for="code">Effective End Date</label>
+                                </div>
+                            </div>
+                            <div class="rolePermissions">
+                                <div class="rolePermissionsHeader">
+                                    <h4>Role Permissions</h4>
+                                    <!-- <div>Paste</div> -->
+                                </div>
+                                <div class="rolePermissionsManger"
+                                    *ngFor="let module of moduleFeaturesAndFunctions; let i=index">
+
+                                    <div class="roleManager">
+                                        <div class="selectRole">
+
+
+                                            <input type="checkbox" [(ngModel)]="module.selected"
+                                                [ngModelOptions]="{standalone: true}" (click)="onCheckboxClick(module)">
+                                            <label> {{module.description}}</label>
+                                        </div>
+                                        <div class="rolePermission">
+                                            {{showfeatureCount(i)}}<span><img (click)="toggle(i)"
+                                                    src="../../../assets/images/arrow-bottom-gray.svg" /></span>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="module.show">
+                                        <div class="roleSeletion billing"
+                                            *ngFor="let feature of module.child;let j=index">
+                                            <div style="display: flex;align-items: center;">
+                                                <div class="roleSeletionType">
+                                                    <input type="checkbox" [(ngModel)]="feature.selected"
+                                                        [ngModelOptions]="{standalone: true}"
+                                                        (click)="onCheckboxClick(feature)" />
+                                                    <label>{{feature.description}}</label>
+                                                </div>
+                                                <div class="rolePermission" style="margin: 21px;">
+                                                    {{showfunctionCount(i,j)}}<span><img (click)="featuretoggle(i,j)"
+                                                            src="../../../assets/images/arrow-bottom-gray.svg" /></span>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="feature.show" class="roleSeletion">
+                                                <div *ngFor="let function of feature.child" class="billing-mdfy">
+                                                    <div class="roleSeletionType">
+                                                        <input type="checkbox" [(ngModel)]="function.selected"
+                                                            [ngModelOptions]="{standalone: true}" />
+                                                        <label>{{function.description}}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="addNewUserBtn">
+                                <button type="button" id="cncl" class="common-btn btn-light-red"
+                                    data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="common-btn btn-blue">Save</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

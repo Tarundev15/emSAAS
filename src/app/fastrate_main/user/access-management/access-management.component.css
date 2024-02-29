@@ -1,0 +1,196 @@
+.input-group{
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    width: 100%;
+    border-radius: 0;
+}
+
+.input-group-prepend{
+    margin-right: -1px;
+    display: -webkit-box;
+    display: flex;
+}
+
+.input-group-text{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0.85rem 1.15rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.25;
+    text-align: center;
+    white-space: nowrap;
+    border: 1px solid #ced4da;
+}
+
+.la.la-user {
+    /* background-image: "assets/icons/icons8-user-16.png"; */
+    background-size: cover; /* Adjust as needed */
+    /* width: 300px;  */
+    /* height: 200px;  */
+    display: inline-block; /* If you want the element to behave like a block */
+  }
+
+.form-control m-input{
+  display: block;
+    height: calc(2.95rem + 2px);
+    padding: 0.85rem 1.15rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    font-family: sans-serif, Arial;
+    position: relative;
+    -webkit-box-flex: 1;
+    flex: 1 1 auto;
+    width: 1%;
+    margin-bottom: 0;
+}
+
+.btn-sm btn-primary{
+    color: #fff;
+    background-color: #5867dd;
+    border-color: #5867dd;
+    padding: 0.45rem 0.8rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+    outline: none !important;
+    -webkit-appearance: button;
+    text-transform: none;
+    overflow: visible;
+    margin: 0;
+    font-family: inherit;
+    
+
+}
+
+.m-form__help{
+    display: inline-block;
+    color: #7b7e8a;
+    font-weight: 300;
+    font-size: .85rem;
+    padding-top: 7px;
+    box-sizing: border-box;
+
+}
+
+.col-lg-3{
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    box-sizing: border-box;
+    margin-left: 230px;
+    margin-top: -27px;
+}
+
+/* Styles for the overlay (background behind the popup) */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Styles for the popup */
+  .popup {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .popup-header {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  
+  .popup-header h2 {
+    margin: 0;
+  }
+  .filter{
+   color: #e24c4c;
+  }
+  .close-popup {
+    cursor: pointer;
+    font-size: 20px;
+    color: #777;
+    line-height: 20px;
+    position: absolute;
+    top: -1px;
+    right: 6px;
+    font-family: calibri;
+  }
+  .popup-content {
+    padding-top: 10px;
+  }
+  .popup-content p {
+    margin: 0;
+  }
+  
+  /* Styles for the close button */
+  .popup-content button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .popup-content button:hover {
+    background-color: #0056b3;
+  }
+  .disabled-div {
+    pointer-events: none; /* Disable mouse and keyboard events */
+    opacity: 7.5;          /* Add a visual indication that it's disabled */
+}
+::ng-deep.loader-screen {
+  z-index: 99999999999999999;
+}
+
+.modal-title1{
+    color: #3f4047;
+    font-weight: 400;
+    font-size: 1.2rem;
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+/* .modal-body1{
+    overflow-y: auto;
+    max-height: 500px;
+    padding: 25px;
+    position: relative;
+    -webkit-box-flex: 1;
+    flex: 1 1 auto;
+    box-sizing: border-box;
+    
+} */
+

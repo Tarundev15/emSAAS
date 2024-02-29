@@ -1,0 +1,22 @@
+.file-upload {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+}
+.buttonSection .button {
+    margin: 0px 0px; 
+}
+.buttonSection .button {
+   margin: 0px 0px; 
+}
+.buttonPrimary {
+   background-color: #ffffff;
+   color: #ffffff
+}
+.button {
+    padding: 0px;
+}

@@ -1,0 +1,278 @@
+<div class="horizontal-filter">
+    <div class="form-group">
+        
+        <input type="text"  id="txtmessage_code" required class="inputField" style="padding-right: 10px;" [(ngModel)]="MessageCode"
+           >
+            <label class="inputLabel" id="lblmessage_code">Message Code</label>
+    </div>
+    <div class="form-group">
+        <label class="selectLabel" id="lbldrpmodule_Id">Module</label>
+        <select id="drpmodule_Id" [(ngModel)]="ModuleId" style="
+        color: black;" class="common-select" placeholder="Select Module Name"
+            (change)="onModuleSelectionChange($event)">
+            <option value="" disabled selected>Select Module
+            </option>
+            <option *ngFor="let item of moduleData" [value]="item.moduleID">{{item.description}}
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="selectLabel" id="lbldrpmodule_FeatureID">Module Feature</label>
+        <select id="drpmodule_FeatureID" [(ngModel)]="moduleFeatureId" style="
+        color: black;" class="common-select" placeholder="Enter Module Feature">
+            <option value="" disabled selected>Select Module Feature</option>
+            <option *ngFor="let item of moduleFeatureData" [value]="item.applicationModuleFeatureId">
+                {{item.description}}
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+       
+        <input class="inputField" required type="text"  id="txtmessage_number" [(ngModel)]="MessageNumber" >
+        <label class="inputLabel" id="lbltxtmessage_number">Message Number</label>
+    </div>
+
+    <div class="form-group no-flex" style="padding-bottom: 25px;">
+        <label for="model"></label>
+        <button class="common-btn btn-blue " id="btnsearch" style="min-width: 20px !important;" (click)="search()"><img
+                class="search-white-img" src="../../../../assets/images/search-white.svg"> </button>
+    </div>
+    <div class="form-group no-flex" style="padding-bottom: 25px;">
+        <label for="model"></label>
+        <button class="common-btn btn-blue " id="btnreset" style="min-width: 20px !important;" (click)="reset()">Reset </button>
+    </div>
+</div>
+
+
+<div class="user-add-section">
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-3 d-flex align-items-center">
+            <div class="user-number" *ngIf="!isSearchClicked">
+                <p id="lblsearhcounrrecords"> {{totalRecords}} Message Codes</p>
+            </div>
+            <div class="user-number" *ngIf="isSearchClicked">
+                <p id="lblfoundcounrrecords"> {{totalRecords}} Record(s) Found</p>
+            </div>
+
+        </div>
+        <div class="col-md-9 col-sm-9 col-xs-9">
+            <div class="add-user-btn">
+                <select id="actions" (change)="onChange($event)"  class="no-border width-70-px small-select">
+                    <option value="Action" ng-reflect-value="all">Action</option>
+                    <option value="ADD">Add</option>
+                </select>
+
+                <div id="modelpop" class="link-img-container app-tooltip" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">
+                    <img (click)="afterModelOpen()" src="../../../../assets/images/plus.svg">
+                    <p class="tooltiptext app-bottom ">Add New</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- List Of Message -->
+<div class="user-details-section">
+    <table id="tblmessagelist">
+        <thead>
+            <tr>
+                <th> Message Code
+                </th>
+                <th> Message Text
+                </th>
+
+                <th>Module
+                </th>
+                <th>Module Feature
+                </th>
+                <th>Message Number
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of messageData;let i=index">
+                <td>
+
+                    {{data.messageCode}}
+                </td>
+                <td>
+
+                    {{data.messageText}}
+                </td>
+
+                <td>{{data.moduleText}}</td>
+                <td> {{data.moduleFeaturesText}}</td>
+                <td>{{data.messageNumber}}</td>
+                <td><svg (click)="Edit(data)" id="btnedit" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <g clip-path="url(#clip0_229_9307)">
+                            <path
+                                d="M11.3334 2.00004C11.5085 1.82494 11.7163 1.68605 11.9451 1.59129C12.1739 1.49653 12.4191 1.44775 12.6667 1.44775C12.9143 1.44775 13.1595 1.49653 13.3883 1.59129C13.6171 1.68605 13.8249 1.82494 14 2.00004C14.1751 2.17513 14.314 2.383 14.4088 2.61178C14.5036 2.84055 14.5523 3.08575 14.5523 3.33337C14.5523 3.58099 14.5036 3.82619 14.4088 4.05497C14.314 4.28374 14.1751 4.49161 14 4.66671L5.00004 13.6667L1.33337 14.6667L2.33337 11L11.3334 2.00004Z"
+                                stroke="#344054" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                    </svg>
+                </td>
+
+            </tr>
+            <tr *ngIf="messageData.length==0">
+                <td>No Result found</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <div class="b-pagination-outer">
+        <div class="left-pagination">
+            <span>{{ (currentPage - 1) * itemsPerPage + 1 }} - {{ (currentPage - 1) * itemsPerPage +
+                messageData.length }}
+                of {{totalRecords}}</span>
+        </div>
+        <div class="right-pagination">
+            <div class="show-result">
+                <p>Show results:</p>
+                <select class="custom-select" [(ngModel)]="itemsPerPage" (change)="GetMessageList(0,0,0,1)">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                </select>
+            </div>
+            <ul id="border-pagination">
+                <li><a class="no-border" (click)="GetMessageList(0,0,0,1)"><img
+                            src="../../../../assets/images/chevron-left.svg"></a></li>
+                <li *ngFor="let page of totalPagesArray"> <a (click)="GetMessageList(0,0,0,page)"
+                        [class.active]="page == currentPage">{{page}}</a></li>
+                <li><a class="no-border" (click)="GetMessageList(0,0,0,totalPages)"><img
+                            src="../../../../assets/images/chevron-right.svg"></a></li>
+            </ul>
+        </div>
+
+
+    </div>
+
+</div>
+<div class="add-user-popup">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="staticBackdropLabel">Add New Message</h1>
+                </div>
+                <div class="modal-body" style="height: 100vh;">
+                    <div class="form">
+                        <form (ngSubmit)="add()" [formGroup]="addForm">
+                            <div class="form-group">
+                                
+                                <input type="text" id="textmessagecode" [readonly]="isEditMode" class="inputField common-input"
+                                    formControlName="messageCode" 
+                                    (input)="onMessageCodeInput($event)" required>
+                                <label class="inputLabel">Message Code <b style="color: red;">*</b></label>
+                                <div *ngIf="issubmitted && addForm.get('messageCode')?.hasError('required')">
+                                    <div style="color: red;">
+                                        Message Code is required
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group labelWhiteBg">
+                                <label class="selectLabel">Module Name <b style="color: red;">*</b> </label>
+                                <select id="module123" formControlName="moduleId" style="
+                                color: black;" class="common-select" placeholder="Select Module Name"
+                                    (change)="onModuleSelectionChange($event)">
+                                    <option value="" disabled selected>Select Module
+                                    </option>
+                                    <option *ngFor="let item of moduleData" [value]="item.moduleID">{{item.description}}
+                                    </option>
+                                </select>
+                                <div *ngIf="issubmitted && addForm.get('moduleId').hasError('required')"
+                                    style="color: red;">
+                                    Module Name is required
+                                </div>
+                            </div>
+                            <div class="form-group labelWhiteBg">
+                                <label class="selectLabel">Module Feature <b style="color: red;">*</b></label>
+                                <select id="moduleFeatureID123" formControlName="moduleFeatureID" style="
+                                color: black;" class="common-select" placeholder="Enter Module Feature">
+                                    <option value="" disabled selected>Select Module Feature</option>
+                                    <option *ngFor="let item of moduleFeatureData"
+                                        [value]="item.applicationModuleFeatureId">{{item.description}}
+                                    </option>
+                                </select>
+                                <!-- <select id="moduleFeatureID123" formControlName="moduleFeatureID" style="
+                                color: black;
+                               " aria-label="Default select example"  class="common-select">
+                                   <option selected value="">Select Module Feature</option>
+                                   <option [value]="option.applicationModuleFeatureId" *ngFor="let option of moduleFeatureData">
+                                     {{option.description}} </option>
+                                 </select> -->
+                                <div *ngIf="issubmitted && addForm.get('moduleFeatureID')?.hasError('required')">
+                                    <div style="color: red;">
+                                        Module Feature is required
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group labelWhiteBg">
+                                
+                                <textarea type="text" formControlName="messageText" class="inputField form-control"
+                                   required>
+                                </textarea >
+                                <label class="inputLabel">Message Text <b style="color: red;">*</b></label>
+                                <div *ngIf="issubmitted && addForm.get('messageText')?.hasError('required')">
+                                    <div style="color: red;">
+                                        Message Text is required
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group labelWhiteBg">
+                                
+                                <textarea type="text" id="txtdescription" formControlName="messageDescription" class="inputField form-control"
+                                    required>
+                                </textarea>
+                                <label class="inputLabel">Message Description</label>
+
+                            </div>
+                            <div class="form-group labelWhiteBg">
+                                <label class="selectLabel" for="messageTypeSelect">Message Type <b style="color: red;">*</b></label>
+                                <select id="messageTypeSelect" formControlName="messageType" style="
+                                color: black;" class="common-select" placeholder="Select Message Type">
+                                    <option value="" disabled selected>Select Message Type</option>
+                                    <option *ngFor="let item of messageTypeData" [value]="item.meaningShortCode">
+                                        {{item.lookupcodeMeaning}}
+                                    </option>
+                                </select>
+                                <div *ngIf="issubmitted && addForm.get('messageType')?.hasError('required')">
+                                    <div style="color: red;">
+                                        Message Type is required
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group labelWhiteBg">
+                                <label class="selectLabel" for="severitySelect">Severity <b style="color: red;">*</b></label>
+                                <select id="severitySelect" formControlName="messageSeverity" style="
+                                color: black;" class="common-select">
+                                    <option value="" disabled selected>Select Severity</option>
+                                    <option *ngFor="let item of messageSeverityeData" [value]="item.meaningShortCode">
+                                        {{item.lookupcodeMeaning}}
+                                </select>
+                                <div *ngIf="issubmitted && addForm.get('messageSeverity')?.hasError('required')">
+                                    <div style="color: red;">
+                                        Severity is required
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="cncl" class="common-btn btn-light-red"
+                                    data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" id="btnsave" class="common-btn btn-blue">Save</button>
+                                <!-- <button type="button" class="common-btn btn-blue" [hidden]="isEditMode"
+                                    (click)="add($event)">Save & Add</button> -->
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

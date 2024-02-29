@@ -1,0 +1,11 @@
+<svg width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="mdi:graph-areaspline">
+<path id="Vector" d="M42.1705 36.685L53.1663 17.6659V50.75H4.83301V7.25006H9.66634V37.555L22.958 14.5001L38.6663 23.6351L48.913 5.9209L53.0938 8.33756L40.4547 30.2084L24.7222 21.1459L10.4155 45.9167H15.8772L26.4863 27.6467L42.1705 36.685Z" fill="url(#paint0_linear_1_198423)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_1_198423" x1="53" y1="22.5001" x2="5" y2="39.0001" gradientUnits="userSpaceOnUse">
+<stop stop-color="#2C50EE"/>
+<stop offset="1" stop-color="#6470FF"/>
+</linearGradient>
+</defs>
+</svg>

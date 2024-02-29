@@ -1,0 +1,141 @@
+<div class="user-add-section">
+    <div class="row">
+      <div class="col-md-9 col-sm-9 col-xs-9 d-flex align-items-center">
+        <div class="user-number">
+          <p>6 Roles </p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-3 col-xs-3">
+        <div class="add-user-btn">
+          <button (click)="openModal()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24" fill="none">
+              <path d="M12 5V19M5 12H19" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>Add Role</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="user-details-section add-role">
+    <table>
+      <thead>
+        <tr>
+          <th>Role title</th>
+          <th>Permissions</th>
+          <th>Created By</th>
+          <th>Added On</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let role of roleJson">
+          <td>
+            {{role.roleName}}
+          </td>
+          <td>{{role.permissionscount}} permissions</td>
+          <td>
+            <p> <img src="../../assets/images/profileImage.jfif"> {{role.createdby}} </p>
+          </td>
+          <td>{{role.addedon}}</td>
+          <td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <g clip-path="url(#clip0_229_9307)">
+                <path
+                  d="M11.3334 2.00004C11.5085 1.82494 11.7163 1.68605 11.9451 1.59129C12.1739 1.49653 12.4191 1.44775 12.6667 1.44775C12.9143 1.44775 13.1595 1.49653 13.3883 1.59129C13.6171 1.68605 13.8249 1.82494 14 2.00004C14.1751 2.17513 14.314 2.383 14.4088 2.61178C14.5036 2.84055 14.5523 3.08575 14.5523 3.33337C14.5523 3.58099 14.5036 3.82619 14.4088 4.05497C14.314 4.28374 14.1751 4.49161 14 4.66671L5.00004 13.6667L1.33337 14.6667L2.33337 11L11.3334 2.00004Z"
+                  stroke="#344054" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </g>
+              <defs>
+                <clipPath id="clip0_229_9307">
+                  <rect width="16" height="16" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+            <svg (click)="deleteRole(role)" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+              viewBox="0 0 16 16" fill="none">
+              <path
+                d="M2 4.00016H3.33333M3.33333 4.00016H14M3.33333 4.00016V13.3335C3.33333 13.6871 3.47381 14.0263 3.72386 14.2763C3.97391 14.5264 4.31304 14.6668 4.66667 14.6668H11.3333C11.687 14.6668 12.0261 14.5264 12.2761 14.2763C12.5262 14.0263 12.6667 13.6871 12.6667 13.3335V4.00016H3.33333ZM5.33333 4.00016V2.66683C5.33333 2.31321 5.47381 1.97407 5.72386 1.72402C5.97391 1.47397 6.31304 1.3335 6.66667 1.3335H9.33333C9.68696 1.3335 10.0261 1.47397 10.2761 1.72402C10.5262 1.97407 10.6667 2.31321 10.6667 2.66683V4.00016M6.66667 7.3335V11.3335M9.33333 7.3335V11.3335"
+                stroke="#ED1B2E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modalrole" [ngStyle]="{'display': showModal ? 'block' : 'none'}">
+    <div class="modal-role-content">
+      <div class="add-user-popup add-role-popup">
+        <div class="">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title" id="staticBackdropLabel">Add New Role</h1>
+              </div>
+              <div class="modal-body">
+                <div class="form">
+                  <form (ngSubmit)="addroleForm()" [formGroup]="roleForm">
+                    <div class="form-group role-name">
+                      <label>Role name</label>
+                      <input type="text" class="form-control" formControlName="roleName" 
+                        placeholder="Billing 0.2">
+                    </div>
+                    <div class="form-group">
+                      <label>Role Permissions</label>
+                    </div>
+                    <div class="select-box-inner" *ngFor="let permission of permissionArray">
+                      <div *ngFor="let data of permission.permission">
+                        <div class="form-group billing">
+                          <span><input type="checkbox" [(ngModel)]="data.acess" [value]="data.acess"
+                              [checked]="data.acess" (change)="updateCheckboxValue(data, $event)">
+                            <label>{{data.txt}} </label></span>
+                          <p><span>5/5 Selected <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                viewBox="0 0 16 16" fill="none">
+                                <path d="M12 10L8 6L4 10" stroke="#0083FD" stroke-width="1.5"
+                                  stroke-linecap="round" stroke-linejoin="round" />
+                              </svg></span></p>
+                        </div>
+                        <div class="form-group prebilling">
+                          <div *ngFor="let dataval of data.subpermisson" class="billing-mdfy">
+                            <div class="add-role-user">
+                              <input type="checkbox" [(ngModel)]="dataval.acess" [value]="dataval.acess"
+                                [checked]="dataval.acess" (ngModelChange)="checkboxChanged(dataval)" />
+                              <label>{{dataval.text}}</label>
+                            </div>
+
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div class="select-box-inner">
+                      <div class="form-group billing">
+                        <span><input type="checkbox">
+                          <label>Management</label></span>
+                      </div>
+                    </div>
+                    <div class="select-box-inner">
+                      <div class="form-group billing">
+                        <span><input type="checkbox">
+                          <label>Task Manage</label></span>
+                      </div>
+                    </div>
+                    <div class="select-box-inner">
+                      <div class="form-group billing">
+                        <span><input type="checkbox">
+                          <label>Notification</label></span>
+                      </div>
+                    </div>
+
+                    <button type="submit">done</button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" (click)="closeModal()"
+                    data-bs-dismiss="modal">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Done</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

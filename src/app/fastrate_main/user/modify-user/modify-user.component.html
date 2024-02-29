@@ -1,0 +1,1075 @@
+<div *ngIf="showModal1">
+  <app-advance-search [advanceTxt]="'USER_SEARCH'" (searchparamid)="searchbytId($event)"
+    (close)="closefn($event)"></app-advance-search>
+</div>
+<p-toast></p-toast>
+<div class="user-add-section">
+  <div class="row">
+    <div class="col-md-3 col-sm-3 col-xs-3 d-flex align-items-center">
+
+    </div>
+    <app-loader *ngIf="userList==null"></app-loader>
+    <div class="col-md-9 col-sm-9 col-xs-9">
+      <div class="add-user-btn">
+
+        <!-- <button id="reset_button" style="display: none;" (click)="reset()">{{"LC20-117D"|lang}}</button>
+        <span (click)="openModelAdvance()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+            viewBox="0 0 16 16" fill="none">
+            <path
+              d="M14 14L11.1 11.1M12.6667 7.33333C12.6667 10.2789 10.2789 12.6667 7.33333 12.6667C4.38781 12.6667 2 10.2789 2 7.33333C2 4.38781 4.38781 2 7.33333 2C10.2789 2 12.6667 4.38781 12.6667 7.33333Z"
+              stroke="#7B8390" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>{{"LC20-43M"|lang}}</span>
+
+        <span (click)="showUpLoadPopup()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+            viewBox="0 0 16 16" fill="none">
+            <path
+              d="M14 10V12.6667C14 13.0203 13.8595 13.3594 13.6095 13.6095C13.3594 13.8595 13.0203 14 12.6667 14H3.33333C2.97971 14 2.64057 13.8595 2.39052 13.6095C2.14048 13.3594 2 13.0203 2 12.6667V10M4.66667 6.66667L8 10M8 10L11.3333 6.66667M8 10V2"
+              stroke="#7B8390" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>{{"LC2-45M"|lang}}</span> -->
+
+        <span>
+
+          <button data-bs-toggle="modal" data-bs-target="#staticBackdrop"><svg xmlns="http://www.w3.org/2000/svg"
+              width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 5V19M5 12H19" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>{{"LC2-46M"|lang}}</button>
+        </span>
+
+        <!-- <span>
+
+          <button [routerLink]="['/eManager/user/add-user']" ><svg
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" >
+            <path d="M12 5V19M5 12H19" stroke="white" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+          </svg>{{"LC2-46M"|lang}}</button>
+        </span> -->
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="user-details-section">
+  <table>
+    <thead>
+      <tr>
+
+        <ng-container *ngFor="let header of tableHeaders;let i=index">
+          <th id="th{{i}}" class="width-{{header.width}}">
+            <div class="um-tableHeader" style="display: flex;">
+              <div class="sort-icon">
+                <i class="fa fa-sort-asc" *ngIf="header?.sort=='ASC'"
+                  (click)="assendingdesending(header.name,'ASC',i)"></i>
+                <i class="fa fa-sort-desc" *ngIf="header?.sort=='DESC'"
+                  (click)="assendingdesending(header.name,'DESC',i)"></i>
+                <!-- </div>{{ header.code|lang }} -->
+              </div>{{ header.label|lang }}
+              <div class="" (click)="showPopup(header.label)">
+                <div *ngIf="header.label!=filterth && header.label!='Added By' && header.label!='Added On'"
+                  class="dotsClick"><span>.</span><span>.</span><span>.</span></div>
+                <div *ngIf="header.label==filterth && header.label!='Added By' && header.label!='Added On'"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M4.5 9H13.5M2.25 4.5H15.75M6.75 13.5H11.25" stroke="#344054" stroke-width="1.5"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                  </svg></div>
+              </div>
+            </div>
+
+
+
+            <div class="popup-overlay" *ngIf="popupVisibility[header.label]">
+              <div class="popup">
+                <div class="popup-header">
+                  <span class="close-popup" (click)="closePopup(header.label)">x</span>
+                </div>
+                <div class="popup-content">
+                  <ul>
+                    <li class="searchFilter">
+                      <input type="search" [(ngModel)]="searchFilter" id="seacrchField"
+                        placeholder="{{'LC19-15M'|lang}}">
+                    </li>
+                    <li class="buttonFilter">
+                      <button class="common-btn reset" id="reset" (click)="reset()">{{"LC20-28M"|lang}} </button>
+                      <button class="common-btn btn-blue" id="apply"
+                        (click)="searchFilterMethod(header.label)">{{"LC20-89M"|lang}}
+                      </button>
+                    </li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+          </th>
+        </ng-container>
+        <th id="action" class="width-10 text-center action-data">{{"LC20-30M"|lang}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let data of userList;let i=index">
+        <tr id="{{data.email}}">
+
+          <td id="userName">
+            <!-- {{data.login}} -->
+            {{data?.firstName + ' ' + data?.lastName}}
+          </td>
+
+          <td id="email">{{data?.email}}</td>
+          <!-- <td id="mobileNumber">{{data.contactNumber1}}</td> -->
+          <td id="email">{{data?.division}}</td>
+          <td id="email">{{data?.reportingmanager}}</td>
+          <td id="email">{{data?.hrmanagerName}}</td>
+          <!-- <td id="mobileNumber">{{data.mobileNumber}}</td> -->
+          <!-- <td id="displayName">{{data.firstName + ' ' + data.lastName}} </td> -->
+          <!-- <td id="status" class="active">
+          <span *ngIf="data.status=='A'" class="active-css">{{data.status}}</span>
+          <span *ngIf="data.status=='I'" class="deactivate-css">{{data.status}}</span>
+        </td> -->
+          <td id="status" class="active">
+            <span *ngIf="data?.activated==true" class="active-css">Active</span>
+            <span *ngIf="data?.activated==false" class="deactivate-css">Inactive</span>
+          </td>
+          <td id="creationDate">{{data?.createdDate | date: 'dd/MM/yy'}}</td>
+          <td id="email">{{data?.usergroup}}</td>
+          <!-- <td><p-progressBar [value]="50"></p-progressBar></td> -->
+          <td><p-progressBar [value]="data.profileCompleteness"></p-progressBar></td>
+          <!-- <td id="createdByName">{{data.createdByName}}</td> -->
+          <!-- <td id="createdByName">{{data?.createdBy}}</td> -->
+
+          <td class="text-center action-data">
+            <span>
+              <img (click)="edit(data,i)" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                src="../../../../assets/images/edit.svg">
+
+            </span>
+            <span><img (click)="fetchUserComment(data.id,data.usergroup,data.email)" value data-bs-toggle="modal"
+                data-bs-target="#Commentmodal" id="Comment" src="../../../../assets/images/comment.svg"></span>
+
+            <span><img (click)="fetchWatcherUserList(data.id,data.usergroup)" value data-bs-toggle="modal"
+                data-bs-target="#Watchermodal" src="../../../../assets/images/eye.svg"></span>
+
+            <!-- <span><img (click)="openDialog(data.id)" src="../../../../assets/images/unlock.svg"></span> -->
+            <span><img (click)="loadUserAccessGroup(data.id)" value data-bs-toggle="modal"
+                data-bs-target="#UserAccessGroupmodal" id="accessGroup" src="../../../../assets/images/unlock.svg"></span>
+
+            <!-- 
+            <svg (click)="openDialog(data.id)" width="24px" height="24px" viewBox="0 0 32 32" 
+              xmlns="http://www.w3.org/2000/svg" fill="#000000">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <defs> 
+                  <style>
+                    .cls-1 {
+                      fill:#5f7cf9;
+                    }
+
+                    .cls-2{
+                      fill:#4062ed;
+                    }
+
+                    .cls-3{
+                      fill:#8c9eff;
+                    }
+                  </style>
+                  </defs>
+                  <title></title>
+                  <g id="Unlock">
+                    <path class="cls-1" 
+                    d="M20,14H12a1,1,0,0,1-1-1V9A5,5,0,0,1,21,9a1,1,0,0,1-2,0,3,3,0,0,0-6,0v3h7a1,1,0,0,1,0,2Z"></path> 
+                    <path class="cls-2" d="M19,9a1,1,0,0,0,2,0,5,5,0,0,0-5-5V6A3,3,0,0,1,19,9Z"></path> 
+                    <path class="cls-3" d="M21,13a1,1,0,0,0-1-1H16v2h4A1,1,0,0,0,21,13Z"></path> 
+                    <rect class="cls-3" height="16" rx="1" ry="1" width="18" x="7" y="12"></rect> 
+                    <path class="cls-1" d="M24,12H16V28h8a1,1,0,0,0,1-1V13A1,1,0,0,0,24,12Z"></path> 
+                    <path class="cls-3" d="M18,21H14a1,1,0,0,1,0-2h4a1,1,0,0,1,0,2Z"></path> 
+                    <path class="cls-1" d="M18,19H16v2h2a1,1,0,0,0,0-2Z"></path> 
+                  </g> 
+                </g>
+              </svg> -->
+            <!-- </div> -->
+        </tr>
+      </ng-container>
+      <tr *ngIf="userList==null">
+        <td>{{"LC20-94M"|lang}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p-dialog header="Group Toggle Buttons" [(visible)]="displayDialog">
+    <ng-template pTemplate="content">
+      <tr class="text-center action-data">
+        <div *ngFor="let group of groupOptions">
+          <td>
+            {{ group.groupname }}
+            <!-- {{ group.activeflag }} -->
+          </td>
+          <td>
+            <p-inputSwitch [(ngModel)]="group.activeflag"
+              (onChange)="AddOrRemove(group.groupid,group.activeflag)"></p-inputSwitch>
+          </td>
+        </div>
+      </tr>
+    </ng-template>
+  </p-dialog>
+
+  <!-- <div class="b-pagination-outer" *ngIf="userList!=null">
+    <div class="left-pagination">
+      <span>{{ (currentPage - 1) * itemsPerPage + 1 }} - {{ (currentPage - 1) * itemsPerPage + userList.length }}
+        {{"LC20-119M"|lang}} {{totalRecords}}</span>
+    </div>
+    <div class="right-pagination">
+      <div class="show-result">
+        <p>{{"LC20-42D"|lang}}:</p>
+        <select class="custom-select" [(ngModel)]="itemsPerPage" (change)="userRoleList(1)">
+          <option value="10" id="page_10">10</option>
+          <option value="20" id="page_20">20</option>
+        </select>
+      </div>
+      <ul id="border-pagination">
+        <li><a class="no-border" (click)="userRoleList(1)"><img src="../../../../assets/images/chevron-left.svg"></a>
+        </li>
+        <li *ngFor="let page of totalPagesArray"> <a (click)="userRoleList(page)"
+            [class.active]="page == currentPage">{{page}}</a></li>
+
+        <li><a class="no-border" (click)="userRoleList(totalPages)"><img
+              src="../../../../assets/images/chevron-right.svg"></a></li>
+      </ul>
+    </div>
+
+
+  </div>  -->
+
+  <app-pagination [currentPage]="currentPage" [totalPages]="totalPages" [itemsPerPage]="itemsPerPage"
+    [totalRecords]="totalRecords" [totalPagesArray]="totalPagesArray" (pageChange)="onPageChange($event)"
+    (showResults)="showResults($event)"></app-pagination>
+
+  <div class="table-popup" *ngIf="namediv">
+    <p id="ascsort"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M13.5 11.25L9 6.75L4.5 11.25" stroke="#344054" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg> Sort Ascending</p>
+    <p id="descsort"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M13.5 11.25L9 6.75L4.5 11.25" stroke="#344054" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg> Sort Descending</p>
+    <p id="filter"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M4.5 9H13.5M2.25 4.5H15.75M6.75 13.5H11.25" stroke="#344054" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg> Filter</p>
+    <input type="text" [(ngModel)]="name_srch">
+    <button>done</button>
+  </div>
+</div>
+<!-- <div class="add-user-popup">
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div *ngIf="!showDetails" class="modal-header">
+          <h1 *ngIf="!editbutton" class="modal-title" id="staticBackdropLabel">{{"LC2-46M"|lang}}</h1>
+          <h1   *ngIf="editbutton"class="modal-title" id="staticBackdropLabel">{{"LC2-103M"|lang}}</h1>
+          
+        </div>
+        <div class="modal-header">
+          <h1 *ngIf="showDetails" class="modal-title" id="staticBackdropLabel">{{"LC20-118M"|lang}}</h1>
+       
+          
+        </div>
+        <div class="modal-body">
+          <div  class="form">
+            <form (ngSubmit)="add()" [formGroup]="addForm">
+              <div id="details">
+              <div class="form-group labelWhiteBg">
+
+                <input type="text" id="username" class="inputField common-input" formControlName="name">
+                <label class="inputLabel">{{"LC2-47M"|lang}}<span style="color: red;">*</span></label>
+                <div *ngIf="submitted && f['name'].errors">
+
+                  <div *ngIf="f['name'].errors['required']" style="color: red;"> {{"MG100138M"|lang}}</div>
+                  <div *ngIf="f['name'].errors['maxlength']" style="color: red;">{{"MG100163M"|lang}}</div>
+                  <div *ngIf="f['name'].errors['minlength']" style="color: red;">{{"MG100163M"|lang}}</div>
+
+                </div>
+              </div>
+              <div class="form-group labelWhiteBg">
+                <input type="text" id="displayName" class="inputField common-input" formControlName="displayName">
+                <label class="inputLabel">{{"LC2-38M"|lang}}</label>
+                <div *ngIf="submitted && f['displayName'].errors">
+
+                  <div *ngIf="f['displayName'].errors['maxlength']" style="color: red;">{{"MG100164M"|lang}}
+                  </div>
+                  <div *ngIf="f['displayName'].errors['minlength']" style="color: red;">{{"MG100165M"|lang}}
+                  </div>
+
+                </div>
+              </div>
+              <div class="form-group labelWhiteBg">
+
+                <input type="text" id="email" [ngStyle]="{'background-color': editbutton ? '#F9F7F4' : '' }"  [readonly]="editbutton" formControlName="email" placeholder="" class="inputField common-input">
+                <label class="inputLabel">{{"LC2-36M"|lang}}<span style="color: red;">*</span></label>
+                <div *ngIf="submitted && f['email'].errors">
+                  <div *ngIf="f['email'].errors['required']" style="color: red;">  {{"MG100135M"|lang}}</div>
+                  <div *ngIf="f['email'].errors['pattern']" style="color: red;"> {{"MG100137M"|lang}}</div>
+                </div>
+              </div>
+              <div class="form-group labelWhiteBg">
+
+                <input appMobileNumber type="text" id="contact"  formControlName="contact"
+                  class="inputField common-input" />
+
+                <label class="inputLabel">{{"LC2-37M"|lang}}</label>
+                <div *ngIf="submitted && f['contact'].errors && !f['contact'].pristine">
+                  <div *ngIf="f['contact'].errors['minlength']" style="color: red;">{{"MG100166M"|lang}}</div>
+                </div>
+              </div>
+              <div class="form-group labelWhiteBg">
+                <label class="selectLabel">{{"LC20-53M"|lang}}<span style="color: red;">*</span></label>
+                <select id="country" class="common-select" formControlName="country" (change)="getstate($event)"
+                  aria-label="Default select example">
+                  <option value="" selected>{{"LC20-56M"|lang}}</option>
+                  <option [value]="data.countryId" *ngFor="let data of countryList">{{data.countryName}}</option>
+
+                </select>
+                <div *ngIf="submitted && f['country'].errors">
+                  <div *ngIf="f['country'].errors['required']" style="color: red;">{{"MG100139M"|lang}}</div>
+                </div>
+              </div>
+              <div class="form-group labelWhiteBg">
+                <label class="selectLabel">{{"LC20-52M"|lang}}<span style="color: red;">*</span></label>
+                <select id="state" class="common-select" formControlName="state" aria-label="Default select example">
+                  <option value="">{{"LC20-120M"|lang}}</option>
+                  <option [value]="data.stateId" selected *ngFor="let data of stateList">{{data.stateName}}</option>
+
+                </select>
+                <div *ngIf="submitted && f['state'].errors">
+                  <div *ngIf="f['state'].errors['required']" style="color: red;">{{"MG100140M"|lang}}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group labelWhiteBg">
+                <input id="city" type="text" formControlName="city" class="inputField common-input">
+                <label class="inputLabel">{{"LC20-51M"|lang}}<span style="color: red;">*</span></label>
+                <div *ngIf="submitted && f['city'].errors">
+                  <div *ngIf="f['city'].errors['maxlength']" style="color: red;">{{"MG100167M"|lang}}</div>
+                  <div *ngIf="f['city'].errors['minlength']" style="color: red;">{{"MG100165M"|lang}}</div>
+                  <div *ngIf="f['city'].errors['required']" style="color: red;">{{"MG100141M"|lang}}</div>
+                </div>
+              </div>
+              <div class="form-group labelWhiteBg">
+
+                <input id="street" type="text" formControlName="street" class="inputField common-input">
+                <label class="inputLabel">{{"LC2-48M"|lang}}<span style="color: red;">*</span></label>
+                <div *ngIf="submitted && f['street'].errors">
+                  <div *ngIf="f['street'].errors['maxlength']" style="color: red;">{{"MG100168M"|lang}}</div>
+                  <div *ngIf="f['street'].errors['minlength']" style="color: red;">{{"MG100165M"|lang}}</div>
+                  <div *ngIf="f['street'].errors['required']" style="color: red;">{{"MG100142M"|lang}}</div>
+                </div>
+              </div>
+
+
+              <div class="form-group labelWhiteBg">
+
+                <input type="text" id="zip" appCharNumericOnly formControlName="zip" class="inputField common-input" />
+                <label class="inputLabel">{{"LC20-54M"|lang}}<span style="color: red;">*</span></label>
+                <div *ngIf="submitted && f['zip'].errors">
+                  <div *ngIf="f['zip'].errors['maxlength']" style="color: red;">{{"MG100169M"|lang}}</div>
+                  <div *ngIf="f['zip'].errors['minlength']" style="color: red;">{{"MG100170M"|lang}}</div>
+                  <div *ngIf="f['zip'].errors['required']" style="color: red;">{{"MG100143M"|lang}}</div>
+                </div>
+              </div>
+
+
+              <div class="form-group labelWhiteBg">
+                <label class="selectLabel">{{"LC20-55M"|lang}}<span style="color: red;">*</span></label>
+
+                <select formControlName="status" id="status" class="common-select" aria-label="Default select example">
+                  <option value="">{{"LC20-55M"|lang}}</option>
+                        <option value="A">{{"LC20-57M"|lang}}</option>
+                        <option value="I">{{"LC20-58M"|lang}}</option>
+                </select>
+                <div *ngIf="submitted && f['status'].errors">
+                  <div *ngIf="f['status'].errors['required']" style="color: red;">{{"MG100151M"|lang}}</div>
+                </div>
+              </div>
+              <div class="form-group ">
+               
+                <button [disabled]="showDetails" *ngIf="codeList.length==0" (click)="openModal()" class="user-slct userSelect" type="button"><svg
+                    *ngIf="codeList.length==0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none">
+                    <path d="M12 5V19M5 12H19" stroke="#0083FD" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg> {{"LC2-49D"|lang}}</button>
+                <div *ngIf="codeList.length>0" class="bilingAdmin">
+                  <div style="display: flex; flex-direction: row;justify-content: flex-start; flex-wrap: wrap;">
+                    <div *ngFor="let data of codeList "
+                      style="background-color: #cbdffd; color: #333; padding: 5px 10px; margin: 5px; border-radius: 5px;">
+                      <div>{{ data}}</div>
+
+                    </div>
+                  </div>
+
+                  <img (click)="openModal()" src="../../../assets/images/edit-icon-blue.svg" />
+                </div>
+
+              </div>
+            </div>
+              <div class="modal-footer">
+                <button type="button" id="cncl" (click)="detailsClose($event)" class="common-btn btn-light-red" data-bs-dismiss="modal">{{"LC20-34M"|lang}}</button>
+                <button *ngIf="!showDetails" type="submit" class="common-btn btn-blue">{{"LC20-33M"|lang}}</button>
+              </div>
+
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="modalrole" [ngStyle]="{'display': showModal ? 'block' : 'none'}">
+  <div class="modal-role-content">
+    <div class="select-role-popup">
+      <div>
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title" id="staticBackdropLabel">{{"LC2-49D"|lang}}</h1>
+            </div>
+            <div class="modal-body">
+              <div class="form">
+
+                <div *ngFor="let data of getFixRoleList;let i=index" class="select-box-inner">
+                  <div class="billing">
+                    <span><input type="checkbox" [(ngModel)]="data.select" id="rolename_{{i}}">
+                      <label>{{data.roleName}}</label></span>
+                    <p (click)="showpermission(i)"><span *ngIf="data?.child?.length">{{data?.child.length}}
+                        {{"permissions"|lang}}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <path d="M12 10L8 6L4 10" stroke="#0083FD" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        </svg></span></p>
+                  </div>
+                  <div *ngIf="data.show">
+                    <div *ngFor="let permission of data.child" class="form-group prebilling">
+                      <label style="font-size: 13px; font-weight: normal;">{{permission.description}}</label>
+                      <div class="" style="display: flex; flex-direction: row; flex-wrap: wrap;">
+                        <p style="margin-bottom: 0;" *ngFor="let function of permission.child" class="billing-mdfy">
+                          <span>{{function.description}}</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" id="common-btn btn-light-red" class="common-btn btn-light-red"
+                  (click)="closeModal()" data-bs-dismiss="modal">{{"LC20-34M"|lang}}</button>
+                <button type="button" id="common-btn btn-blu" (click)="setIds()"
+                  class="common-btn btn-blue">{{"LC20-50M"|lang}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modalrole" [ngStyle]="{'display': uploadpopup ? 'block' : 'none'}">
+  <div class="modal-role-content" style="height: 100%;">
+    <div class="select-role-popup">
+      <div>
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title" id="staticBackdropLabel">{{"LC20-122M"|lang}} </h1>
+            </div>
+            <div class="modal-body">
+              <div class="form">
+                <div class="fileDownloadRow">
+                  <div>
+                    <a href="{{link}}" download (click)="showuploadinput()">{{"LC20-123M"|lang}}</a>
+                  </div>
+                  <div>
+                    <input type="file" id="file" (change)="onFileSelected($event)" />
+                  </div>
+                </div>
+
+
+
+
+                <div *ngIf="importError"> <a href="{{errorLink}}" target="_blank">{{"LC20-124M"|lang}}</a></div>
+                <div class="modal-footer">
+                  <button type="button" class="common-btn btn-light-red" (click)="hideUpLoadPopup()"
+                    data-bs-dismiss="modal">{{"LC20-34M"|lang}}</button>
+                  <button type="button" (click)="convertAndDownload()"
+                    class="common-btn btn-blue">{{"LC20-33M"|lang}}</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="add-user-popup">
+  <div class="modal fade" id="UserAccessGroupmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div *ngIf="!showDetails" class="modal-header">
+          <h1 *ngIf="editbutton" class="modal-title" id="staticBackdropLabel">Modify user's access group</h1>
+          <h1 *ngIf="!editbutton" class="modal-title" id="staticBackdropLabel">Modify user's access group</h1>
+        </div>
+        <div class="modal-header">
+          <h1 *ngIf="showDetails" class="modal-title" id="staticBackdropLabel">{{"LC20-118M12"|lang}}</h1>
+        </div>
+        <div class="modal-body">
+          <div class="addprofileLevels">
+            <div class="addprofileLevelsRow">
+              <!-- <div class="levels">{{"LC8-137M"|lang}}:</div> -->
+              <div class="levels"><strong>Group Name</strong></div>
+              <div class="leveltoggels">
+                <!-- <div class="leveltoggelsVisible">{{"LC8-138M"|lang}}</div> -->
+                <div class="leveltoggelsVisible"><strong>Access</strong></div>
+              </div>
+            </div>
+          </div>
+          <div class="addprofileLevelsRow levelRowBdr" *ngFor="let group of groupOptions">
+            <div class="levels" id="labelSite">{{ group.groupname }}</div>
+            <div class="leveltoggels">
+              <p-inputSwitch [(ngModel)]="group.activeflag"
+                (onChange)="AddOrRemove(group.groupid,group.activeflag)"></p-inputSwitch>
+            </div>
+          </div>
+          <!-- <tr class="text-center action-data">
+            <div *ngFor="let group of groupOptions">
+              <td>
+                {{ group.groupname }}
+              </td>
+              <td>  
+                <p-inputSwitch [(ngModel)]="group.activeflag" (onChange)="AddOrRemove(group.groupid,group.activeflag)"></p-inputSwitch>
+              </td>
+            </div>
+          </tr> -->
+          <div class="modal-footer">
+            <button type="button" id="cncl" (click)="detailsCloseUserAccessGroupmodal($event)" class="common-btn btn-light-red"
+              data-bs-dismiss="modal">{{"LC20-34M"|lang}}</button>
+            <!-- <button  type="submit" class="common-btn btn-blue">{{"LC20-33M"|lang}}</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="add-user-popup">
+  <div class="modal fade" id="Commentmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div *ngIf="!showDetails" class="modal-header">
+          <h1 *ngIf="editingCommentID" class="modal-title" id="staticBackdropLabel">Edit Comment</h1>
+          <h1 *ngIf="!editingCommentID" class="modal-title" id="staticBackdropLabel">Add Comment</h1>
+        </div>
+        <div class="modal-header">
+          <h1 *ngIf="showDetails" class="modal-title" id="staticBackdropLabel">{{"LC20-118M12"|lang}}</h1>
+        </div>
+        <div class="modal-body">
+          <tr>
+            <td>
+              <div *ngFor="let comment of userComments">
+                <!-- <div *ngIf="!editingComment"> -->
+                  <strong>
+                    <span style="color: blue;">
+                      {{comment.createdByFullName}}
+                    </span>
+                    added comment on - {{comment.creationDate}}
+                  <span style="color: blue;">
+                    Level:{{comment.levelMeaning}}{{comment.comments}}
+                  </span>
+                  </strong>
+                  <!-- <textarea class="inputField common-input" [(ngModel)]="editCommentdata" [value]="comments.comments" rows="6" cols="6"></textarea> -->
+                  <!-- <textarea *ngIf="editingCommentID" class="inputField common-input" [(ngModel)]="comment.comments" rows="6" cols="6"></textarea> -->
+                  <!-- <button pButton (click)="editComment(comments.comments, comments.commentId)" style="float: right;">
+                    edit
+                  </button> -->
+                  <div class="d-flex g-8">
+                    <span><img (click)="editComment(comment, comment.commentId)"
+                      src="../../../assets/images/edit-icon-blue.svg" /></span>
+                      <button 
+                      (click)="deleteComment(comment.commentId)">
+                      <i class="pi pi-trash"></i>
+                    </button>
+                  </div>
+                  <br>
+                  <div class="form form-group labelWhiteBg" *ngIf="editingCommentID">
+                    <textarea *ngIf="editingCommentID === comment.commentId" class="inputField common-input" [(ngModel)]="comment.comments" rows="6" cols="6"></textarea>
+                    <label *ngIf="editingCommentID === comment.commentId" class="inputLabel">Edit Comment</label>
+                  </div>
+                  <!-- <br> -->
+                  <!-- <strong>Comment ID:</strong> {{comments.commentId}} <br>
+                  <strong>Comments:</strong> {{comments.comments}} <br>
+                  <strong>Level Meaning:</strong> {{comments.levelMeaning}} <br>
+                  <strong>Created By:</strong> {{comments.createdBy}} - {{comments.createdByFullName}} <br>
+                  <strong>Creation Date:</strong> {{comments.creationDate}} <br>
+                  <strong>Last Update Date:</strong> {{comments.lastUpdateDate}} <br><br> -->
+                  <!-- <button type="button" (click)="editComment(comment)">Edit</button> -->
+                <!-- </div> -->
+                <!-- <hr> -->
+                <!-- <button (click)="editComment(comments,comments.commentId)">Edit</button> -->
+              </div>
+            </td>
+            <!-- <td>
+              <div *ngFor="let comment of userComments">
+                <button (click)="editComment(comment,comment.commentId)">Edit</button>
+              </div>
+            </td> -->
+          </tr>
+          
+         
+          
+          <!-- <h2>Edit Comment</h2> -->
+          <!-- <button (click)="saveEditedComment()">Save</button> -->
+          <!-- <div class="form form-group labelWhiteBg" *ngIf="editingCommentID">
+            <br>
+            <textarea class="inputField common-input" [(ngModel)]="editCommentdata" rows="6" cols="6"></textarea>
+            <label _ngcontent-ng-c2323403366="" class="inputLabel">Edit Comment </label>
+          </div> -->
+          <br>
+          <div  class="form">
+            <form  [formGroup]="CommentForm">
+              <div id="details"  *ngIf="!editingCommentID">
+              <div class="form-group labelWhiteBg">
+                <!-- <input type="text" id="comments" class="inputField common-input" formControlName="comments"> -->
+                <!-- <textarea id="comments" class="inputField common-input" formControlName="comments"></textarea> -->
+                <textarea id="comments" class="inputField common-input" formControlName="comments" rows="6" cols="6"></textarea>
+                <label class="inputLabel">Add Comment
+                  <!-- <span style="color: red;">*</span> -->
+                </label>
+              </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" id="cncl" (click)="detailsCloseComment($event)" class="common-btn btn-light-red" data-bs-dismiss="modal">{{"LC20-34M"|lang}}</button>
+                <button *ngIf="!editingCommentID"  type="submit" (click)="AddComment()" class="common-btn btn-blue">{{"LC20-33M"|lang}}</button>
+                <button *ngIf="editingCommentID" (click)="saveEditedComment()" class="common-btn btn-blue">{{"LC20-33M"|lang}}</button>
+              </div>
+
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="add-user-popup">
+  <div class="modal fade" id="Watchermodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div *ngIf="!showDetails" class="modal-header">
+          <!-- <h1 *ngIf="!editbutton" class="modal-title" id="staticBackdropLabel">{{"LC2-46M"|lang}}</h1> -->
+          <!-- <h1   *ngIf="editbutton"class="modal-title" id="staticBackdropLabel">{{"LC2-103M"|lang}}</h1> -->
+          <h1 *ngIf="editbutton" class="modal-title" id="staticBackdropLabel">Manage Watcher</h1>
+          <h1 *ngIf="!editbutton" class="modal-title" id="staticBackdropLabel">Manage Watcher</h1>
+          <!-- <button type="button" id="cncl" (click)="detailsClose($event)" class="common-btn btn-light-red" data-bs-dismiss="modal">{{"LC20-34M"|lang}}</button> -->
+        </div>
+        <div class="modal-header">
+          <h1 *ngIf="showDetails" class="modal-title" id="staticBackdropLabel">{{"LC20-118M12"|lang}}</h1>
+        </div>
+        <div class="modal-body">
+
+          <div class="col-sm-12">
+            <div class="tags-input-wrapper">
+              <label class="tags-input-lbl ">Watchers</label>
+              <div class="tags-input-wrapper-scroll">
+                <div *ngFor="let Watcher of WatcherUserList_Y;let i=index;">
+                  <div *ngIf="Watcher.activeFlag=='Y'" class="user-tags">
+                    <span *ngIf="Watcher.activeFlag=='Y'">{{Watcher?.fullName}}
+                      <span *ngIf="Watcher.activeFlag=='Y'"
+                        (click)="DeleteWatcher('REMOVE_USER',+Watcher.userWatcherId)" class="close-file-icon">
+                        <img src="../../../assets/images/close.svg">
+                      </span>
+                    </span>
+                  </div>
+                </div>
+                <a (click)="addWatcher()" class="add-tags"><img src="../../../assets/images/add-tag.svg"></a>
+              </div>
+
+            </div>
+          </div>
+          <div class="form" *ngIf="addWatcherVisible">
+            <div class="form-group labelWhiteBg">
+              <form [formGroup]="WatcherForm">
+                <p-multiSelect opened="true" [options]="WatcherUserList_N" display="chip" formControlName="username"
+                  optionLabel="fullName" placeholder="Select Watcher" [virtualScroll]="true" optionValue="username"
+                  [filter]="true" [style]="{'width': '300px'}" [virtualScrollItemSize]="43">
+                </p-multiSelect>
+                <!-- <button (click)="submitWatcherForm()" [style]="{'margin-inline':'10px'}" pButton pRipple label="Submit" class="p-button-success"></button> -->
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="cncl" (click)="detailsCloseWatchermodal($event)" class="common-btn btn-light-red"
+              data-bs-dismiss="modal">{{"LC20-34M"|lang}}</button>
+            <button type="submit" class="common-btn btn-blue" (click)="submitWatcherForm()">{{"LC20-33M"|lang}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="add-user-popup">
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div *ngIf="!showDetails" class="modal-header">
+          <h1 *ngIf="!editbutton" class="modal-title" id="staticBackdropLabel">{{"LC2-46M"|lang}}</h1>
+          <h1 *ngIf="editbutton" class="modal-title" id="staticBackdropLabel">{{"LC2-103M"|lang}}</h1>
+
+        </div>
+        <div class="modal-header">
+          <h1 *ngIf="showDetails" class="modal-title" id="staticBackdropLabel">{{"LC20-118M"|lang}}</h1>
+
+
+        </div>
+        <div class="modal-body">
+          <div class="form">
+            <form (ngSubmit)="SubmitAddUserform()" [formGroup]="AddUserform">
+              <div id="details">
+
+                <div class="form-group labelWhiteBg">
+                  <div class="row">
+                    <!-- First Column -->
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input formControlName="firstName" class="inputField" type="text" id="firstName">
+                        <label class="inputLabel" for="firstName">First Name*:</label>
+                      </div>
+
+                      <div
+                        *ngIf="AddUserform.get('firstName')!.hasError('required') && AddUserform.get('firstName')?.touched">
+                        <div class="error-message">
+                          *Please Enter First Name.
+                        </div>
+                      </div>
+
+
+                      <!-- <div class="col-md-6">
+                        <div class="form-group">
+                          <input formControlName="firstName" class="inputField" type="text" id="firstName">
+                          <label class="inputLabel" for="firstName">First Name*:</label>
+                      
+                          <div *ngIf="form.get('firstName')!.hasError('required') && form.get('firstName')?.touched">
+                            <div class="error-message">
+                              *First Name is required.
+                            </div> 
+                          </div>
+                        </div> -->
+
+
+
+
+                    </div>
+
+
+                    <!-- Second Column -->
+                    <div class="col-md-6">
+                      <div class="form-group">
+
+                        <input formControlName="lastName" class="inputField" type="text" id="lastName">
+                        <label for="lastName" class="inputLabel">Last Name*:</label>
+                      </div>
+
+                      <div
+                        *ngIf="submitted && AddUserform.get('lastName')!.hasError('required') && AddUserform.get('lastName')?.touched">
+                        <div class="error-message">
+                          *Please Enter Last Name.
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="form-group labelWhiteBg">
+                <div class="row">
+                  <!-- First Column -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+
+                      <input formControlName="email" class="inputField" type="email" id="email">
+                      <label class="inputLabel" for="email">Email*:</label>
+
+                    </div>
+
+                    <!-- <div *ngIf="form.get('email')!.hasError('required') && form.get('email')?.touched">
+                        <div class="error-message">
+                          *Please Enter E-mail ID.
+                        </div> 
+                      </div> -->
+
+                    <div *ngIf="AddUserform.get('email')!.hasError('required') && AddUserform.get('email')!.touched">
+                      <div class="error-message" *ngIf="AddUserform.get('email')!.hasError('required')">
+                        *Please Enter E-mail Address.
+                      </div>
+                      <div class="error-message" *ngIf="AddUserform.get('email')!.hasError('email')">
+                        *Please enter a valid email address.
+                      </div>
+                    </div>
+
+
+
+                  </div>
+
+
+                  <!-- Second Column -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+
+                      <!-- <input class="inputField" type="text" id="employeeId" formControlName="langKey">
+                        <label for="employeeId" class="inputLabel">lang key*:</label> -->
+
+                      <input class="inputField" type="text" id="employeeId" formControlName="employeeId">
+                      <label for="employeeId" class="inputLabel">Employee ID*:</label>
+
+                    </div>
+
+                    <div
+                      *ngIf="AddUserform.get('employeeId')!.hasError('required') && AddUserform.get('employeeId')?.touched">
+                      <div class="error-message">
+                        *Please Enter Employee ID.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group labelWhiteBg">
+                <div class="row">
+                  <!-- First Column -->
+                  <div class="col-md-6">
+                    <div class="form-group with-icon">
+
+                      <!-- <p-calendar inputId="joiningDate" [showIcon]="true" dateFormat="dd/mm/yy"
+                          class=" inputField"></p-calendar>
+                        <label for="joiningDate" class="inputLabel">Joining Date*:</label> -->
+
+                      <p-calendar formControlName="joiningdate" inputId="joiningdate" [showIcon]="true"
+                        dateFormat="dd/mm/yy" class=" inputField"></p-calendar>
+                      <label for="joiningdate" class="inputLabel">Joining Date*:</label>
+
+                    </div>
+
+                    <div
+                      *ngIf="AddUserform.get('joiningdate')!.hasError('required') && AddUserform.get('joiningdate')?.touched">
+                      <div class="error-message">
+                        *Please Select Joining Date.
+                      </div>
+                    </div>
+
+
+                  </div>
+
+
+                  <!-- Second Column -->
+                  <div class="col-md-6">
+                    <div class="form-group with-icon">
+
+                      <!-- <p-calendar inputId="dob" [showIcon]="true" dateFormat="dd/mm/yy" class="inputField"></p-calendar>
+                        <label for="dob" class="inputLabel">DOB*:</label> -->
+
+                      <p-calendar formControlName="dob" inputId="dob" [showIcon]="true" dateFormat="dd/mm/yy"
+                        class="inputField dob-right"></p-calendar>
+                      <label for="dob" class="inputLabel">DOB*:</label>
+
+                    </div>
+
+                    <div *ngIf="AddUserform.get('dob')!.hasError('required') && AddUserform.get('dob')?.touched">
+                      <div class="error-message">
+                        *Please Select DOB.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group labelWhiteBg">
+                <div class="row">
+                  <!-- First Column -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+
+                      <select class="inputField common-select" id="division" formControlName="division">
+                        <option value="" selected>Select Division</option>
+                        <option *ngFor="let option of divisionOptions" [value]="option.name">{{ option.name }}
+                        </option>
+                      </select>
+                      <label for="division" class="inputLabel">Division*:</label>
+                      <!-- <span class="span-error1">Please select user division</span> -->
+                    </div>
+
+                    <div
+                      *ngIf="AddUserform.get('division')!.hasError('required') && AddUserform.get('division')?.touched">
+                      <div class="error-message">
+                        *Please Select Division.
+                      </div>
+                    </div>
+
+                  </div>
+
+
+                  <!-- Second Column -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+
+                      <!-- <select class="inputField common-select" id="rm" formControlName="reportingmanager">
+                          <option value="" selected>Select RM</option>
+                          <option *ngFor="let option of rmOptions" [value]="option.fullName">{{ option.fullName }}</option>
+                        </select> -->
+
+                      <select class="inputField common-select" id="rm" formControlName="reportingmanager">
+                        <option value="" selected>Select RM</option>
+                        <option *ngFor="let option of rmOptions" [value]="option.useName">{{ option.fullName }}
+                        </option>
+                      </select>
+
+                      <label class="inputLabel" for="rm">RM*:</label>
+                      <!-- <span class="span-error1">Please select Reporting Manager</span> -->
+                    </div>
+
+                    <div
+                      *ngIf="AddUserform.get('reportingmanager')!.hasError('required') && AddUserform.get('reportingmanager')?.touched">
+                      <div class="error-message">
+                        *Please Select RM.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="form-group labelWhiteBg">
+                <div class="row">
+                  <!-- First Column -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+
+                      <select class="inputField common-select" id="hr" formControlName="hrmanager">
+                        <option value="" selected>Select HR</option>
+                        <option *ngFor="let option of hrOptions" [value]="option.useName">{{ option.fullName }}
+                        </option>
+                      </select>
+                      <label class="inputLabel" for="hr">HR*:</label>
+                      <!-- <span class="span-error1">Please select HR manager</span> -->
+                    </div>
+
+                    <div
+                      *ngIf="AddUserform.get('hrmanager')!.hasError('required') && AddUserform.get('hrmanager')?.touched">
+                      <div class="error-message">
+                        *Please Select HR.
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <!-- Second Column -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+
+                      <select class="common-select inputField" id="groupName" formControlName="usergroup">
+                        <option value="" selected>Select Group</option>
+                        <option *ngFor="let option of groupOptions" [value]="option.groupid">{{ option.groupname }}
+                        </option>
+                        <!-- Add more options as needed -->
+                      </select>
+                      <label for="groupName" class="inputLabel">Access Group*:</label>
+                      <!-- <span class="span-error1">Please select access group</span> -->
+                    </div>
+
+                    <div
+                      *ngIf="AddUserform.get('usergroup')!.hasError('required') && AddUserform.get('usergroup')?.touched">
+                      <div class="error-message">
+                        *Please Select Access Group.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="form-group labelWhiteBg">
+                <div class="row">
+                  <!-- First Column -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <select class="inputField common-select" id="department" formControlName="department">
+                        <option value="" selected>Select Department</option>
+                        <option *ngFor="let option of departmentOptions" [value]="option.lookupKeys.lookupCode">{{
+                          option.lookupKeys.lookupCode }}</option>
+                        <!-- Add more options as needed -->
+                      </select>
+                      <label class="inputLabel" for="department">Department*:</label>
+
+                      <!-- <span class="span-error1">Please enter user department</span> -->
+                    </div>
+
+                    <div
+                      *ngIf="AddUserform.get('department')!.hasError('required') && AddUserform.get('department')?.touched">
+                      <div class="error-message">
+                        *Please Select Department.
+                      </div>
+                    </div>
+
+                    <!-- <div *ngIf="submitted && AddUserform?.get('department')?.errors" class="error-container">
+                        <p class="error-message" *ngIf="AddUserform?.get('department')?.errors?.['required']">
+                          *Password is required.
+                        </p>
+              
+                      </div> -->
+
+                  </div>
+
+
+                  <!-- Second Column -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+
+                      <!-- <textarea class="inputField" id="remark" formControlName="remark"></textarea>
+                        <label class="inputLabel" for="remark">Remark*:</label> -->
+
+                      <textarea class="inputField" id="remark" formControlName="remark"></textarea>
+                      <label class="inputLabel" for="remark">Remark*:</label>
+
+                    </div>
+
+                    <div *ngIf="AddUserform.get('remark')!.hasError('required') && AddUserform.get('remark')?.touched">
+                      <div class="error-message">
+                        *Remark is required.
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" id="cncl" (click)="detailsClosestaticBackdrop($event)" class="common-btn btn-light-red"
+                  data-bs-dismiss="modal">{{"LC20-34M"|lang}}</button>
+                <button *ngIf="!showDetails" type="submit" class="common-btn btn-blue">{{"LC20-33M"|lang}}</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>

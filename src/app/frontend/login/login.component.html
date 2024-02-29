@@ -1,0 +1,233 @@
+<!-- 
+<div  *ngIf="loaderService.isLoading | async">
+  <div class="load-container">
+      <div class="linespinner"></div>
+  </div>
+</div>
+<form (ngSubmit)="onSubmit()" [formGroup]="SignupForm">
+  <p-toast></p-toast>
+    <h2>Log in</h2>
+      <input placeholder="Mobile Number" type="text"  formControlName="username">
+      
+      <span [hidden]="SignupForm.controls['username'].valid || !SignupForm.controls['username'].dirty" class="alert alert-danger">
+        Login is required
+      </span>
+      <input placeholder="Password" type="password"  formControlName="password" required>
+      <span [hidden]="SignupForm.controls['password'].valid || !SignupForm.controls['password'].dirty" class="alert alert-danger">
+        Password is required
+      </span>
+      <input type="submit" value="Login" [disabled]="!SignupForm.valid">
+
+       <a class="forgPass" [routerLink]="['forgot-password']">Forgot Password</a> -->
+
+<!-- <p class="dontPass">Don’t have any account?</p>
+      <input class="Register" type="submit" value="Register" [routerLink]="['/registration']" > -->
+<!-- </form> -->
+
+
+
+
+
+<div class="login div-2">
+
+  <p-toast></p-toast>
+  <!-- <div class="frame">
+      <div class="text-wrapper-4">Not Registered Yet?</div>
+      <div class="text-wrapper-5">Create an account</div>
+    </div> -->
+  <div class="frame-2">
+    <img class="login-img" src="/assets/images/emanager-logo.png">
+  </div>
+  <div class="frame-3">
+    <div class="frame-4"></div>
+    <div class="frame-5">
+      <div *ngIf="!isforgotPassword" class="frame-6">
+        <div class="loginTitleHeader">
+          <div class="LoginTitle text-wrapper-6">{{"LC16-1M"|lang}}</div>
+          <div class="sl-nav">
+            <!-- <b>{{lang1}}</b> -->
+            <b style="margin-left: 1px;"  aria-hidden="true">
+              <svg height="30" width="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" id="Language"><g data-name="24 Language" fill="#212529" class="color000000 svgShape"><path d="M19 58a1 1 0 0 1-.63-.23A28 28 0 0 1 36 8a27.74 27.74 0 0 1 12.35 2.86 1 1 0 0 1 .45 1.34 1 1 0 0 1-1.34.46 26 26 0 0 0-33.67 9.82 26 26 0 0 0 5.86 33.73 1 1 0 0 1 .14 1.41A1 1 0 0 1 19 58zm17 6a27.75 27.75 0 0 1-12.84-3.11 1 1 0 0 1 .92-1.78 26 26 0 0 0 34.13-36.63 26.26 26.26 0 0 0-5.84-6.68 1 1 0 0 1-.15-1.4 1 1 0 0 1 1.41-.15 28.21 28.21 0 0 1 6.28 7.19A28 28 0 0 1 36 64z" fill="#212529" class="color000000 svgShape"></path><path d="M35 63a1 1 0 0 1-.67-.26A30.51 30.51 0 0 1 26 50.38 39.12 39.12 0 0 1 23 36a36.4 36.4 0 0 1 3-14.39 35.7 35.7 0 0 1 8.33-12.35 1 1 0 0 1 1.34 1.48 33.77 33.77 0 0 0-7.88 11.65A34.53 34.53 0 0 0 25 36a37 37 0 0 0 2.8 13.62 28.65 28.65 0 0 0 7.87 11.64A1 1 0 0 1 35 63Z" fill="#212529" class="color000000 svgShape"></path><path d="M37 63a1 1 0 0 1-.67-1.74 28.65 28.65 0 0 0 7.87-11.64A37 37 0 0 0 47 36a34.53 34.53 0 0 0-2.79-13.61 33.77 33.77 0 0 0-7.88-11.65 1 1 0 1 1 1.34-1.48 35.7 35.7 0 0 1 8.38 12.35A36.4 36.4 0 0 1 49 36a39.12 39.12 0 0 1-3 14.38 30.51 30.51 0 0 1-8.37 12.36A1 1 0 0 1 37 63Z" fill="#212529" class="color000000 svgShape"></path><path d="M63 37H9a1 1 0 0 1 0-2h54a1 1 0 0 1 0 2zm-4-14H13a1 1 0 0 1 0-2h46a1 1 0 0 1 0 2zm0 28H13a1 1 0 0 1 0-2h46a1 1 0 0 1 0 2z" fill="#212529" class="color000000 svgShape"></path><path d="M36 63a1 1 0 0 1-1-1V10a1 1 0 0 1 2 0v52a1 1 0 0 1-1 1Z" fill="#212529" class="color000000 svgShape"></path></g></svg>
+              <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="Translate"><path d="M17 20H2.5A2.503 2.503 0 0 1 0 17.5v-15C0 1.122 1.122 0 2.5 0h8a.5.5 0 0 1 .473.338l6.5 19A.502.502 0 0 1 17 20zM2.5 1C1.673 1 1 1.673 1 2.5v15c0 .827.673 1.5 1.5 1.5h13.8L10.143 1H2.5z" fill="#212529" class="color000000 svgShape"></path><path d="M21.5 24h-8a.5.5 0 0 1-.468-.324l-1.5-4a.5.5 0 0 1 .936-.352L13.847 23H21.5c.827 0 1.5-.673 1.5-1.5v-15c0-.827-.673-1.5-1.5-1.5H12a.5.5 0 0 1 0-1h9.5C22.878 4 24 5.122 24 6.5v15c0 1.378-1.122 2.5-2.5 2.5z" fill="#212529" class="color000000 svgShape"></path><path d="M13.5 24a.5.5 0 0 1-.376-.83l3.5-4a.5.5 0 1 1 .753.659l-3.5 4A.502.502 0 0 1 13.5 24zM9.5 14a.499.499 0 0 1-.471-.332L7 7.987l-2.029 5.681a.5.5 0 0 1-.942-.336l2.5-7c.142-.398.8-.398.941 0l2.5 7A.5.5 0 0 1 9.5 14z" fill="#212529" class="color000000 svgShape"></path><path d="M8 11H6a.5.5 0 0 1 0-1h2a.5.5 0 0 1 0 1zM21.5 11h-7a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1z" fill="#212529" class="color000000 svgShape"></path><path d="M17.5 11a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 1 0v1a.5.5 0 0 1-.5.5zM16 17a.498.498 0 0 1-.29-.907c2.189-1.555 3.79-4.727 3.79-5.592a.5.5 0 0 1 1 0c0 1.318-1.927 4.785-4.21 6.408A.507.507 0 0 1 16 17z" fill="#212529" class="color000000 svgShape"></path><path d="M20 18a.494.494 0 0 1-.337-.131c-.363-.332-3.558-3.283-4.126-4.681a.5.5 0 0 1 .926-.376c.409 1.007 2.936 3.459 3.875 4.319A.5.5 0 0 1 20 18z" fill="#212529" class="color000000 svgShape"></path></svg> -->
+            </b>
+            <ul>
+              <li>
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="Translatelanguage"><path d="M7.01 10a.505.505 0 0 0 .405-.227.526.526 0 0 0 .055-.471c-.144-.396-.796-.396-.939 0l-.01.027a.504.504 0 0 0 .069.458.521.521 0 0 0 .42.213z" fill="#212529" class="color000000 svgShape"></path><path d="M17.407 19.791a.496.496 0 0 0 .066-.452l-6.5-19A.5.5 0 0 0 10.5 0h-8A2.503 2.503 0 0 0 0 2.5v15C0 18.878 1.122 20 2.5 20H17a.5.5 0 0 0 .407-.209zM4.029 13.332l2.5-7c.142-.396.801-.396.942 0l2.5 7a.502.502 0 0 1-.302.639.503.503 0 0 1-.64-.302l-.834-2.336A.5.5 0 0 0 7.724 11H6.276a.5.5 0 0 0-.471.332l-.835 2.336a.504.504 0 0 1-.639.303.502.502 0 0 1-.302-.639zM16.312 12.626a.487.487 0 0 1 .151.185c.099.245.31.563.664.999a.499.499 0 0 0 .389.186h.016a.503.503 0 0 0 .392-.21c.476-.67.904-1.409 1.206-2.08a.503.503 0 0 0-.457-.706h-2.296a.5.5 0 0 0-.473.661l.253.741c.03.088.084.165.155.224z" fill="#212529" class="color000000 svgShape"></path><path d="M21.5 4h-7.518a.5.5 0 0 0-.473.661l1.71 5c.07.203.26.339.473.339h.808a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-.695a.5.5 0 0 0-.478.354c-.303.989-.992 2.242-1.844 3.353a.5.5 0 0 0 .037.652 44.5 44.5 0 0 0 1.817 1.773.498.498 0 0 1 .031.705.512.512 0 0 1-.707.031c-.164-.15-.512-.473-.939-.888a.499.499 0 0 0-.822.52l.518 1.514A1.499 1.499 0 0 1 17 21h-4.25a.5.5 0 0 0-.468.675l.75 2A.5.5 0 0 0 13.5 24h8c1.378 0 2.5-1.122 2.5-2.5v-15C24 5.122 22.878 4 21.5 4z" fill="#212529" class="color000000 svgShape"></path></svg> -->
+                 <i class="fa fa-angle-down" aria-hidden="true"></i>
+                <div class="triangle"></div>
+                <ul>
+                  <li (click)="changeLanguage('fr')"> <span class="active">Français</span></li>
+                  <li (click)="changeLanguage('en')"><span>English</span></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p class="p"></p>
+      </div>
+      <!-- <div *ngIf="!isforgotPassword" class="frame-6">
+        <div class="text-wrapper-6">Login to your Account</div>
+        <p class="p"></p>
+      </div>
+      <div *ngIf="isforgotPassword" class="frame-6">
+        <div class="text-wrapper-6">Enter Your Email</div>
+        <p class="p"></p>
+      </div> -->
+      <form *ngIf="!isforgotPassword" (ngSubmit)="onSubmit()" [formGroup]="SignupForm">
+        <div class="frame-5">
+          <div class="frame-7">
+            <!-- Add Angular form controls and bindings here -->
+            <label id="labelEmail">{{"LC16-2M"|lang}}<span style="color: red;">*</span></label>
+            <input class="responsive-text-input" type="text" id="userName" formControlName="username"
+              placeholder="User Name" />
+               <div *ngIf="submit && f['username'].errors">
+                <div *ngIf="f['username'].errors['required']" id="errorMessageEmail"
+                      style="color: red;padding-right: 5px; text-align: left;">
+                      {{"MG100135M"|lang}}
+                </div>
+                <div *ngIf="f['username'].errors['pattern']" style="color: red;" id="errorMessageEmail2">
+                  {{"MG100137M"|lang}}
+                </div>
+               
+              </div>
+            <div class="frame-8">
+              <!-- Add Angular form controls and bindings here -->
+              <label id="labelPassword">{{"LC16-3M"|lang}}<span style="color: red;">*</span></label>
+              <input class="responsive-text-input" id="user_password" placeholder="Password" type="password"
+                formControlName="password" />
+                <div *ngIf="submit && f['password'].errors">
+                  <div *ngIf="f['password'].errors['required']" id="errorMessageEmail"
+                        style="color: red;padding-right: 5px; text-align: left;">
+                        {{"MG100136M"|lang}}
+                  </div>
+                  <!-- <div *ngIf="f['clientId'].errors['pattern']" style="color: red;" id="errorMessageEmail2">
+                    Enter valid password
+                  </div> -->
+                </div>
+                
+                <div class="frame-8">
+              <label id="Tenant">{{"LC16-8M"|lang}}<span style="color: red;">*</span></label>
+              <input class="responsive-text-input" id="user_clientId" placeholder="Tenant" type="text"
+                formControlName="clientId" />
+                <div *ngIf="submit && f['clientId'].errors">
+                  <div *ngIf="f['clientId'].errors['required']" id="errorMessageEmail"
+                        style="color: red;padding-right: 5px; text-align: left;">
+                        {{"MG100273M"|lang}}
+                  </div>
+                  <div *ngIf="f['clientId'].value && f['clientId'].hasError('invalidClientId')" style="color: red;" id="errorMessageEmail2">
+                    {{"MG100274M"|lang}}
+                  </div>
+                </div>
+                  <!-- <div *ngIf="SignupForm.get('clientId')?.errors?.['required']" style="color: red;" id="errorMessage']" 
+                  style="color: red;padding-right: 5px; text-align: left;">
+                    <p>Invalid client ID value.</p>
+                  </div> -->
+                </div>
+              <div class="frame-9">
+                <div class="checkbox">
+                  <!-- Add Angular form controls and bindings here -->
+                  <!-- <input type="checkbox"/>
+                    <div class="text-wrapper-7">Remember Me</div> -->
+
+
+                  <input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" value="value1">
+                  <label for="styled-checkbox-1 text-wrapper-7">Remember Me</label>
+
+
+                </div>
+                <div class="text-wrapper-8" (click)="forgot()">Forgot Password?</div>
+              </div>
+            </div>
+          </div>
+          <!-- Add Angular event binding and form submission here -->
+          <button class="responsive-button-instance" id="login_button">Login</button>
+
+          <div class="responsive-button-wrapper">
+            <!-- <div class="responsive-button-2">
+              <img class="img" alt="Frame" src="https://c.animaapp.com/rt4s3Bfd/img/frame.svg" />
+              <div class="text-wrapper-9">Login with Microsoft</div>
+            </div> -->
+          </div>
+          <br>
+          <br>
+          <br>
+          <!-- <br>
+          <div class="frame-7" align="center">
+            <div class="text-wrapper-7">Not Registered Yet?</div>
+            <div class="text-wrapper-8" (click)="register()">Create an account</div>
+          </div> -->
+        </div>
+      </form>
+      <form *ngIf="isforgotPassword" (ngSubmit)="onSubmit()" [formGroup]="forgotpassword">
+        <div class="frame-5">
+          <div class="frame-7">
+            <!-- Add Angular form controls and bindings here -->
+            <label>Email<span style="color: red;">*</span></label>
+            <input class="responsive-text-input" type="text" id="userName" formControlName="email" placeholder="" />
+            <div class="frame-8">
+              <!-- Add Angular form controls and bindings here -->
+              <div class="frame-9">
+                <div class="checkbox">
+                  <!-- Add Angular form controls and bindings here -->
+                  <!-- <input type="checkbox"/>
+                  <div class="text-wrapper-7">Remember Me</div> -->
+
+
+
+                </div>
+                <div class="text-wrapper-8" (click)="login()">Login?</div>
+              </div>
+            </div>
+          </div>
+          <!-- Add Angular event binding and form submission here -->
+          <button class="responsive-button-instance" id="login_button">Send Link</button>
+
+          <div class="responsive-button-wrapper">
+            <div class="responsive-button-2">
+              <img class="img" alt="Frame" src="https://c.animaapp.com/rt4s3Bfd/img/frame.svg" />
+              <div class="text-wrapper-9">Login with Microsoft</div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <form *ngIf="isRegisterUser" [formGroup]="RegisterForm">
+        <div class="frame-5">
+          <div class="frame-7">
+
+            <label for="login">Register</label>
+            <input class="responsive-text-input" type="text" id="login" formControlName="login" placeholder="" />
+
+            <label for="firstName">First Name</label>
+            <input class="responsive-text-input" type="text" id="firstName" formControlName="firstName"
+              placeholder="" />
+
+            <label for="lastName">Last Name</label>
+            <input class="responsive-text-input" type="text" id="lastName" formControlName="lastName" placeholder="" />
+
+            <label for="email">Email Address</label>
+            <input class="responsive-text-input" type="email" id="email" formControlName="email" placeholder="" />
+
+            <label for="email">Authority</label>
+            <input class="responsive-text-input" type="number" id="email" formControlName="authorities"
+              placeholder="" />
+
+
+          </div>
+          <!-- Add Angular event binding and form submission here -->
+          <br>
+          <button class="responsive-button-instance" id="register_button" (click)="RegisterUser()">Create
+            Account</button>
+
+          <div class="responsive-button-wrapper">
+            <div class="responsive-button-2">
+              <img class="img" alt="Frame" src="https://c.animaapp.com/rt4s3Bfd/img/frame.svg" />
+              <div class="text-wrapper-9">Login with Microsoft</div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+</div>

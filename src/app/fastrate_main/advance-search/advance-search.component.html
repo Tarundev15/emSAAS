@@ -1,0 +1,205 @@
+<div class="modalrole" style="display: block;">
+    <div class="modal-role-content advSearchModal">
+      <div>
+  
+        <div>
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title" ></h1>
+              </div>
+             <div class="modal-body advBody">
+                <div class="form">
+                  <div class="advSearchHeader" >
+                    <!-- <h2>{{"LC24-104M"}} </h2> -->
+                    <h2>{{"LC24-104M"|lang}} </h2>
+                  </div>
+                <!-- <button type="button" (click)="showModaledit()">saved DAta</button> -->
+                  <div class="searchCondition">
+                    <div style="display: flex; flex-direction: column; width: 100%;">
+                      <div style="display: flex; flex-direction: row; width: 100%; justify-content: space-between;">
+                        <div class="form-group labelWhiteBg ">  
+                          <input [(ngModel)]="searchName" class="inputField"  type="text" id="" >
+                          <label class="inputLabel" for="code">{{"LC24-105M"|lang}}<span style="color: red;">*</span></label>
+                          <div style="color: red;" *ngIf="savesearchvaldation">Please Enter Name</div>
+                        </div>
+                       
+                        <div class="form-group labelWhiteBg">  
+                          <label class="selectLabel">{{"LC24-109M"|lang}}</label>
+                          <select class="common-select mb-0" [(ngModel)]="savedId" (change)="searchByName($event)" >
+                            <option>//{{"LC24-109M"|lang}}</option>
+                            <!-- <option [value]="data.savedSearchId" *ngFor="let data of namelist">{{data.searchName}}</option> -->
+                            <option [value]="1" >Ak</option>
+                            <option [value]="3" >kk</option>
+                        </select>
+                        </div>
+                      </div>
+<!--                       
+                      <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                      <h3>Search Condition</h3> -->
+                      <!-- <a class="saveSearchEditIcon" href="#"><img src="../../../assets/images/edit-icon-square-pen.svg"/>Edit</a> -->
+                     <!-- </div> -->
+                    </div>
+                    
+                  </div>
+                  <div class="advSearchWrapper saveSearchWrapper">
+                    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+                        <div formArrayName="students">
+                            <div style="display: flex; flex-direction: column; align-items: flex-start; width:100%;"  *ngFor="let student of studentsFormArray.controls; let i = index;">
+                              <div style="display: flex; flex-direction: column; width: 100%; ">
+                                <div [formGroupName]="i" class="advSearchForm">
+                                  <div style="display: flex; flex-direction: row;    justify-content: space-between; flex: 0 0 75%; max-width: 75%;">
+                                    <div class="form-group labelWhiteBg">  
+                                      <label class="selectLabel">{{"LC24-106M"|lang}}<span style="color: red;">*</span></label>
+                                      <select formControlName="column"  class="common-select mb-0" >
+                                        <option [value]="data.searchAvailableColumnId" *ngFor="let data of selectColomnList">{{data.searchColumnName}}</option>
+                                      </select>
+                                      <div style="color: red;" *ngIf="submitted && myForm.get('students')?.get(i.toString())?.get('column')?.hasError('required')"
+                                      class="error-message">Please select Column.</div>
+                                      <!-- <div style="min-height: 20px;">Please Enter column</div> -->
+                                    </div>
+                                    <div class="form-group labelWhiteBg">  
+                                      <label class="selectLabel">{{"LC24-107M"|lang}}<span style="color: red;">*</span></label>
+                                      <select  formControlName="condition" class="common-select mb-0" >
+                                          <option [value]="data.searchConditionId" *ngFor="let data of cndsnList">{{data.searchCondition}}</option>
+                                      </select>
+                                      <div style="color: red;" *ngIf="submitted && myForm.get('students')?.get(i.toString())?.get('condition')?.hasError('required')"
+                                      class="error-message">Please select condition.</div>
+                                    </div>
+                                    <div class="form-group labelWhiteBg ">  
+                                      <input formControlName="value" class="inputField"  type="text" id=""  placeholder="enter search" required>
+                                      <div style="color: red;" *ngIf="submitted && myForm.get('students')?.get(i.toString())?.get('value')?.hasError('required')"
+               class="error-message">This field is required.</div>
+                                    </div>
+                                  </div>
+                                  <div *ngIf="i != studentsFormArray.length - 1 && studentsFormArray.length>1" class="form-group labelWhiteBg" style="flex: 0 0 15%; max-width: 15%;" >  
+                                    <select  formControlName="opretor" class="common-select mb-0" >
+                                        <option value="AND" >{{"LC24-115M"|lang}}</option>
+                                        <option value="OR" >{{"LC24-114M"|lang}}</option>
+                                    </select>
+                                  </div>
+                                  <div class="advDelMinus">
+                                    <a *ngIf="i > 0" (click)="removeStudent(i)">
+                                      <img src="../../../assets/images/delete-minus-icon.svg"/>
+                                    </a>
+                                    
+                                  </div>
+                                 
+                                  </div>
+                                 
+                              </div>
+                              <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
+                                <button class="addStudentBtn" type="button" *ngIf="i === studentsFormArray.length - 1" (click)="addStudent()"><span>+</span>{{"LC20-110M"|lang}}</button>
+                                <!-- <div *ngIf="i === studentsFormArray.length - 1">No result found</div> -->
+                              </div>
+                         
+                    </div>
+                    </div>
+                    </form>
+
+                  </div>
+                </div>
+            
+                <div class="saveSearchBtnSection">
+                  <div>
+                    <button class="common-btn btn-light-red" (click)="closefn()" >{{"LC20-34M"|lang}}</button>
+                  </div>
+                  <div class="delSearchIcon">
+                    <button (click)="saveandSearch()" class="advBtn saveSearchBtn"><img src="../../../assets/images/save-icon.svg"/>{{"LC24-116M"|lang}}</button>
+                    
+                    <button class="btnBlue advBtn" (click)="saveSearch()">{{"LC20-33M"|lang}}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modalrole"  [ngStyle]="{'display': showModal ? 'block' : 'none'}">
+    <div class="modal-role-content advSearchModal">
+      <div class="select-role-popup">
+  
+        <div>
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title" ></h1>
+              </div>
+             <div class="modal-body " style="display: flex; flex-direction: column; height: 100vh; justify-content: space-between;">
+              <div>
+                <div class="form-group labelWhiteBg">
+                  <label class="selectLabel" for="">{{"LC24-113D"|lang}}</label>
+                  <select [(ngModel)]="savedId" class="common-select mb-0" (change)="searchByName($event)" >
+                      <option>{{"LC20-90M"|lang}}</option>
+                      <option [value]="data.savedSearchId" *ngFor="let data of namelist">{{data.searchName}}</option>
+                  </select>
+                </div>
+              <div class="form">
+                <div class="advSearchHeader advSearchHeaderTwo" >
+                  <h2>{{"LT24M"|lang}}</h2>
+                </div>
+              
+                <!-- <div  (click)="closeedit()" class="searchCondition">
+                  <h3>Search Condition</h3>
+                  <a class="saveSearchEditIcon" ><img src="../../../assets/images/edit-icon-square-pen.svg"/>New</a>
+                </div> -->
+                <div class="advSearchWrapper saveSearchWrapper">
+                  <form  [formGroup]="myForm" (ngSubmit)="onSubmit()">
+                      <div formArrayName="students">
+                          <div class="advSearchCol" *ngFor="let student of studentsFormArray.controls; let i = index;">
+                  <div [formGroupName]="i" class="advSearchFormTwo">
+                    <div class="form-group labelWhiteBg">  
+                      <label class="selectLabel">{{"LC24-106M"|lang}}</label>
+                      <select formControlName="column"  class="common-select mb-0 disable">
+                        <option [value]="data.searchAvailableColumnId" *ngFor="let data of selectColomnList">{{data.searchColumnName}}</option>
+                      </select>
+                    </div>
+                    <div class="form-group labelWhiteBg">  
+                      <label class="selectLabel">{{"LC24-107M"|lang}}</label>
+                      <select  formControlName="condition" class="common-select mb-0" >
+                          <option [value]="data.searchConditionId" *ngFor="let data of cndsnList">{{data.searchCondition}}</option>
+                      </select>
+                    </div>
+                 
+                    <div class="form-group labelWhiteBg ">  
+                      <input formControlName="value" class="inputField"  type="text" id=""  placeholder="enter search" >
+                      <!-- <label class="inputLabel" for="code">Enter Search Character</label> -->
+                    </div>
+                    <div *ngIf="i != studentsFormArray.length - 1 && studentsFormArray.length>1" class="form-group labelWhiteBg" >  
+                        <select  formControlName="opretor" class="common-select mb-0" >
+                          <option value="AND" >{{"LC24-115M"|lang}}</option>
+                          <option value="OR" >{{"LC24-114M"|lang}}</option>
+                        </select>
+                      </div>
+                  </div>
+                 
+                 
+                  </div>
+                  </div>
+                  </form>
+
+                </div>
+              </div>
+              </div>
+               
+        
+                <div class="saveSearchBtnSection">
+                  <div>
+                    <button class="common-btn btn-light-red"  (click)="closeedit()">{{"LC20-34M"|lang}}</button>
+                  </div>
+                  <div class="delSearchIcon">
+                  
+                    <button class="advBtn deleteIcon"  type="button"  (click)="delete()"><img src="../../../assets/images/del-icon-red.svg"/> {{"LC20-112M"|lang}}</button>
+                    <button class="btnBlue advBtn" (click)="search_save()">{{"LC20-29M"|lang}}</button>
+                    <button class="advBtn"  (click)="update()"> {{"LC20-33M"|lang}}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

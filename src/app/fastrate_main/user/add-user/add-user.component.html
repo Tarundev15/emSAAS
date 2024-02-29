@@ -1,0 +1,165 @@
+    <div class="horizontal-filter">
+      <div class="form-group">
+        <!-- <div class="user-header"> -->
+        <!-- <div class="title"> -->
+        <span class="user-icon">
+          <img src="assets/icons/users.png">
+        </span>
+        <h3 class="user-text">
+          Create User
+        </h3>
+        <div>
+          <img style="float:right;margin-top:-24px;" src="assets/icons/ellipsis.png">
+          <div class="popup-content">
+            This is your pop-up content.
+          </div>
+        </div>
+        <!-- </div> -->
+      </div>
+
+    </div>
+
+
+    <div class="user-add-section">
+      <div class="row">
+        <p-toast></p-toast>
+        <form [formGroup]="form" class="container-fluid" (ngSubmit)="submitForm()">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <input formControlName="firstName" class="inputField" type="text" id="firstName">
+                <label class="inputLabel" for="firstName">First Name*:</label>
+              
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+
+                <input formControlName="lastName" class="inputField" type="text" id="lastName">
+                <label for="lastName" class="inputLabel">Last Name*:</label>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+
+                <input formControlName="email" class="inputField" type="email" id="email">
+                <label class="inputLabel" for="email">Email*:</label>
+              
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-group">
+
+                <input class="inputField" type="text" id="employeeId" formControlName="employeeId">
+                <label for="employeeId" class="inputLabel">Employee ID*:</label>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group with-icon">
+
+                <p-calendar formControlName="joiningdate" inputId="joiningdate" [showIcon]="true" dateFormat="dd/mm/yy"
+                  class=" inputField"></p-calendar>
+                <label for="joiningdate" class="inputLabel">Joining Date*:</label>
+
+                <span class="span-error">Please enter joining date</span>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group with-icon">
+
+                <p-calendar formControlName="dob" inputId="dob" [showIcon]="true" dateFormat="dd/mm/yy" class="inputField"></p-calendar>
+                <label for="dob" class="inputLabel">DOB*:</label>
+                <span class="span-error">Please enter DOB</span>
+              </div>
+            </div>
+
+
+            <div class="col-sm-4">
+              <div class="form-group">
+
+                <select class="inputField common-select" id="division" formControlName="divisionid" >
+                  <option value="" selected>Select Division</option>
+                  <option *ngFor="let div of divisionOptions" [value]="div.divisionId">{{ div.name }}</option>
+                </select>
+                <label for="division" class="inputLabel">Division*:</label>
+                <span class="span-error1">Please select user division</span>
+              </div>
+            </div> 
+
+            <!-- RM Dropdown -->
+            <div class="col-sm-4">
+              <div class="form-group">
+
+                <select class="inputField common-select" id="rm" formControlName="reportingmanager">
+                  <option value="" selected>Select RM</option>
+                  <option value="1" selected>J</option>
+                  <option value="2" selected>A</option>
+                  <option *ngFor="let option of rmOptions" [value]="option.useName">{{ option.fullName }}</option>
+                </select>
+                <label class="inputLabel" for="rm">RM*:</label>
+                <span class="span-error1">Please select Reporting Manager</span>
+              </div>
+            </div>
+
+            <!-- HR Dropdown -->
+            <div class="col-sm-4">
+              <div class="form-group">
+
+                <select class="inputField common-select" id="hr" formControlName="hrmanager">
+                  <option value="" selected>Select HR</option>
+                  <option *ngFor="let option of hrOptions" [value]="option.useName">{{ option.fullName }}</option>
+                </select>
+                <label class="inputLabel" for="hr">HR*:</label>
+                <span class="span-error1">Please select HR manager</span>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-group">
+
+                <select class="common-select inputField" id="groupName" formControlName="usergroup">
+                  <option value="" selected>Select Group</option>
+                  <option *ngFor="let option of groupOptions" [value]="option.groupid">{{ option.groupname }}</option>
+                  <!-- Add more options as needed -->
+                </select>
+                <label for="groupName" class="inputLabel">Access Group*:</label>
+                <span class="span-error1">Please select access group</span>
+              </div>
+            </div>
+
+
+            <div class="col-sm-4">
+              <div class="form-group">
+                <select class="inputField common-select" id="department" formControlName="department">
+                  <option value="" selected>Select Department</option>
+                  <option *ngFor="let option of departmentOptions" [value]="option.lookupKeys.lookupCode">{{ option.lookupKeys.lookupCode }}</option>
+                  <!-- Add more options as needed -->
+                </select>
+                <label class="inputLabel" for="department">Department*:</label>
+
+                <span class="span-error1">Please enter user department</span>
+              </div>
+            </div>
+
+
+            <div class="col-sm-4">
+              <div class="form-group">
+
+                <textarea class="inputField" id="remark" formControlName="remark"></textarea>
+                <label class="inputLabel" for="remark">Remark*:</label>
+                <span class="span-error1">Please enter remark</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group no-flex">
+            <button class="common-btn btn-blue" id="submit_button" style="min-width: 20px !important;" type="submit">
+              Submit
+              
+<!-- <p-toast></p-toast> -->
+            </button>
+          </div>
+        </form>
+      </div>
+      

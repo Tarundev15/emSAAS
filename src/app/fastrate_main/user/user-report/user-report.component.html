@@ -1,0 +1,319 @@
+<!-- <app-header></app-header> -->
+<app-loader></app-loader>
+<div class="mainWrapper">
+  <!-- <app-sidebar-menu></app-sidebar-menu> -->
+  <div class="">
+
+    <div class="horizontal-filter">
+      <!-- <div class="form-group"> -->
+      <!-- <div class="form-group">
+        <input class="inputField" type="text" id="code" [(ngModel)]="filter.profileOptionCode" name="code">
+        <label class="inputLabel" for="code">{{"LC8-133M"|lang}}</label>
+      </div> -->
+      <div class="form-group">
+        <label class="selectLabel" for="model">
+          Divison
+          <span class="requiredAsterisk">*</span>
+        </label>
+        <select class="common-select" aria-label="Default select example" [(ngModel)]="filter.userDivisions"
+          class="common-select mb-0" required #divisionInput="ngModel">
+          <option disabled selected value="0">{{"LC20-90M"|lang}}</option>
+          <option [value]="option.name" *ngFor="let option of divisionOptions">{{option.displayName}} </option>
+        </select>
+        <div id="errorMessageModuleFeatureId"
+          *ngIf="issubmitted && filter.userDivisions === '' && divisionInput.touched" style="color: red;">
+          <!-- *ngIf="issubmitted && filter.userDivisions === '' && divisionInput.touched" style="color: red;"> -->
+          <!-- {{"MG100149M"|lang}} --> Division is required
+        </div>
+      </div>
+
+
+      <form [formGroup]="joiningForm">
+        <div class="form-group">
+          <div class="card flex justify-content-center">
+            <span class="p-float-label" pInputText pTooltip="Enter your username" tooltipEvent="focus">
+              <p-calendar (keyup)="formatDateInput($event,'joiningdate')" inputId="joining_date" [showButtonBar]="false"
+                dateFormat="dd-mm-yy" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2099"
+                formControlName="joiningdate" selectionMode="range" [numberOfMonths]="2" [showIcon]="true">
+                <!-- Calendar content -->
+                <ng-template pTemplate="header" class="button-container">
+                  <button pButton type="button" label="Last 30 Days" (click)="selectLast30Days(true,false)"
+                    class="custom-calendar-button"></button>
+                  <button pButton type="button" label="This Month" (click)="selectThisMonth(true,false)"
+                    class="custom-calendar-button"></button>
+                  <button pButton type="button" label="Last Month" (click)="selectLastMonth(true,false)"
+                    class="custom-calendar-button"></button>
+                </ng-template>
+              </p-calendar>
+              <label for="joining_date">Joining Date</label>
+            </span>
+          </div>
+        </div>
+      </form>
+      <!-- <button type="submit" pButton label="Submit Joining Form"></button> -->
+
+      <form [formGroup]="lastWorkingForm">
+        <div class="form-group">
+          <div class="card flex justify-content-center">
+            <span class="p-float-label" pInputText pTooltip="Enter your username" tooltipEvent="focus">
+              <p-calendar (keyup)="formatDateInput($event,'lastworkingdate')" inputId="lastworking_date"
+                [showButtonBar]="false" dateFormat="dd-mm-yy" [monthNavigator]="true" [yearNavigator]="true"
+                yearRange="2000:2099" formControlName="lastworkingdate" selectionMode="range" [numberOfMonths]="2"
+                [showIcon]="true">
+                <!-- Calendar content -->
+                <ng-template pTemplate="header" class="button-container">
+                  <button pButton type="button" label="Last 30 Days" (click)="selectLast30Days(false,true)"
+                    class="custom-calendar-button"></button>
+                  <button pButton type="button" label="This Month" (click)="selectThisMonth(false,true)"
+                    class="custom-calendar-button"></button>
+                  <button pButton type="button" label="Last Month" (click)="selectLastMonth(false,true)"
+                    class="custom-calendar-button"></button>
+                </ng-template>
+              </p-calendar>
+              <label for="lastworking_date">Last Working Date</label>
+            </span>
+          </div>
+        </div>
+      </form>
+      <!-- <button type="submit" pButton label="Submit Last Working Form"></button> -->
+
+      <div class="form-group">
+        <label class="selectLabel" for="model">Department</label>
+        <select class="common-select" aria-label="Default select example" [(ngModel)]="filter.userDepartments"
+          class="common-select mb-0" required #deptInput="ngModel">
+          <option disabled selected value="">{{"LC20-90M"|lang}}</option>
+          <!-- <option value="" selected>Select Department</option> -->
+          <option *ngFor="let option of departmentOptions" [value]="option.lookupKeys.lookupCode">
+            {{option.lookupKeys.lookupCode}}</option>
+        </select>
+        <!-- <div id="errorMessageModuleFeatureId"
+              *ngIf="issubmitted && filter.userDepartments === '' && deptInput.touched" style="color: red;">
+               Department is required
+              </div> -->
+      </div>
+
+      <div class="form-group">
+        <label class="selectLabel" for="model">Status</label>
+        <select class="common-select" aria-label="Default select example" [(ngModel)]="filter.status" name="status"
+          class="common-select mb-0" required #statusInput="ngModel">
+          <option disabled selected value="">{{"LC20-90M"|lang}}</option>
+          <option value="Active">Active</option>
+          <option value="Disable">Disable</option>
+          <option value="salary-on-hold">Salary on Hold</option>
+        </select>
+        <!-- <div id="errorMessageModuleFeatureId"
+              *ngIf="issubmitted && filter.status === '' && statusInput.touched" style="color: red;">
+               Status is required
+              </div> -->
+      </div>
+      <div class="form-group no-flex">
+        <label for="model"></label>
+        <button class="common-btn btn-blue " type="submit" style="min-width: 20px !important;"
+          (click)="onSubmit_DateForm()"><img class="search-white-img m-r-0"
+            src="../../../../assets/images/search-white.svg"> </button>
+        <!-- <button class="common-btn btn-blue " type="submit" style="min-width: 20px !important;" (click)="GetProfileOptionsList()"><img class="search-white-img m-r-0" src="../../../../assets/images/search-white.svg"> </button> -->
+        <!-- {{"LC20-28M"|lang}} -->
+      </div>
+      <div class="form-group no-flex">
+        <label for="model"></label>
+        <button class="common-btn btn-blue" [disabled]="!searchPerformed" style="min-width: 20px !important;"
+          (click)="DownloadUserReport()"><img class="search-white-img m-r-0"
+            src="../../../../assets/images/cloud-download-icon.svg">
+        </button>
+      </div>
+    </div>
+    <!-- </div> -->
+
+
+    <div class="user-add-section">
+      <div class="row">
+        <div class="col-md-5 col-sm-3 col-xs-3 d-flex align-items-center">
+          <!-- <div class="user-number">
+            <p><span>0</span> Results  </p>
+          </div> -->
+
+        </div>
+        <!-- <div class="col-md-7 col-sm-9 col-xs-9">
+          <div class="add-user-btn">
+            <select  id="mySelect" class="no-border width-70-px small-select">
+              <option [defaultSelected]="true" value="Action" ng-reflect-value="all">{{"LC20-30M"|lang}}</option>
+              <option  value="ADD" id="add">{{"LC20-32M"|lang}}</option>
+            </select>
+            <div  class="link-img-container app-tooltip" >
+              <img (click)="openLookupDialogBox('','')"src="../../../../assets/images/plus.svg">
+              <p class="tooltiptext app-bottom ">{{"LC20-32M"|lang}}</p>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+    <div class="user-details-section">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th class="width-3"></th>
+            <!-- <th class="width-10">{{"LC8-133M"|lang}}</th>
+            <th class="width-10">{{"LC8-134M"|lang}}</th>
+            <th class="width-10">{{"LC6-23M"|lang}}</th>
+            <th class="width-10">{{"LC6-22M"|lang}}</th>
+    
+            <th class="width-10">{{"LC6-24M"|lang}}</th>
+            <th class="width-10">{{"LC6-25M"|lang}}</th>
+            <th class="width-10">{{"LC6-21M"|lang}}</th> -->
+            <th class="width-10">Emp. Id</th>
+            <th class="width-10">Emp. Name</th>
+            <th class="width-10">Division</th>
+            <th class="width-10">E-mail</th>
+            <th class="width-10">RM</th>
+            <th class="width-10">Designation</th>
+            <th class="width-10">User's Role</th>
+            <th class="width-10">Department</th>
+            <th class="width-10">Status</th>
+            <th class="width-10">Joining Date</th>
+            <th class="width-10">Last Working Date</th>
+            <!-- <th class="width-5 text-center action-data">{{"LC20-30M"|lang}}</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let data of allProfileOptionsLists;  let i = index">
+            <tr id="parent_{{i}}" [class.highlighted]="data.highlighted">
+              <td (click)="toggleSubTable(data)">
+                <!-- <ng-container *ngIf="!data.subTableVisible">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
+                  </svg>
+                 </ng-container> 
+                 <ng-container *ngIf="data.subTableVisible"><svg xmlns="http://www.w3.org/2000/svg"
+                    width="16" height="16" fill="currentColor" class="bi bi-dash-square-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z" />
+                  </svg>
+                </ng-container> -->
+              </td>
+              <td> {{data.EmpId }}
+              <td> {{data.FULL_NAME }}
+              <td> {{data.DIVISION }}
+                <!-- <td> {{ data.USER_STATUS }} -->
+              <td>{{data.MAIL_ID }}</td>
+              <td>{{data.RM_NAME}}</td>
+              <td>{{data.DESIGNATION }}</td>
+              <td>{{data.ROLE }}</td>
+              <td>{{data.DEPARTMENT }}</td>
+
+              <td id="status" class="active">
+                <span *ngIf="data?.USER_STATUS=='Active'" class="active-css">Active</span>
+                <span *ngIf="data?.USER_STATUS=='Disable'" class="deactivate-css">Disable</span>
+                <span *ngIf="data?.USER_STATUS=='Salary On Hold'" class="deactivate-css">Salary On Hold</span>
+              </td>
+
+              <td>{{ data.JOINING_DATE ? (data.JOINING_DATE | date: 'dd/MM/yy') :''}}</td>
+              <td>{{ data.LAST_WORKING_DATE ? (data.LAST_WORKING_DATE | date: 'dd/MM/yy') :'' }}</td>
+              <!-- <td>{{data.profileDisplayDescription}}</td> -->
+              <!-- <td class="text-center action-data">
+                <svg (click)="edit(data,'edit')" xmlns="http://www.w3.org/2000/svg" width="25" height="24"
+                  viewBox="0 0 25 24" fill="none">
+                  <path
+                    d="M12.5 20.0002H21.5M17 3.50023C17.3978 3.1024 17.9374 2.87891 18.5 2.87891C18.7786 2.87891 19.0544 2.93378 19.3118 3.04038C19.5692 3.14699 19.803 3.30324 20 3.50023C20.197 3.69721 20.3532 3.93106 20.4598 4.18843C20.5665 4.4458 20.6213 4.72165 20.6213 5.00023C20.6213 5.2788 20.5665 5.55465 20.4598 5.81202C20.3532 6.06939 20.197 6.30324 20 6.50023L7.5 19.0002L3.5 20.0002L4.5 16.0002L17 3.50023Z"
+                    stroke="#7B8390" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </td> -->
+            </tr>
+            <tr *ngIf="data.subTableVisible">
+              <td colspan="9" class="highlighted">
+                <div class="d-flex">
+                  <div class="form-group">
+                    <input class="inputField" type="text" id="code" name="code" [(ngModel)]="childfilter.levelName">
+                    <label class="inputLabel" for="code">{{"LC8-147M"|lang}}</label>
+                  </div>
+                  <div class="form-group">
+                    <input class="inputField" type="text" id="meaning" name="meaning"
+                      [(ngModel)]="childfilter.levelDisplayValue">
+                    <label class="inputLabel" for="meaning">{{"LC8-148M"|lang}}</label>
+                  </div>
+                  <div class="form-group">
+                    <input class="inputField" type="text" id="description" name="description"
+                      [(ngModel)]="childfilter.profileOptionValues">
+                    <label class="inputLabel" for="description">{{"LC8-149M"|lang}}</label>
+                  </div>
+                  <div class="form-group no-flex">
+                    <button class="common-btn btn-blue " style="min-width: 20px !important;" (click)="childSearch()">
+                      <img class="search-white-img m-r-0" src="../../../../assets/images/search-white.svg"> </button>
+                  </div>
+                  <div class="form-group no-flex">
+                    <button class="common-btn btn-blue " style="min-width: 20px !important;" (click)="childSearch()">
+                      <img class="search-white-img m-r-0" src="../../../../assets/images/download.svg"> </button>
+                  </div>
+                  <div class="form-group no-flex">
+                    <button class="common-btn btn-blue " style="min-width: 20px !important;"
+                      (click)="childreset()">{{"LC20-28M"|lang}} </button>
+                  </div>
+                  <div class="add-user-btn app-tooltip">
+                    <svg (click)="openLookupDialogBoxChild(data,'add')" xmlns="http://www.w3.org/2000/svg" width="16"
+                      height="17" viewBox="0 0 16 17" fill="none">
+                      <path d="M8.0026 3.83301V13.1663M3.33594 8.49967H12.6693" stroke="#7B8390" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <p class="tooltiptext app-bottom ">{{"LC20-32M"|lang}}</p>
+                  </div>
+                </div>
+
+                <table class="sub-table">
+                  <thead colspan="9">
+                    <tr colspan="9">
+                      <th class="">{{"LC8-147M"|lang}}</th>
+                      <th class="">{{"LC8-148M"|lang}}</th>
+                      <th class="">{{"LC8-149M"|lang}}</th>
+                      <th class="">{{"LC20-30M"|lang}}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of profileOptionValues">
+                      <td>{{item.levelName}}</td>
+                      <td>{{item.levelDisplayValue}}</td>
+                      <td>
+                        {{profileValueDiscription(item.profileOptionValues)}}
+                      <td>
+                        <svg (click)="openLookupDialogBoxChild(item,'edit')" xmlns="http://www.w3.org/2000/svg"
+                          width="25" height="24" viewBox="0 0 25 24" fill="none">
+                          <path
+                            d="M12.5 20.0002H21.5M17 3.50023C17.3978 3.1024 17.9374 2.87891 18.5 2.87891C18.7786 2.87891 19.0544 2.93378 19.3118 3.04038C19.5692 3.14699 19.803 3.30324 20 3.50023C20.197 3.69721 20.3532 3.93106 20.4598 4.18843C20.5665 4.4458 20.6213 4.72165 20.6213 5.00023C20.6213 5.2788 20.5665 5.55465 20.4598 5.81202C20.3532 6.06939 20.197 6.30324 20 6.50023L7.5 19.0002L3.5 20.0002L4.5 16.0002L17 3.50023Z"
+                            stroke="#7B8390" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span>
+                          <img src="assets/images/delete.svg" alt="" (click)="delete(item)">
+                        </span>
+
+                      </td>
+                    </tr>
+                    <!-- <tr>
+                      <td *ngIf="!data.lookupCodes">No Result found</td>
+                    </tr> -->
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </ng-container>
+          <ng-container *ngIf="!allProfileOptionsLists">
+            <tr>
+              <td colspan="8">No Result found</td>
+            </tr>
+          </ng-container>
+
+        </tbody>
+      </table>
+      <app-pagination [currentPage]="currentPage" [totalPages]="totalPages" [itemsPerPage]="itemsPerPage"
+        [totalRecords]="totalRecords" [totalPagesArray]="totalPagesArray" (pageChange)="onPageChange($event)"
+        (showResults)="showResults($event)"></app-pagination>
+
+
+    </div>
+    <!-- <app-add-profile-option (dataToParent)="receiveDataFromChild($event)"></app-add-profile-option> -->
+    <!-- <app-add-profile-level (childEvent)="handleChildEvent($event)"></app-add-profile-level> -->
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="b-pagination-outer">
+    <div class="left-pagination">
+        <span>
+            {{ calculateStartIndex() }} - {{ calculateEndIndex() }}
+            {{ "LC20-119M" | lang }} {{ totalRecords }}
+        </span>
+    </div>
+    <div class="right-pagination">
+        <div class="show-result">
+            <p>{{"LC20-42M"|lang}}:</p>
+            <select class="custom-select" [(ngModel)]="itemsPerPage" (change)="perPageShow($event)">
+                <option value="10">10</option>
+                <option value="20">20</option>
+            </select>
+        </div>
+        <ul id="border-pagination">
+            <li><a class="no-border"  (click)="perPage(1)">
+                <img src="../../../../assets/images/chevron-left.svg"></a>
+            </li>
+            <li *ngFor="let page of totalPagesArray"   (click)="perPage(page)" > 
+                <a [class.active]="page == currentPage">{{page}}
+                </a>
+                </li>
+            <li (click)="perPage(totalPages)">
+                <a class="no-border">
+                  <img src="../../../../assets/images/chevron-right.svg">
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

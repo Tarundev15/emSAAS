@@ -1,0 +1,626 @@
+<!-- <div class="horizontal-filter">
+    <div class="user-add-section1">
+      <div class="title">
+
+      <h3 class="user-text">
+        Manage User's Group
+      </h3>
+      </div>
+    </div>
+
+    
+
+  </div> -->
+<app-loader></app-loader>
+  <div class="user-add-section2">
+    <p-toast></p-toast>   
+    <label style="margin-left: 30px;" ></label>
+    <!-- <label style="margin-left: 30px;" >  Manage User's Group</label> -->
+   <div class="col-lg-3">
+    <div class="input-group" style="height: 26px;">
+        <div class="input-group-prepend">
+            <span class="input-group-text" style="height: 34px;">
+                <i class="la la-user">
+                    Employee*   
+                    <img src="assets/icons/icons8-user-16.png"> 
+                </i>
+                <!-- <img src="assets/icons/users.png"> -->
+              </span>
+        </div>
+        <!-- <input type="text" class="form-control m-input" placeholder="Search Employee" [(ngModel)]="firstName">
+        <button class="btn-sm btn-primary" style="height: 34px;" (click)="EmpSearch(firstName,'1','10','firstName','desc')">View</button>
+        <button class="btn-sm btn-danger" style="height: 34px;" (click)="resetSearch()">Reset</button> -->
+        <form [formGroup]="searchForm">
+            <input type="text" class="form-control m-input" placeholder="Search Employee" formControlName="firstName" (input)="onSearchInputChange()">
+            <div *ngIf="showDropdown" class="search-dropdown">
+              <div style="background-color: gainsboro; height: max-content; width: max-content;" *ngFor="let result of searchResults" (click)="selectResult(result)" >
+              <!-- (click)="EmpSearch(searchForm.get('firstName')?.value,'1','10','firstName','desc')"> -->
+                {{ result.firstName }} {{ result.middleName}}{{ result.lastName }} {{result.employeeNumber  }}
+                    <div *ngIf="result.content.length === 0">
+                        No records found
+                    </div>
+              </div>
+              <!-- <button class="btn-sm btn-primary" style="display: none; height: 34px;" (click)="EmpSearch(searchForm.get('firstName')?.value,'1','10','firstName','desc')">View</button> -->
+            </div>
+        </form>
+        <button class="btn-sm btn-primary" style="height: 34px;" (click)="EmpSearch(TrimmedfirstName,'1','10','firstName','desc')">View</button>
+        <button class="btn-sm btn-danger" style="height: 34px;" (click)="resetSearch()">Reset</button>
+    </div>
+    <!-- <span class="m-form__help">Please enter access group name.</span> -->
+   </div>
+    
+  </div>
+    <div class="row">
+    </div>
+    
+
+  <div class="user-add-section">
+    <div class="row">
+      <div class="col-md-3 col-sm-3 col-xs-3 d-flex align-items-center">
+  
+      </div>
+  
+      <div class="col-md-9 col-sm-9 col-xs-9">
+        <div class="add-user-btn">
+          
+  
+        </div>
+      </div>
+    </div>
+
+  <p-tabView class="title" *ngIf="empList">
+    <p-tabPanel header="Summary">
+      Content 1
+    <!-- <div class="dock-window dock-advanced">
+        <p-dock [model]="items" [position]="position">
+            <ng-template pTemplate="item" let-item>
+                <img [src]="item.icon" (click)="selectedItem(item.label)" [alt]="item.label" width="100%" />
+            </ng-template>
+        </p-dock>
+        <p-tabView NgStyle="margin-left: 105px !important">
+          <p-tabPanel header="Site" *ngIf="activeTab === 'site'">
+            Content Site.............
+          </p-tabPanel>
+          <p-tabPanel header="Business Group" *ngIf="activeTab === 'business group'">
+            Content Business Group.............
+          </p-tabPanel>
+          <p-fieldset legend="Business Group" [toggleable]="true" *ngIf="activeTab === 'business group'">
+            <div style="float: left; width: 70%;">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            </div>
+          </p-fieldset>
+          <p-tabPanel header="Operation Unit" *ngIf="activeTab === 'operation unit'">
+            Content Opertion Unit.............
+          </p-tabPanel>
+          <p-tabPanel header="Access Group" *ngIf="activeTab === 'access group'">
+            Content Access Group.............
+          </p-tabPanel>
+          <p-tabPanel header="User" *ngIf="activeTab === 'user'">
+            Content User.............
+          </p-tabPanel>
+          
+        </p-tabView>
+    </div> -->
+    <!-- Your content for Summary panel -->
+      <div id="container">
+        <div id="sideMenu">
+            <button class="menu-item" [class.selected]="isMenuItemSelected('Personal Info')"
+                (click)="selectMenuItem('Personal Info'); openCard(1)">
+                <svg height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Your SVG icon for Personal Info -->
+                </svg>
+                <span>Personal Info</span>
+            </button>
+            <button class="menu-item" [class.selected]="isMenuItemSelected('Employee Payroll')"
+                (click)="selectMenuItem('Employee Payroll'); openCard(2)">
+                <svg height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Your SVG icon for Employee Payroll -->
+                </svg>
+                <span>Employee Payroll</span>
+            </button>
+            <button class="menu-item" [class.selected]="isMenuItemSelected('Designation')"
+                (click)="selectMenuItem('Designation'); openCard(3)">
+                <svg height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Your SVG icon for Access Info -->
+              </svg>
+              
+                <span>Designation</span>
+            </button>
+        </div>
+
+     <div id=card>
+      <button style="align-items: end;" (click)="toggleFullscreen('card')" style="margin: 10px;">
+        <!-- <svg fill="#000000" height="24" width="24" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 384.97 384.97" xml:space="preserve" transform="matrix(1, 0, 0, 1, 0, 0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g id="Fullscreen_1_"> <path d="M372.939,216.545c-6.123,0-12.03,5.269-12.03,12.03v132.333H24.061V24.061h132.333c6.388,0,12.03-5.642,12.03-12.03 S162.409,0,156.394,0H24.061C10.767,0,0,10.767,0,24.061v336.848c0,13.293,10.767,24.061,24.061,24.061h336.848 c13.293,0,24.061-10.767,24.061-24.061V228.395C384.97,221.731,380.085,216.545,372.939,216.545z"></path> <path d="M372.939,0H252.636c-6.641,0-12.03,5.39-12.03,12.03s5.39,12.03,12.03,12.03h91.382L99.635,268.432 c-4.668,4.668-4.668,12.235,0,16.903c4.668,4.668,12.235,4.668,16.891,0L360.909,40.951v91.382c0,6.641,5.39,12.03,12.03,12.03 s12.03-5.39,12.03-12.03V12.03l0,0C384.97,5.558,379.412,0,372.939,0z"></path> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </g> </g></svg> -->
+        <svg fill="#000000" height="24" width="24" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 384.97 384.97" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g id="Fullscreen"> <path d="M384.97,12.03c0-6.713-5.317-12.03-12.03-12.03H264.847c-6.833,0-11.922,5.39-11.934,12.223 c0,6.821,5.101,11.838,11.934,11.838h96.062l-0.193,96.519c0,6.833,5.197,12.03,12.03,12.03c6.833-0.012,12.03-5.197,12.03-12.03 l0.193-108.369c0-0.036-0.012-0.06-0.012-0.084C384.958,12.09,384.97,12.066,384.97,12.03z"></path> <path d="M120.496,0H12.403c-0.036,0-0.06,0.012-0.096,0.012C12.283,0.012,12.247,0,12.223,0C5.51,0,0.192,5.317,0.192,12.03 L0,120.399c0,6.833,5.39,11.934,12.223,11.934c6.821,0,11.838-5.101,11.838-11.934l0.192-96.339h96.242 c6.833,0,12.03-5.197,12.03-12.03C132.514,5.197,127.317,0,120.496,0z"></path> <path d="M120.123,360.909H24.061v-96.242c0-6.833-5.197-12.03-12.03-12.03S0,257.833,0,264.667v108.092 c0,0.036,0.012,0.06,0.012,0.084c0,0.036-0.012,0.06-0.012,0.096c0,6.713,5.317,12.03,12.03,12.03h108.092 c6.833,0,11.922-5.39,11.934-12.223C132.057,365.926,126.956,360.909,120.123,360.909z"></path> <path d="M372.747,252.913c-6.833,0-11.85,5.101-11.838,11.934v96.062h-96.242c-6.833,0-12.03,5.197-12.03,12.03 s5.197,12.03,12.03,12.03h108.092c0.036,0,0.06-0.012,0.084-0.012c0.036-0.012,0.06,0.012,0.096,0.012 c6.713,0,12.03-5.317,12.03-12.03V264.847C384.97,258.014,379.58,252.913,372.747,252.913z"></path> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </g> </g></svg>
+    </button>
+      
+      <div id="card1" *ngIf="selectedCard === 1">
+        <h2>Card Content</h2>
+        <div *ngFor="let P_Info of personalInfo">
+          <h2>{{ P_Info.firstName }} {{ P_Info.lastName }}</h2>
+          <img src="path/to/employee/image.jpg" alt="Employee Image">
+
+          <div class="info-section">
+              <h3>Personal Information</h3>
+              <p><strong>Username:</strong> {{ P_Info.username }}</p>
+              <!-- Add other personal information fields as needed -->
+          </div>
+
+          <div class="info-section">
+              <h3>Employment Information</h3>
+              <!-- Add other employment information fields as needed -->
+          </div>
+
+          <!-- Add more sections for other information categories as needed -->
+        </div>
+      </div>
+
+      <div id="card2" *ngIf="selectedCard === 2">
+          <h2>Card Content</h2>
+          <div>Content for Card 2</div>
+          <!-- <button (click)="toggleFullscreen('card')">Toggle Fullscreen</button> -->
+      </div>
+
+      <div id="card3" *ngIf="selectedCard === 3">
+          <h2>Card Content</h2>
+          <div>Content for Card 3</div>
+      </div>
+
+     </div>
+    </div>
+    </p-tabPanel>
+    <p-tabPanel header="Details">
+        Content 2
+      <!-- Your content for Details panel -->
+      <div id="container">
+        <div id="sideMenu">
+            <button class="menu-item" [class.selected]="isMenuItemSelected('Personal')"
+                (click)="selectMenuItem('Personal'); openCard(1)">
+                <svg height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Your SVG icon for Personal -->
+                </svg>
+                <span>Personal</span>
+            </button>
+            <button class="menu-item" [class.selected]="isMenuItemSelected('Access Info')"
+                (click)="selectMenuItem('Access Infoll'); openCard(2)">
+                <svg height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Your SVG icon for Access Info -->
+                </svg>
+                <span>Access Info</span>
+            </button>
+            <button class="menu-item" [class.selected]="isMenuItemSelected('Contact Information')"
+                (click)="selectMenuItem('Contact Information'); openCard(3)">
+                <svg height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Your SVG icon for Access Info -->
+              </svg>
+              
+                <span>Contact Information</span>
+            </button>
+        </div>
+
+     <div id=card>
+      <button style="align-items: end;" (click)="toggleFullscreen('card')" style="margin: 10px;">
+        <!-- <svg fill="#000000" height="24" width="24" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 384.97 384.97" xml:space="preserve" transform="matrix(1, 0, 0, 1, 0, 0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g id="Fullscreen_1_"> <path d="M372.939,216.545c-6.123,0-12.03,5.269-12.03,12.03v132.333H24.061V24.061h132.333c6.388,0,12.03-5.642,12.03-12.03 S162.409,0,156.394,0H24.061C10.767,0,0,10.767,0,24.061v336.848c0,13.293,10.767,24.061,24.061,24.061h336.848 c13.293,0,24.061-10.767,24.061-24.061V228.395C384.97,221.731,380.085,216.545,372.939,216.545z"></path> <path d="M372.939,0H252.636c-6.641,0-12.03,5.39-12.03,12.03s5.39,12.03,12.03,12.03h91.382L99.635,268.432 c-4.668,4.668-4.668,12.235,0,16.903c4.668,4.668,12.235,4.668,16.891,0L360.909,40.951v91.382c0,6.641,5.39,12.03,12.03,12.03 s12.03-5.39,12.03-12.03V12.03l0,0C384.97,5.558,379.412,0,372.939,0z"></path> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </g> </g></svg> -->
+        <svg fill="#000000" height="24" width="24" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 384.97 384.97" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g id="Fullscreen"> <path d="M384.97,12.03c0-6.713-5.317-12.03-12.03-12.03H264.847c-6.833,0-11.922,5.39-11.934,12.223 c0,6.821,5.101,11.838,11.934,11.838h96.062l-0.193,96.519c0,6.833,5.197,12.03,12.03,12.03c6.833-0.012,12.03-5.197,12.03-12.03 l0.193-108.369c0-0.036-0.012-0.06-0.012-0.084C384.958,12.09,384.97,12.066,384.97,12.03z"></path> <path d="M120.496,0H12.403c-0.036,0-0.06,0.012-0.096,0.012C12.283,0.012,12.247,0,12.223,0C5.51,0,0.192,5.317,0.192,12.03 L0,120.399c0,6.833,5.39,11.934,12.223,11.934c6.821,0,11.838-5.101,11.838-11.934l0.192-96.339h96.242 c6.833,0,12.03-5.197,12.03-12.03C132.514,5.197,127.317,0,120.496,0z"></path> <path d="M120.123,360.909H24.061v-96.242c0-6.833-5.197-12.03-12.03-12.03S0,257.833,0,264.667v108.092 c0,0.036,0.012,0.06,0.012,0.084c0,0.036-0.012,0.06-0.012,0.096c0,6.713,5.317,12.03,12.03,12.03h108.092 c6.833,0,11.922-5.39,11.934-12.223C132.057,365.926,126.956,360.909,120.123,360.909z"></path> <path d="M372.747,252.913c-6.833,0-11.85,5.101-11.838,11.934v96.062h-96.242c-6.833,0-12.03,5.197-12.03,12.03 s5.197,12.03,12.03,12.03h108.092c0.036,0,0.06-0.012,0.084-0.012c0.036-0.012,0.06,0.012,0.096,0.012 c6.713,0,12.03-5.317,12.03-12.03V264.847C384.97,258.014,379.58,252.913,372.747,252.913z"></path> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </g> </g></svg>
+    </button>
+      
+      <div id="card1" *ngIf="selectedCard === 1">
+          <h2>Card Content</h2>
+          <div>Content for Card 1</div>
+      </div>
+
+      <div id="card2" *ngIf="selectedCard === 2">
+          <h2>Card Content</h2>
+          <div>Content for Card 2</div>
+          <!-- <button (click)="toggleFullscreen('card')">Toggle Fullscreen</button> -->
+      </div>
+
+      <div id="card3" *ngIf="selectedCard === 3">
+          <h2>Card Content</h2>
+          <div>Content for Card 3</div>
+      </div>
+
+     </div>
+    </div>
+
+
+    </p-tabPanel>
+    <p-tabPanel header="Other Info" value="LEVEL2">
+        Content 3
+        <!-- <div class="addressFlexBox">
+          <div class="addressDetails" >
+            
+              <p-fieldset [toggleable]="true" [collapsed]="collapsed">
+              <ng-template pTemplate="header">
+                  <div class="flex align-items-center gap-2 px-2">
+                      <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
+                      <span class="font-bold">Amy Elsner</span>
+                  </div>
+              </ng-template>
+              <p class="m-0">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+              </p-fieldset>
+            
+          </div>
+        </div> -->
+        <hr>
+        <p-fieldset [toggleable]="true" [collapsed]="collapsed">
+          <ng-template pTemplate="header">
+              <div class="flex align-items-center gap-2 px-2">
+                  <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
+                  <span class="font-bold">Amy Elsner</span>
+              </div>
+          </ng-template>
+          <p class="m-0">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+          </p-fieldset>
+    </p-tabPanel>
+    <p-tabPanel header="Salary">
+        Content 4
+        <div id="table-scroll" class="table-scroll">
+          <div class="table-wrap">
+            <label class="subheader-label">
+              Level's Profile Value:
+            </label>
+          <table class="main-table">
+            <thead>
+              <tr>
+  
+                <th>Level Value</th>
+                <th>Profile Value</th>
+                <th>#</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <!-- <td><input type="text" class="form-control" formControlName="accessProfileName"></td> -->
+                <!-- <td><input type="text" class="form-control" formControlName="accessProfileDescription"></td> -->
+               <td><select class="common-select">
+              <option selected>Site-Supra</option>
+            </select></td>
+                <td><select class="common-select">
+                  <option selected>Yes</option>
+                  <option>No</option>
+                </select></td>
+                <td>
+                  <button class="btn btn-primary" type="submit">
+                    <i class="pi pi-save"></i>
+                    <!-- Save -->
+                  </button>
+                  
+                  <button class="btn btn-danger" type="delete">
+                    <i class="pi pi-trash"></i>
+                    <!-- Delete -->
+                  </button>
+                  
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <hr>
+          <div id="table-scroll" class="table-scroll">
+            <div class="table-wrap">
+              <label class="subheader-label">
+                Set New Profile Value for Level:
+              </label>
+              <table class="main-table">
+            <thead>
+              <tr>
+  
+                <th>Level Value</th>
+                <th>Profile Value</th>
+                <!-- <th>#</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+               <td>
+                <form>
+                  <select class="common-select inputField" id="groupName" formControlName="usergroup">
+                    <option value="0" selected>Select Group</option>
+                    <option *ngFor="let option of groupOptions" [value]="option.groupid">{{ option.groupname }}</option>
+                  </select>
+                  <!-- <p-button icon="pi pi-save" type="submit" label="Save"></p-button> -->
+                </form>
+              </td>
+                <td>
+                  <select class="common-select">
+                  <option selected>Yes</option>
+                  <option>No</option>
+                </select>
+              </td>
+                <!-- <td>
+                  <button class="btn btn-primary" type="submit">
+                    <i class="pi pi-save"></i>
+                  </button>
+                  
+                  <button class="btn btn-danger" type="delete">
+                    <i class="pi pi-trash"></i>
+                  </button>
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+    </p-tabPanel>
+    <p-tabPanel header="Account Summary">
+        Content 5
+        <div id="table-scroll" class="table-scroll">
+          <div class="table-wrap">
+            <label class="subheader-label">
+              Level's Profile Value:
+            </label>
+          <table class="main-table">
+            <thead>
+              <tr>
+  
+                <th>Level Value</th>
+                <th>Profile Value</th>
+                <th>#</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <!-- <td><input type="text" class="form-control" formControlName="accessProfileName"></td> -->
+                <!-- <td><input type="text" class="form-control" formControlName="accessProfileDescription"></td> -->
+               <td><select class="common-select">
+              <option selected>Site-Supra</option>
+            </select></td>
+                <td><select class="common-select">
+                  <option selected>Yes</option>
+                  <option>No</option>
+                </select></td>
+                <td>
+                  <button class="btn btn-primary" type="submit">
+                    <i class="pi pi-save"></i>
+                    <!-- Save -->
+                  </button>
+                  
+                  <button class="btn btn-danger" type="delete">
+                    <i class="pi pi-trash"></i>
+                    <!-- Delete -->
+                  </button>
+                  
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <!-- <div class="addressFlexBox">
+          <div class="addressDetails" style="background-color: aqua;"> -->
+        <hr>
+        <!-- <div class="user-add-section2">
+        </div> -->
+        <!-- <p class="user-text">Set New Profile Value for Level</p> -->
+          <div id="table-scroll" class="table-scroll">
+            <div class="table-wrap">
+              <label class="subheader-label">
+                Set New Profile Value for Level:
+              </label>
+              <table class="main-table">
+            <thead>
+              <tr>
+  
+                <th>Level Value</th>
+                <th>Profile Value</th>
+                <!-- <th>#</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <!-- <td><input type="text" class="form-control" formControlName="accessProfileName"></td> -->
+                <!-- <td><input type="text" class="form-control" formControlName="accessProfileDescription"></td> -->
+               <td><select class="common-select">
+              <option selected>Site-Supra</option>
+            </select></td>
+                <td><select class="common-select">
+                  <option selected>Yes</option>
+                  <option>No</option>
+                </select></td>
+                <!-- <td>
+                  <button class="btn btn-primary" type="submit">
+                    <i class="pi pi-save"></i>
+                  </button>
+                  
+                  <button class="btn btn-danger" type="delete">
+                    <i class="pi pi-trash"></i>
+                  </button>
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+    </p-tabPanel>
+    
+  </p-tabView>
+</div>
+  <div class="user-details-section">
+    
+  </div>
+  <div class="add-user-popup">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog" style="max-width: 720px;">
+        <div class="manageColSection">
+            <div class="manageColSectionHeader">
+                <h2 id="headingmanagecolumn">Users in Access Group:
+                    <b>{{ selectedGroupName }}</b>
+                </h2>
+                <div class="selectCheck">
+                    <p id="selectedlenghtmanagecolumn">10 Select</p>
+                    <!-- <p id="selectedlenghtmanagecolumn">{{selectedTrueArray.length}} Select</p> -->
+                    <a class="closeCol" id="btnmanagecolumnclose">x</a>
+                </div>
+
+            </div>
+            <div>
+                <div class="searchCol">
+                    <input type="search" id="inputsearch" [(ngModel)]="ManageSearchInput" (input)="filterItems()">
+                </div>
+            </div>
+            <div class="list manListCol">
+                <div class="selectSpace">
+                    <input type="checkbox" id="checkboxselectallmangecolumn" />Select All
+                </div>
+                <ul *ngFor="let list of authorityNotList; let i = index">
+                    <li>
+                        <div>
+                            <input type="checkbox" id="checkboxmangecolumdata{{i}}" [value]="list.userfullname" />
+                            {{ i + 1 }}.{{ list.userfullname }}({{list.usercode}})
+                        </div>
+                    </li>
+                </ul>
+                <button type="button" id="btnapply"  
+                class="common-btn btn-blue">Apply</button>
+            </div>
+        </div>
+        <!-- <div class="modal-content">
+          <div  class="modal-header">
+            <h1 class="modal-title1">
+                Add/Remove Users in Access Group: 
+                <b>{{ selectedGroupName }}</b> -->
+                <!-- <b>{{ selectedGroupId }}</b> -->
+            <!-- </h1> -->
+            <!-- <button type="button" class="close1" data-bs-dismiss="modal" aria-label="close">
+                <span aria-hidden="true">X</span>
+            </button>
+           
+            
+          </div>
+          
+          <div class="modal-body">
+            <div  class="row">
+              <div class="col-md-5">
+                <h5>Add User</h5>
+                <div class="col-md-8">
+                    <input type="text" class="adduser" id="userAccessSearch1" placeholder="Search For Names.." title="Type in a name" (input)="onUserSearch($event, 'add')">
+                    <div >
+                        <ol id="groupUserId" style="max-height: 300px; overflow-y: auto;">
+                            <li *ngFor="let list of authorityNotList; let i = index"  [value]="list.userfullname" >{{ i + 1 }}.{{ list.userfullname }}({{list.usercode}})</li>
+                        </ol>
+                    </div>
+                </div>
+              </div>
+              <div class="col-md-2" style="margin-top: 20%;">
+                  <button type="button" class="btn btn-secondary" (click)="addUser(selectedUsername)"> Right &gt;</button>
+                  <button type="button" class="btn btn-secondary" (click)="removeUser(selectedUsername)"> &lt; Left</button>
+            </div>
+              <div class="col-md-5">
+                <h5>Remove User</h5>
+                <div class="col-md-8">
+                    <input type="text" class="adduser" id="userAccessSearch2" placeholder="Search For Names.." title="Type in a name" (input)="onUserSearch($event, 'remove')">
+                    <div>
+                        <ol id="nonGroupUserId" style="max-height: 300px; overflow-y: auto;">
+                            <li *ngFor="let list of authorityList; let i = index" [value]="list.userfullname" >{{ i + 1 }}.{{ list.userfullname }}({{list.usercode}})</li>
+                        </ol>
+                    </div>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <div class="modalrole" >
+    <div class="modal-role-content">
+      <div class="select-role-popup">
+        <div>
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title" id="staticBackdropLabel">{{"LC2-49D"|lang}}</h1>
+              </div>
+              <div class="modal-body">
+                <div class="form">
+  
+                  <div >
+                    <div class="billing">
+                      <span><input type="checkbox" >
+                        <label></label></span>
+                      <p ><span > {{"permissions"|lang}}
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M12 10L8 6L4 10" stroke="#0083FD" stroke-width="1.5" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                          </svg></span></p>
+                    </div>
+                    <div >
+                      <div  class="form-group prebilling"
+                        >
+                        <label style="font-size: 13px; font-weight: normal;"></label>
+                        <div class="" style="display: flex; flex-direction: row; flex-wrap: wrap;">
+                          <p style="margin-bottom: 0;"  class="billing-mdfy">
+                            <span></span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+  
+                  </div>
+  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" id="common-btn btn-light-red" class="common-btn btn-light-red"
+                     data-bs-dismiss="modal">{{"LC20-34M"|lang}}</button>
+                  <button type="button" id="common-btn btn-blu"
+                    class="common-btn btn-blue">{{"LC20-50M"|lang}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modalrole" >
+    <div class="modal-role-content" style="height: 100%;">
+      <div class="select-role-popup">
+        <div>
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title" id="staticBackdropLabel">{{"LC20-122M"|lang}} </h1>
+              </div>
+              <div class="modal-body">
+                <div class="form">
+                  <div class="fileDownloadRow">
+                    <div>
+                      <a  >{{"LC20-123M"|lang}}</a>
+                    </div>
+                    <div>
+                      <input type="file" id="file"  />
+                    </div>
+                  </div>
+                  
+  
+  
+                  
+                
+                  <div class="modal-footer">
+                    <button type="button" class="common-btn btn-light-red"
+                      data-bs-dismiss="modal">{{"LC20-34M"|lang}}</button>
+                    <button type="button"  class="common-btn btn-blue">{{"LC20-33M"|lang}}</button>
+                  </div>
+                </div>
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+

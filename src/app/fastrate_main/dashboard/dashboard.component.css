@@ -1,0 +1,624 @@
+.destination {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+}
+
+.destination-card {
+    background: #1a1d3a;
+    background: linear-gradient(45deg, #7b88e1 0%, #212752 100%);
+    padding: 20px;
+    width: 100%;
+    border-radius: 6px;
+}
+
+.destination-profile {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.destination-points {
+    margin-top: 30px;
+}
+
+.profile-img {
+    width: 46px;
+    height: 46px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    border-radius: 50%;
+    padding: 2px;
+    border: 1px solid #bebec4;
+    flex-shrink: 0;
+}
+
+.destination-length {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+}
+
+.destination-profile svg {
+    width: 18px;
+    flex-shrink: 0;
+    margin-right: 8px;
+}
+
+.point {
+    font-size: 14px;
+    color: #bebec4;
+    font-weight: 500;
+}
+
+.sub-point {
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+mat-slider {
+    width: 300px;
+}
+
+
+/* cardcss*/
+.card {
+    margin-block-end: 1.5rem;
+}
+
+.card .card-header,
+.card .card-footer {
+    background-color: #fff !important;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.card.custom-card {
+    border-radius: 0.5;
+    border: 0;
+    background-color: #fff;
+    box-shadow: 0 0.125rem 0 rgba(10, 10, 10, .04);
+    position: relative;
+    margin-block-end: 1.5rem;
+    width: 100%;
+}
+
+.card.custom-card .card-header {
+    padding: 1rem 1.25rem;
+    background-color: transparent !important;
+    border-block-end: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+.card.custom-card .card-header:first-child {
+    border-radius: 0.625rem 0.625rem 0 0;
+}
+
+.card.custom-card .card-header .card-title:before {
+    content: "";
+    position: absolute;
+    height: 1rem;
+    width: 0.2rem;
+    inset-block-start: 0.15rem;
+    inset-inline-start: -0.65rem;
+    background: linear-gradient(to bottom, var(--primary04) 50%, rgba(var(--secondary-rgb), 0.5) 50%);
+    border-radius: 0.5;
+}
+
+.card.custom-card .card-header .card-title {
+    position: relative;
+    margin-block-end: 0;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.card.custom-card .card-header .card-title .subtitle {
+    margin-block-end: 0;
+    text-transform: initial;
+}
+
+.card.custom-card .card-footer {
+    background-color: transparent !important;
+    border-block-start: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem 1.25rem;
+    font-size: 0.813rem;
+}
+
+.card.custom-card .card-body {
+    padding: 1.25rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.card.custom-card .card-link {
+    font-size: 0.75rem;
+}
+
+.card.custom-card .card-text {
+    font-size: 0.813rem;
+}
+
+.card.custom-card .footer-card-icon {
+    width: 60px;
+    height: 60px;
+}
+
+.card.overlay-card {
+    position: relative;
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.card.overlay-card .card-header {
+    border-block-end: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card.overlay-card .card-footer {
+    border-block-start: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card.overlay-card .over-content-bottom {
+    top: auto;
+}
+
+.card.overlay-card:before {
+    content: "";
+    inset-inline-start: 0;
+    inset-inline-end: 0;
+    inset-block-start: 0;
+    inset-block-end: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+}
+
+/* .card.card-bg-primary {
+    background-color: $primary;
+    color: #fff;
+} */
+.card.card-bg-primary .card-header {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fff;
+    border-block-end: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card.card-bg-primary .card-header:before {
+    background-color: #fff;
+}
+
+.card.card-bg-primary .card-body {
+    color: #fff;
+}
+
+.card.card-bg-primary .card-footer {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fff;
+    border-block-start: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* .card.card-bg-secondary {
+    background-color: $secondary;
+    color: #fff;
+} */
+.card.card-bg-secondary .card-header {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fff;
+    border-block-end: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card.card-bg-secondary .card-header:before {
+    background-color: #fff;
+}
+
+.card.card-bg-secondary .card-body {
+    color: #fff;
+}
+
+.card.card-bg-secondary .card-footer {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fff;
+    border-block-start: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card.card-bg-warning {
+    background-color: rgb(var(--warning-rgb));
+    color: #fff;
+}
+
+.card.card-bg-warning .card-header {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fff;
+    border-block-end: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card.card-bg-warning .card-header:before {
+    background-color: #fff;
+}
+
+.card.card-bg-warning .card-body {
+    color: #fff;
+}
+
+.card.card-bg-warning .card-footer {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fff;
+    border-block-start: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card.card-bg-info {
+    background-color: rgb(var(--info-rgb));
+    ;
+    color: #fff;
+}
+
+.card.card-bg-info .card-header {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fff;
+    border-block-end: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card.card-bg-info .card-header:before {
+    background-color: #fff;
+}
+
+.card.card-bg-info .card-body {
+    color: #fff;
+}
+
+.card.card-bg-info .card-footer {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fff;
+    border-block-start: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card.card-bg-success {
+    background-color: rgb(var(--success-rgb));
+    ;
+    color: #fff;
+}
+
+.card.card-bg-success .card-header {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fff;
+    border-block-end: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card.card-bg-success .card-header:before {
+    background-color: #fff;
+}
+
+.card.card-bg-success .card-body {
+    color: #fff;
+}
+
+.card.card-bg-success .card-footer {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fff;
+    border-block-start: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card.card-bg-danger {
+    background-color: rgb(var(--danger-rgb));
+    color: #fff;
+}
+
+.card.card-bg-danger .card-header {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fff;
+    border-block-end: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card.card-bg-danger .card-header:before {
+    background-color: #fff;
+}
+
+.card.card-bg-danger .card-body {
+    color: #fff;
+}
+
+.card.card-bg-danger .card-footer {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fff;
+    border-block-start: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card.card-bg-light {
+    background-color: rgb(var(--light-rgb));
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.card.card-bg-light .card-header {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    color: rgba(255, 255, 255, 0.7);
+    border-block-end: rgba(255, 255, 255, 0.1);
+}
+
+.card.card-bg-light .card-body {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.card.card-bg-light .card-footer {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    color: rgba(255, 255, 255, 0.7);
+    border-block-start: rgba(255, 255, 255, 0.1);
+}
+
+.card.card-bg-dark {
+    background-color: rgb(var(--dark-rgb));
+    color: #fff;
+}
+
+.card.card-bg-dark .card-header {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fff;
+    border-block-end: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card.card-bg-dark .card-header:before {
+    background-color: #fff;
+}
+
+.card.card-bg-dark .card-body {
+    color: #fff;
+}
+
+.card.card-bg-dark .card-footer {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fff;
+    border-block-start: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* End::Card Background Colors */
+
+/* Start:: Cards With Links */
+/* Start:: Cards With Links */
+.card .card-anchor {
+    position: absolute;
+    top: 0;
+    inset-inline-end: 0;
+    bottom: 0;
+    inset-inline-start: 0;
+    z-index: 1;
+    pointer-events: auto;
+    content: "";
+}
+
+/* End:: Cards With Links */
+
+/* Start:: Card With Collapse */
+.card .collapse-close {
+    display: none;
+}
+
+.card.card .collapsed .collapse-close {
+    display: block;
+}
+
+.card.card .collapsed .collapse-open {
+    display: none;
+}
+
+/* End:: Card With Links */
+
+/* Start::Card With FullScreen */
+.card.card-fullscreen {
+    position: fixed;
+    top: 0;
+    inset-inline-start: 0;
+    inset-inline-start: 0;
+    bottom: 0;
+    z-index: 9999;
+    margin: 0;
+}
+
+/* End::Card With FullScreen */
+
+
+.table-container {
+    max-height: 300px;
+    /* Set a maximum height for scrolling */
+    height: 100%;
+    overflow-y: auto;
+    /* Enable vertical scrolling if content overflows */
+    overflow-x: none;
+    /* Enable vertical scrolling if content overflows */
+}
+
+/* Table Styles */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    margin: 0;
+    padding: 0;
+    max-height: 180px;
+    /* Limit the height */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+}
+
+.custom-table thead {
+    border-bottom: 1px solid #EAECF0;
+    background: #ECF0F4;
+}
+
+.custom-table th {
+    font-size: 12px;
+    color: var(--text-primary, #344054);
+    padding: 4px 8px;
+    font-weight: normal;
+    text-align: left;
+}
+
+.custom-table th.centered {
+    /* text-align: center; */
+}
+
+.custom-table td {
+    border-bottom: 1px solid #EAECF0;
+    padding: 4px 8px;
+    vertical-align: middle;
+}
+
+.custom-table td p {
+    margin: 0;
+}
+
+.custom-table td span {
+    /* background-color: #F3F7FF;
+    border-radius: 4px;
+    padding: 2px 6px; */
+}
+
+/* Example Usage */
+.custom-table tr:hover {
+    background-color: #E0E0E0;
+}
+
+.scroll-container {
+    overflow: hidden;
+    height: 290px;
+    /* Adjust the height as needed */
+    position: relative;
+}
+
+.scroll-content {
+    margin-top: 5px;
+    position: absolute;
+    animation: scroll-up 8s linear infinite;
+    width: 100%;
+}
+
+.scroll-container:hover .scroll-content {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-up {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+/* Default styles for all screen sizes */
+
+/* Adjust styles for laptops (medium-sized screens) */
+/* @media (min-width: 768px) {
+
+    .fc {
+      font-size: 16px;
+    }
+  
+
+    .fc-header-toolbar {
+      background-color: #333;
+      color: #fff;
+    }
+  
+    .fc-dayGridMonth-view .fc-day {
+      padding: 10px;
+    }
+  }
+  
+
+  @media (min-width: 992px) {
+    .fc {
+        font-size: 32px;
+      }
+    
+      .fc-header-toolbar {
+        background-color: #333;
+        color: #fff;
+      }
+    
+      .fc-dayGridMonth-view .fc-day {
+        padding: 30px;
+      }
+    }
+  
+  
+   */
+/* .addressFlexBox { */
+/* background-color: rgba(192, 192, 192, 0.2); Gray color with transparency */
+/* border: 1px solid #888; Border for the 3D effect */
+/* border-radius: 30px; Rounded corners for the 3D effect */
+/* padding: 20px; Add some padding for spacing */
+/* box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4); Box shadow for a 3D effect */
+
+/* You can also add other styles like margin, width, etc. as needed */
+/* } */
+
+
+#calendar {
+    /* max-width: 1100px; */
+    width: 100%;
+
+    /* margin: 40px auto; */
+    .fc-toolbar-title {
+        font-size: 20px;
+        /* Set the font size to 20 pixels */
+        font-weight: bold;
+        /* Set the font weight to bold */
+        /* color: #333; Set the text color to a shade of gray (#333) */
+        color: #344054;
+        padding: 0px;
+    }
+
+    .fc .fc-toolbar.fc-header-toolbar {
+        margin-bottom: 1.1em;
+    }
+
+    .fc .fc-toolbar {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .fc-prev-button,
+    .fc-next-button {
+        color: #000000;
+        background-color: #f8f9fa;
+        border: none;
+        cursor: pointer;
+    }
+
+    .fc-prev-button:hover,
+    .fc-next-button:hover {
+        border: none;
+        background-color: #0056b3;
+    }
+
+    .fc-unthemed .fc-toolbar .fc-button:focus,
+    .fc-unthemed .fc-toolbar .fc-button:active,
+    .fc-unthemed .fc-toolbar .fc-button.fc-state-active {
+        border: none;
+        background: #716aca;
+        color: #fff;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        text-shadow: none;
+    }
+
+}
+
+/* Define custom theme classes */
+.my-event {
+    background-color: #cf9e66;
+    color: #074719;
+}
+
+.my-header {
+    background-color: #333;
+    color: #fff;
+}
+
+.my-day {
+    background-color: #f0f0f0;
+    color: #333;
+}

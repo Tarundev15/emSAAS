@@ -1,0 +1,24 @@
+
+<form (ngSubmit)="onSubmit()" [formGroup]="SignupForm">
+    <h2>Log in</h2>
+      <input placeholder="Mobile Number" type="text"  formControlName="username">
+      
+      <span [hidden]="SignupForm.controls['username'].valid || !SignupForm.controls['username'].dirty" class="alert alert-danger">
+        Login is required
+      </span>
+      <input placeholder="Password" type="password"  formControlName="password" required>
+      <span [hidden]="SignupForm.controls['password'].valid || !SignupForm.controls['password'].dirty" class="alert alert-danger">
+        Password is required
+      </span>
+      <input type="submit" value="Login" [disabled]="!SignupForm.valid">
+
+      <a class="forgPass" href="#">Forgot Password</a>
+
+      <p class="dontPass">Don’t have any account?</p>
+      <input class="Register" type="submit" value="Register" >
+</form>
+
+
+
+
+

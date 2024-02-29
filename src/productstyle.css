@@ -1,0 +1,114 @@
+.addressDetails.row.no-gap {
+  gap: 0px !important;
+}
+
+.dob-right .p-datepicker {
+  margin-left: -130px !important;
+}
+
+.rolePermissions.rolePermissionsPage {
+  display: flex;
+}
+
+
+.horizontal-filter .p-overlay {
+  max-width: 100%;
+  min-width: 100%;
+}
+
+.rolePermissions.rolePermissionsPage .row {
+  --bs-gutter-x: 16px;
+  --bs-gutter-y: 16px;
+  min-width: 100%;
+}
+
+.pt-24 {
+  padding-top: 24px !important;
+}
+
+.g-8 {
+  gap: 8px;
+}
+
+.btn-red {
+  background-color: #dc3545 !important;
+  color: #fff !important;
+}
+
+.btn-red:hover {
+  background-color: #b52735 !important;
+  color: #fff !important;
+}
+
+.p-common-btn .p-button {
+  display: flex !important;
+  padding: 12px 24px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 48px !important;
+  border-radius: 4px !important;
+  background-color: #0083FD !important;
+  color: #ffffff !important;
+  transition: 1s !important;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+}
+
+.content-title {
+  margin-bottom: 16px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.table-wrap .subheader-label {
+  margin-bottom: 8px;
+}
+
+.tags-input-wrapper {
+  max-height: 290px;
+}
+
+.tags-input-wrapper .tags-input-wrapper-scroll {
+  overflow-y: auto;
+  max-height: 230px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.addprofileLevelsRow {
+  word-wrap: break-word;
+}
+
+.plr-0 {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.mainWrapper {
+  display: block !important;
+  min-width: 100%;
+}
+
+.user-details-section table::-webkit-scrollbar {
+  width: 4px !important;
+  height: 4px;
+}
+
+/* Track */
+table::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+table::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+table::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

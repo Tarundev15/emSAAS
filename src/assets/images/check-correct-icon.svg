@@ -1,0 +1,18 @@
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="icon-park:check-correct">
+<g id="Group">
+<path id="Vector" d="M26.25 12.5V24.375C26.25 25.4106 25.4106 26.25 24.375 26.25H5.625C4.58947 26.25 3.75 25.4106 3.75 24.375V5.625C3.75 4.58947 4.58947 3.75 5.625 3.75H18.75" stroke="url(#paint0_linear_1_216980)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M10 12.5L16.25 17.5L25.625 4.375" stroke="url(#paint1_linear_1_216980)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_1_216980" x1="15" y1="3.75" x2="15" y2="26.25" gradientUnits="userSpaceOnUse">
+<stop stop-color="#7739FF"/>
+<stop offset="1" stop-color="#5943FE"/>
+</linearGradient>
+<linearGradient id="paint1_linear_1_216980" x1="17.8125" y1="4.375" x2="17.8125" y2="17.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="#7739FF"/>
+<stop offset="1" stop-color="#5943FE"/>
+</linearGradient>
+</defs>
+</svg>

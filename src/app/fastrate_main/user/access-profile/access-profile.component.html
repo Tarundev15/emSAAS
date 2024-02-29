@@ -1,0 +1,712 @@
+<app-loader></app-loader>
+<div *ngIf="!editScreen" class="user-details-section pt-24  table-container">
+  <div id="table-scroll" class="table-scroll">
+    <div class="table-wrap">
+      <table class="main-table">
+        <thead>
+          <tr>
+            <th class="width-10 text-center action-data-first fixed-side" id="th0">
+              <div class="um-tableHeader text-center  justify-center">
+                ID
+                <!-- <i class="fa fa-angle-down"></i> -->
+              </div>
+            </th>
+            <th class="width-10" id="th1">
+              <div class="um-tableHeader">
+                Code <div>
+
+                </div>
+              </div>
+            </th>
+            <th class="width-10" id="th1">
+              <div class="um-tableHeader">
+                Name <div>
+
+                </div>
+              </div>
+            </th>
+            <th class="width-10" id="th1">
+              <div class="um-tableHeader">
+                Description <div>
+
+                </div>
+              </div>
+            </th>
+            <th class="width-10" id="th1">
+              <div class="um-tableHeader">
+                Created On<div>
+
+                </div>
+              </div>
+            </th>
+
+            <!-- <th class="width-10" id="th2">
+          <div class="um-tableHeader">
+            Due Date<div>
+              
+            </div>
+          </div>
+        </th> -->
+            <!-- <th class="width-15" id="th3">
+          <div class="um-tableHeader">
+            Assignee <div>
+
+            </div>
+          </div>
+        </th>
+        <th class="width-10" id="th4">
+          <div class="um-tableHeader">
+            Priority <div>
+              
+            </div>
+          </div>
+        </th>
+        <th class="width-10" id="th5">
+          <div class="um-tableHeader">
+            Status <div></div>
+          </div>
+        </th> -->
+            <!-- <th class="width-10" id="th6">
+          <div class="um-tableHeader">
+            Completed On <div></div>
+          </div>
+        </th> -->
+            <!-- <th id="action" class="width-10 text-center action-data">Created On</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of AccessProfileList.content">
+            <td class="text-center action-data-first fixed-side"> {{data?.profileOptionId}} </td>
+            <!-- <td class=""><a target="_blank" style="cursor: pointer;" [routerLink]="['/eManager/incident',48]"> {{data.profileOptionName}} </a></td> -->
+            <td class=""><a target="_blank" style="cursor: pointer; color: blue;"
+                (click)="GetAccessProfieById(data.profileOptionId)" (onclick)="GetLevelList('LEVEL0')">
+                {{data.profileOptionName}} </a></td>
+            <!-- <td class=""><a target="_blank" style="cursor: pointer; color: blue; text-decoration-line: underline;"
+              (click)="GetAccessProfieById(data.profileOptionId)" (onclick)="GetLevelList('LEVEL0')">
+              {{data.profileOptionName}} </a></td> -->
+            <td class="">{{data?.profileOptionName}}</td>
+
+            <!-- <td>{{""}}</td> -->
+            <td>{{data?.description}} </td>
+            <td>{{data?.creationDate | date: 'dd/MM/yy'}} </td>
+            <!-- <td *ngIf="data.severity=='ATMINC-LOW-M'"><span class="priority-tag priority-tag-low ">{{data?.severitytext}}</span></td>
+        <td *ngIf="data.severity=='ATMINC-HIGH-M'"><span class="priority-tag priority-tag-high ">{{data?.severitytext}}</span></td>
+        <td *ngIf="data.severity=='ATMINC-MEDIUM-M'"><span class="priority-tag priority-tag-medium ">{{data?.severitytext}}</span></td>
+        <td ><span *ngIf="data.status=='ATMINC-1_PENDING-M'" class="status-tag">{{data?.statusText}}</span>
+          <span *ngIf="data.status=='ATMINC-1_COMPLETED-M'" class="status-tag status-completed">{{data?.statusText}}</span></td> -->
+
+            <!-- <td></td> -->
+            <!-- <td  [routerLink]="['/eManager/user/access-profile',data?.profileOptionId]"  class="text-center action-data"> <svg data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+            xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <g clip-path="url(#clip0_229_9307)">
+              <path
+                d="M11.3334 2.00004C11.5085 1.82494 11.7163 1.68605 11.9451 1.59129C12.1739 1.49653 12.4191 1.44775 12.6667 1.44775C12.9143 1.44775 13.1595 1.49653 13.3883 1.59129C13.6171 1.68605 13.8249 1.82494 14 2.00004C14.1751 2.17513 14.314 2.383 14.4088 2.61178C14.5036 2.84055 14.5523 3.08575 14.5523 3.33337C14.5523 3.58099 14.5036 3.82619 14.4088 4.05497C14.314 4.28374 14.1751 4.49161 14 4.66671L5.00004 13.6667L1.33337 14.6667L2.33337 11L11.3334 2.00004Z"
+                stroke="#344054" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+            <defs>
+              <clipPath id="clip0_229_9307">
+                <rect width="16" height="16" fill="white"></rect>
+              </clipPath>
+            </defs>
+          </svg></td> -->
+          </tr>
+          <tr *ngIf="AccessProfileList.content.length==0">No record found</tr>
+        </tbody>
+      </table>
+      <app-pagination [currentPage]="currentPage" [totalPages]="totalPages" [itemsPerPage]="itemsPerPage"
+        [totalRecords]="totalRecords" [totalPagesArray]="totalPagesArray" (pageChange)="onPageChange($event)"
+        (showResults)="showResults($event)"></app-pagination>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="editScreen" class="fluid-container">
+  <!-- <form class="row" (ngSubmit)="submitIncident()" [formGroup]="incidentForm"> -->
+  <div class="horizontal-filter">
+    <div class="user-add-section1">
+      <!-- <div class="user-header"> -->
+      <div class="title d-flex align-items-center g-16">
+        <button>
+          <img (click)="back()" src="../../../../assets/images/arrow-left.svg">
+
+          <!-- <svg style="margin-right: 5px;cursor:pointer;" (click)="back()" height="26px" width="26px" version="1.1" 
+                id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                viewBox="0 0 487.62 487.62" xml:space="preserve" fill="#000000">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier"> 
+                  <g> 
+                    <g> 
+                      <circle style="fill:#CF6F55;" cx="243.811" cy="243.811" r="243.811"></circle> 
+                      <path style="fill:#C06046;" 
+                        d="M473.438,325.906l-77.24-82.096l-89.987-34.76l-68.096-78.382L91.424,243.81l214.352,235.854 C383.796,459.221,446.552,401.096,473.438,325.906z">
+                      </path> 
+                      <polygon style="fill:#FFFFFF;" 
+                        points="91.424,243.81 238.116,130.668 238.116,182.748 396.198,243.81 238.116,304.872 238.116,356.952 ">                        
+                      </polygon> 
+                    </g> 
+                  </g> 
+                </g>
+              </svg> -->
+        </button>
+        <!-- <svg  (click)="back()" height="36px" width="36px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-48.76 -48.76 585.14 585.14" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <circle style="fill:#CF6F55;" cx="243.811" cy="243.811" r="243.811"></circle> <path style="fill:#C06046;" d="M473.438,325.906l-77.24-82.096l-89.987-34.76l-68.096-78.382L91.424,243.81l214.352,235.854 C383.796,459.221,446.552,401.096,473.438,325.906z"></path> <polygon style="fill:#FFFFFF;" points="91.424,243.81 238.116,130.668 238.116,182.748 396.198,243.81 238.116,304.872 238.116,356.952 "></polygon> </g> </g> </g></svg> -->
+        <h3 class="user-text">
+          Profile- Employee Access Info Tab Access
+          <!-- <button type="button" class="btn btn" style="background-color: tomato; align-items: flex-end;" (click)="back()">Back</button> -->
+        </h3>
+      </div>
+    </div>
+  </div>
+  <div class="user-details-section">
+    <p-tabView class="title" (onChange)="switchHeaders($event);" [(activeIndex)]="tabIndex">
+      <!-- <p-tabPanel *ngFor="let tab of accessProfileList; let i = index" header="{{ tab }}">ll</p-tabPanel> -->
+      <p-tabPanel header="Site" (click)="GetLevelList('LEVEL0')">
+        <!-- <div class="content-title">Content 1</div> -->
+        <div (click)="handleTabContentClick($event)">
+          <!-- <form class="row"  [formGroup]="accessProfileForm">
+        </form> -->
+          <div id="table-scroll" class="table-scroll">
+            <div class="table-wrap">
+
+
+
+
+
+
+              <label class="subheader-label">
+                Level's Profile Value:
+              </label>
+              <table class="main-table">
+                <thead>
+                  <tr>
+
+                    <th>Level Value</th>
+                    <th>Profile Value</th>
+                    <th>#</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of Level_ListData.levelvalues">
+                    <!-- <td class="common-select">{{data.levelvalue2}}</td> -->
+                    <td><select disabled class="common-select">
+                        <option selected>{{data.levelvalue2}}</option>
+                      </select></td>
+                    <td>
+                      <select class="common-select" [(ngModel)]="data.profileoptionvalue">
+                        <option [value]="'Y'" selected *ngIf="data.profileoptionvalue =='Y'">Yes</option>
+                        <option [value]="'N'" selected *ngIf="data.profileoptionvalue =='N'">No</option>
+                        <option [value]="'Y'" *ngIf="data.profileoptionvalue =='N'">Yes</option>
+                        <option [value]="'N'" *ngIf="data.profileoptionvalue =='Y'">No</option>
+                      </select>
+                    </td>
+                    <td>
+                      <div class="d-flex g-8">
+                        <button class="btn common-btn btn-blue" type="submit"
+                          (click)="UpdateAccessProfile('LEVEL0',data.levelvalue,data.levelvalue2,data.levelvalueapplicationid,Level_ListData.levelvalues.profileoptionid,data.profileoptionvalue)">
+                          <i class="pi pi-save"></i>
+                          <!-- Save -->
+                        </button>
+                        <button class="btn common-btn btn-red"
+                          (click)="DeleteAccessProfile(data.profileoptionid,'LEVEL0',data.levelvalue)">
+                          <i class="pi pi-trash"></i>
+                          <!-- Delete -->
+                        </button>
+                      </div>
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- <div class="addressFlexBox">
+        <div class="addressDetails" style="background-color: aqua;"> -->
+          <hr>
+          <div id="table-scroll" class="table-scroll pt-24">
+            <div class="table-wrap">
+              <label class="subheader-label">
+                Set New Profile Value for Level:
+              </label>
+              <table class="main-table">
+                <thead>
+                  <tr>
+                    <th>Level Value</th>
+                    <th>Profile Value</th>
+                    <!-- <th>#</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="2" class="plr-0">
+                      <form [formGroup]="SiteForm" (ngSubmit)="CreateAccessProfile('level0')">
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <select class="common-select inputField form-group" id="groupName" formControlName="site">
+                                <option value="0" selected disabled>Select Site</option>
+                                <option *ngFor="let site of siteOptions | keyvalue" [value]="site.key">{{ site.value }}
+                                </option>
+                              </select>
+                            </div>
+                            <div class="col-sm-6">
+                              <select class="common-select form-group" formControlName="profileoptionvalue">
+                                <option selected [value]="'Y'">Yes</option>
+                                <option [value]="'N'">No</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-6">
+                              <p-button icon="pi pi-save" class="p-common-btn" type="submit" label="Save"></p-button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      <!-- <form [formGroup]="SiteForm" (ngSubmit)="CreateAccessProfile('level0')">
+                        <select class="common-select inputField" id="groupName" formControlName="site">
+                          <option value="0" selected disabled>Select Site</option>
+                          <option *ngFor="let site of siteOptions | keyvalue" [value]="site.key">{{ site.value }}
+                          </option>
+                        </select>
+
+
+                        <br><br>
+                        <p-button icon="pi pi-save" class="p-common-btn" type="submit" label="Save"></p-button>
+                      </form> -->
+                    </td>
+                    <!-- <td>
+                      <select class="common-select" formControlName="profileoptionvalue">
+                        <option selected [value]="'Y'">Yes</option>
+                        <option [value]="'N'">No</option>
+                      </select>
+                    </td> -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="Business Group" (click)="GetLevelList('LEVEL1')">
+        <!-- Content 2 -->
+        <div (click)="handleTabContentClick($event)">
+          <!-- <ng-template pTemplate="header">
+            <div (click)="GetLevelList('LEVEL1')">Business Group</div>
+          </ng-template> -->
+          <div id="table-scroll" class="table-scroll">
+            <div class="table-wrap">
+              <label class="subheader-label">
+                Level's Profile Value:
+              </label>
+              <table class="main-table">
+                <thead>
+                  <tr>
+                    <th>Level Value</th>
+                    <th>Profile Value</th>
+                    <th>#</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of Level_ListData.levelvalues">
+                    <td class="form-control">{{data.levelvalue2}}</td>
+                    <td><select class="common-select">
+                        <option selected *ngIf="data.profileoptionvalue =='Y'">Yes</option>
+                        <option selected *ngIf="data.profileoptionvalue =='N'">No</option>
+                      </select></td>
+                    <td>
+                      <button class="btn btn-primary" type="submit"
+                        (click)="UpdateAccessProfile('LEVEL1',data.levelvalue,data.levelvalue2,data.levelvalueapplicationid,data.profileoptionid,data.profileoptionvalue)">
+                        <i class="pi pi-save"></i>
+                        <!-- Save -->
+                      </button>
+
+                      <button class="btn btn-danger"
+                        (click)="DeleteAccessProfile(data.profileoptionid,'LEVEL1',data.levelvalue)">
+                        <i class="pi pi-trash"></i>
+                        <!-- Delete -->
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- <div class="addressFlexBox">
+            <div class="addressDetails" style="background-color: aqua;"> -->
+          <hr>
+
+          <!-- <p class="user-text">Set New Profile Value for Level</p> -->
+          <div id="table-scroll" class="table-scroll pt-24">
+            <div class="table-wrap">
+              <label class="subheader-label">
+                Set New Profile Value for Level:
+              </label>
+              <table class="main-table">
+                <thead>
+                  <tr>
+
+                    <th>Level Value</th>
+                    <th>Profile Value</th>
+                    <!-- <th>#</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="2" class="plr-0">
+                      <form [formGroup]="BusinessUnitForm" (ngSubmit)="CreateAccessProfile('level1')">
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <select class="common-select inputField" id="groupName" formControlName="businessUnit">
+                                <option value="0" selected disabled>Select business unit</option>
+                                <option *ngFor="let user of businessOptions | keyvalue" [value]="user.key">{{ user.value }}
+                                </option>
+                              </select>
+                            </div>
+                            <div class="col-sm-6">
+                              <select class="common-select form-group" formControlName="profileoptionvalue">
+                                <option selected Value="Y">Yes</option>
+                                <option value="N">No</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-6">
+                              <p-button icon="pi pi-save" class="p-common-btn" type="submit" label="Save"></p-button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Operation Unit" (click)="GetLevelList('LEVEL2')">
+        <!-- Content 3 -->
+        <div (click)="handleTabContentClick($event)">
+          <!-- <ng-template pTemplate="header">
+            <div (click)="GetLevelList('LEVEL2')" >Operation Unit</div>
+          </ng-template> -->
+          <div id="table-scroll" class="table-scroll">
+            <div class="table-wrap">
+              <label class="subheader-label">
+                Level's Profile Value:
+              </label>
+              <table class="main-table">
+                <thead>
+                  <tr>
+
+                    <th>Level Value</th>
+                    <th>Profile Value</th>
+                    <th>#</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of Level_ListData.levelvalues">
+                    <!-- <td class="common-select">{{data.levelvalue2}}</td> -->
+                    <td><select disabled class="common-select">
+                        <option selected>{{data.levelvalue2}}</option>
+                      </select></td>
+                    <td>
+                      <select class="common-select" [(ngModel)]="data.profileoptionvalue">
+                        <option [value]="'Y'" selected *ngIf="data.profileoptionvalue =='Y'">Yes</option>
+                        <option [value]="'N'" selected *ngIf="data.profileoptionvalue =='N'">No</option>
+                        <option [value]="'Y'" *ngIf="data.profileoptionvalue =='N'">Yes</option>
+                        <option [value]="'N'" *ngIf="data.profileoptionvalue =='Y'">No</option>
+                      </select>
+                    </td>
+                    <td>
+                      <div class="d-flex g-8">
+                        <button class="btn common-btn btn-blue" type="submit"
+                          (click)="UpdateAccessProfile('LEVEL2',data.levelvalue,data.levelvalue2,data.levelvalueapplicationid,Level_ListData.levelvalues.profileoptionid,data.profileoptionvalue)">
+                          <i class="pi pi-save"></i>
+                          <!-- Save -->
+                        </button>
+
+                        <button class="btn common-btn btn-red"
+                          (click)="DeleteAccessProfile(data.profileoptionid,'LEVEL2',data.levelvalue)">
+                          <i class="pi pi-trash"></i>
+                          <!-- Delete -->
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- <div class="addressFlexBox">
+            <div class="addressDetails" style="background-color: aqua;"> -->
+          <hr>
+          <!-- <div class="user-add-section2">
+          
+          </div> -->
+          <!-- <p class="user-text">Set New Profile Value for Level</p> -->
+          <div id="table-scroll" class="table-scroll pt-24">
+            <div class="table-wrap">
+              <label class="subheader-label">
+                Set New Profile Value for Level:
+              </label>
+              <table class="main-table">
+                <thead>
+                  <tr>
+
+                    <th>Level Value</th>
+                    <th>Profile Value</th>
+                    <!-- <th>#</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="2" class="plr-0">
+                      <form [formGroup]="OperationUnitForm" (ngSubmit)="CreateAccessProfile('level2')">
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <select class="common-select" id="division" formControlName="divisionid">
+                                <option value="0" disabled>Select Division</option>
+                                <option *ngFor="let div of divisionOptions | keyvalue" [value]="div.key">{{ div.value }}
+                                </option>
+                              </select>
+                            </div>
+                            <div class="col-sm-6">
+                              <select class="common-select form-group" formControlName="profileoptionvalue">
+                                <option [value]="'Y'">Yes</option>
+                                <option [value]="'N'">No</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-6">
+                              <p-button icon="pi pi-save" class="p-common-btn" type="submit" label="Save"></p-button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Access Group" (click)="GetLevelList('LEVEL3')">
+        <!-- Content 4 -->
+        <div (click)="handleTabContentClick($event)">
+          <!-- <ng-template pTemplate="header">
+            <div (click)="GetLevelList('LEVEL3')">Access Group</div>
+          </ng-template> -->
+          <div id="table-scroll" class="table-scroll">
+            <div class="table-wrap">
+              <label class="subheader-label">
+                Level's Profile Value:
+              </label>
+              <table class="main-table">
+                <thead>
+                  <tr>
+
+                    <th>Level Value</th>
+                    <th>Profile Value</th>
+                    <th>#</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of Level_ListData.levelvalues">
+                    <!-- <td  class="common-select">{{data.levelvalue2}}</td> -->
+                    <td><select disabled class="common-select">
+                        <option selected>{{data.levelvalue2}}</option>
+                      </select></td>
+                    <td>
+                      <select class="common-select" [(ngModel)]="data.profileoptionvalue">
+                        <option [value]="'Y'" selected *ngIf="data.profileoptionvalue =='Y'">Yes</option>
+                        <option [value]="'N'" selected *ngIf="data.profileoptionvalue =='N'">No</option>
+                        <option [value]="'Y'" *ngIf="data.profileoptionvalue =='N'">Yes</option>
+                        <option [value]="'N'" *ngIf="data.profileoptionvalue =='Y'">No</option>
+                      </select>
+                    </td>
+                    <td>
+                      <div class="d-flex g-8">
+                        <button class="btn common-btn btn-blue" type="submit"
+                          (click)="UpdateAccessProfile('LEVEL3',data.levelvalue,data.levelvalue2,data.levelvalueapplicationid,data.profileoptionid,data.profileoptionvalue)">
+                          <i class="pi pi-save"></i>
+                          <!-- Save -->
+                        </button>
+
+                        <button class="btn common-btn btn-red"
+                          (click)="DeleteAccessProfile(data.profileoptionid,'LEVEL3',data.levelvalue)">
+                          <i class="pi pi-trash"></i>
+                          <!-- Delete -->
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- <div class="addressFlexBox">
+            <div class="addressDetails" style="background-color: aqua;"> -->
+          <hr>
+          <!-- <div class="user-add-section2">
+          </div> -->
+          <!-- <p class="user-text">Set New Profile Value for Level</p> -->
+          <div id="table-scroll" class="table-scroll pt-24">
+            <div class="table-wrap">
+              <label class="subheader-label">
+                Set New Profile Value for Level:
+              </label>
+              <table class="main-table">
+                <thead>
+                  <tr>
+
+                    <th>Level Value</th>
+                    <th>Profile Value</th>
+                    <!-- <th>#</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="2" class="plr-0">
+                      <form [formGroup]="AccessGroupForm" (ngSubmit)="CreateAccessProfile('level3')">
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <select class="common-select inputField" id="groupName" formControlName="usergroup">
+                                <option value="0" selected disabled>Select Group</option>
+                                <option *ngFor="let option of groupOptions | keyvalue" [value]="option.key">{{ option.value }}
+                                </option>
+                              </select>
+                            </div>
+                            <div class="col-sm-6">
+                              <select class="common-select form-group" formControlName="profileoptionvalue">
+                                <option [value]="'Y'">Yes</option>
+                                <option [value]="'N'">No</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-6">
+                              <p-button icon="pi pi-save" class="p-common-btn" type="submit" label="Save"></p-button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="User" (click)="GetLevelList('LEVEL4')">
+        <!-- Content 5 -->
+        <div (click)="handleTabContentClick($event)">
+          <!-- <ng-template pTemplate="header">
+            <div (click)="GetLevelList('LEVEL4')">User</div>
+          </ng-template> -->
+          <div id="table-scroll" class="table-scroll">
+            <div class="table-wrap">
+              <label class="subheader-label">
+                Level's Profile Value:
+              </label>
+              <table class="main-table">
+                <thead>
+                  <tr>
+
+                    <th>Level Value</th>
+                    <th>Profile Value</th>
+                    <th>#</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of Level_ListData.levelvalues">
+                    <!-- <td  class="common-select">{{data.levelvalue2}}</td> -->
+                    <td><select disabled class="common-select">
+                        <option selected>{{data.levelvalue2}}</option>
+                      </select></td>
+                    <td>
+                      <select class="common-select" [(ngModel)]="data.profileoptionvalue">
+                        <option [value]="'Y'" selected *ngIf="data.profileoptionvalue =='Y'">Yes</option>
+                        <option [value]="'N'" selected *ngIf="data.profileoptionvalue =='N'">No</option>
+                        <option [value]="'Y'" *ngIf="data.profileoptionvalue =='N'">Yes</option>
+                        <option [value]="'N'" *ngIf="data.profileoptionvalue =='Y'">No</option>
+                      </select>
+                    </td>
+                    <td>
+                      <div class="d-flex g-8">
+                        <button class="btn common-btn btn-blue" type="submit"
+                          (click)="UpdateAccessProfile('LEVEL4',data.levelvalue,data.levelvalue2,data.levelvalueapplicationid,data.profileoptionid,data.profileoptionvalue)">
+                          <i class="pi pi-save"></i>
+                          <!-- Save -->
+                        </button>
+
+                        <button class="btn common-btn btn-red"
+                          (click)="DeleteAccessProfile(data.profileoptionid,'LEVEL4',data.levelvalue)">
+                          <i class="pi pi-trash"></i>
+                          <!-- Delete -->
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <hr>
+          <div id="table-scroll" class="table-scroll pt-24">
+            <div class="table-wrap">
+              <label class="subheader-label">
+                Set New Profile Value for Level:
+              </label>
+              <table class="main-table">
+                <thead>
+                  <tr>
+                    <th>Level Value</th>
+                    <th>Profile Value</th>
+                    <!-- <th>#</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <form [formGroup]="UserGroupForm" (ngSubmit)="CreateAccessProfile('level4')">
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <select class="common-select inputField" id="groupName" formControlName="user">
+                                <option value="0" selected disabled>Select User</option>
+                                <option *ngFor="let user of sortedUsers " [value]="user">{{ user[1] }}</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-6">
+                             <select class="common-select form-group" formControlName="profileoptionvalue">
+                               <option [value]="'Y'">Yes</option>
+                               <option [value]="'N'">No</option>
+                             </select>
+                            </div>
+                            <div class="col-sm-6">
+                              <p-button icon="pi pi-save" class="p-common-btn" type="submit" label="Save"></p-button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+
+  <p-toast></p-toast>
+  <p-confirmDialog>
+    <ng-template pTemplate="message" let-message>
+      <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border">
+        <i class="pi pi-exclamation-circle text-6xl text-primary-500"></i>
+        <p>{{ message.message }}</p>
+      </div>
+    </ng-template>
+  </p-confirmDialog>

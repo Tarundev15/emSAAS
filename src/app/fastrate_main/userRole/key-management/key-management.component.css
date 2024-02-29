@@ -1,0 +1,24 @@
+.buttonSection .button {
+    margin: 0px 0px; 
+}
+.buttonSection .button {
+   margin: 0px 0px; 
+}
+.buttonPrimary {
+   background-color: #ffffff;
+   color: #ffffff
+}
+.button {
+    padding: 0px;
+}
+.preview-container {
+    position: relative;
+  }
+  
+  .remove-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    color: red;
+  }

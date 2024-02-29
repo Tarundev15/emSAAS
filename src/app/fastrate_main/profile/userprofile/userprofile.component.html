@@ -1,0 +1,66 @@
+<div class="dashBoard">
+    <div class="titleHeader">
+      <div class="title">Edit Profile</div>
+      <p-toast></p-toast>
+    </div>
+    <div class="mainformSection">
+  
+      <div class="editProfilePic">
+        <img src="assets/images/profile-photo.png" *ngIf="Avatar" />
+        <img [src]="profileImage" />
+        <div class="editIcon">
+          <img src="assets/images/edit-icon.svg" width="18px" (click)="profilePic.click()" />
+          <input class="file-upload" type="file" accept="image/*" (change)="setFile($event)" #profilePic />
+        </div>
+      </div>
+      <form class="form" [formGroup]="form" (ngSubmit)="submitForm()">
+        <div class="fieldContainer">
+          <div class="fieldGroup">
+            <label>First Name</label>
+            <input type="text" formControlName="firstName">
+            <div *ngIf="issubmitted && form.get('firstName')?.hasError('required')">
+              <div class="errormessage">
+                First Name is required
+              </div>
+            </div>
+          </div>
+          <div class="fieldGroup">
+            <label>Last Name</label>
+            <input type="text" formControlName="lastName">
+            <div *ngIf="issubmitted && form.get('lastName')?.hasError('required')">
+              <div class="errormessage">
+                Last Name is required
+              </div>
+            </div>
+          </div>
+          <div class="fieldGroup">
+            <label>Email</label> <input type="text" formControlName="email">
+           
+          </div>
+          <div class="fieldGroup">
+            <label>Business Name</label>
+            <input type="text" formControlName="businessName">
+            <div *ngIf="issubmitted && form.get('businessName')?.hasError('required')">
+              <div class="errormessage">
+                Business Name is required
+              </div>
+            </div>
+          </div>
+          <div class="fieldGroup">
+            <label>Address</label>
+            <input type="text" formControlName="address">
+            <div *ngIf="issubmitted && form.get('address')?.hasError('required')">
+              <div class="errormessage">
+                Address is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="buttonSection">
+          <p-button type="submit" class="button buttonPrimary" [loading]="loading">
+            Submit
+          </p-button>
+        </div>
+      </form>
+    </div>
+  </div>

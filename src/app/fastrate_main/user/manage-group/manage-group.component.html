@@ -1,0 +1,83 @@
+<div class="horizontal-filter">
+  <div class="">
+    <div class="title">
+      <div>
+        <label>User's Group Access:</label>
+      </div>
+      <div>
+        <p-dropdown [options]="accessGroups" [(ngModel)]="selectedGroup" optionLabel="groupname" [filter]="true"
+          filterBy="groupname" [showClear]="true" (onChange)="onGroupChange()" placeholder="ADMIN"
+          [style]="{ width: '300px' }">
+          <ng-template pTemplate="selectedItem">
+            <div *ngIf="selectedGroup">
+              <div>{{ selectedGroup.groupname }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-group pTemplate="item">
+            <div class="form-control m-input">
+              <div>{{ group.groupname }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="user-add-section">
+
+  <div class="form">
+
+    <div class="rolePermissions rolePermissionsPage">
+
+      <div class="row">
+
+        <div class=" col-sm-4" *ngFor="let module of functionAccessData">
+          <div class="rolePermissionsManger">
+            <div class="roleManager">
+              <div class="selectRole">
+                <!-- <input type="checkbox" id="checkboxmodueldescription0" /> -->
+                <label>{{module.moduleName}}</label>
+              </div>
+              <!-- <div class="rolePermission" (click)="toggle(i)">
+                {{showfeatureCount(i)}}
+                <span id="btnmodueldescription{{i}}">
+                    <img [src]="module.show ? '../../../assets/images/arrow-icon-up.svg' : '../../../assets/images/arrow-bottom-gray.svg'" />
+                </span>
+            </div> -->
+
+            </div>
+
+            <div>
+            <!-- <div *ngIf="module.show"> -->
+            <div class="roleSeletion billing">
+              <div class="">
+                <div class="roleSeletionType" *ngFor="let feature of module.functionList">
+                  <input type="checkbox" [id]="'checkboxfeature' + module.moduleId + '_' + feature.functionId"
+                    [(ngModel)]="feature.status" (change)="onSave(feature.functionId,feature.status)" />
+                  <label>{{feature.functionName}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+
+  <p-toast></p-toast>
+  <!-- <div class="addNewUserBtn">
+    <button type="button" id="cncl" style="margin-right: 10px" class="common-btn btn-light-red" data-bs-dismiss="modal">
+      {{ "LC20-34M" | lang }}
+    </button> -->
+    <!-- <button type="submit" *ngIf="!showDetails" id="btnformsubmit" class="common-btn btn-blue" (click)="onSave()">
+      {{ "LC20-33M" | lang }}
+    </button>
+  </div> -->
+</div>

@@ -1,0 +1,71 @@
+/* Example CSS for p-tabView styling */
+
+/* Set a background color for the tab view container */
+.p-tabview {
+    background-color: #f8f9fa; /* Example background color */
+  }
+  
+  /* Style for individual tab headers */
+  .p-tabview .p-tabview-nav li {
+    background-color: #007bff; /* Example tab header background color */
+    color: #fff; /* Example tab header text color */
+  }
+  
+  /* Style for the active tab header */
+  .p-tabview .p-tabview-nav li.p-highlight {
+    background-color: #0056b3; /* Example active tab header background color */
+  }
+  
+  /* Style for the tab content */
+  .p-tabview .p-tabview-panels {
+    border: 1px solid #ddd; /* Example border color for the tab content */
+    border-radius: 4px; /* Example border radius for the tab content */
+    margin-top: 10px; /* Example margin top for separation */
+  }
+  
+  /* Style for individual tab content panels */
+  .p-tabview .p-tabpanel {
+    padding: 15px; /* Example padding for the tab content panels */
+  }
+  
+  /* Style for the form inside the tab content */
+  .p-tabview .p-tabpanel form {
+    /* Add your form styling here */
+  }
+  
+  /* Example styling for form controls */
+  .p-tabview .p-tabpanel input[type="text"],
+  .p-tabview .p-tabpanel input[type="password"],
+  .p-tabview .p-tabpanel textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Example styling for the submit button */
+  .p-tabview .p-tabpanel button[type="submit"] {
+    background-color: #28a745; /* Example button background color */
+    color: #fff; /* Example button text color */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Hover effect for the submit button */
+  .p-tabview .p-tabpanel button[type="submit"]:hover {
+    background-color: #218838; /* Example button hover background color */
+  }
+
+  .p-tabview .p-tabpanel .subheader-label {
+    padding-inline-end: 16px;
+    padding-left: 3px;
+    background-color: #ECF0F4;
+    border-radius: 6px;
+    width: fit-content;
+    margin-top: 4px;
+  }
+  

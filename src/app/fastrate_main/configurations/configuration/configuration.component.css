@@ -1,0 +1,133 @@
+
+/* add user popop */
+
+/* Highlight the selected row and its children */
+tr.highlighted {
+  background-color: #F3F7FF; /* Choose your highlight color */
+}
+
+/* Highlight sub-table headers */
+table.sub-table thead {
+  background-color: #F3F7FF; /* Choose your highlight color */
+}
+
+/* Set the sub-table width to 100% and remove border-spacing and padding */
+table.sub-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  padding: 0;
+}
+
+/* Style the main table, headers, and cells */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+thead {
+  background-color: #f2f2f2;
+}
+
+thead th {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+
+tbody td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+/* button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+} */
+
+
+
+
+tr.highlighted,
+tr.highlighted-sub-table {
+  text-align: left;
+  background-color: #F3F7FF; /* Choose your highlight color */
+}
+.subtable-input{
+  width:80px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+
+/* radio */
+
+
+
+
+/* filter */
+.horizontal-filter {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+}
+
+
+
+
+.button {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 6px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  /* margin: 4px 2px; */
+  cursor: pointer;
+}
+
+
+.button5 {border-radius: 10%;}
+
+.horizontal-filter .form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: 0px 8px;
+}
+.horizontal-filter .form-group:nth-child(1) {margin-left: 0px;}
+.horizontal-filter {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid  #EBEDF1;
+background: #F9FAFB;
+align-items: end;
+}
+.user-number {
+  font-size: 24px;
+  font-weight: 400;
+}
+.horizontal-filter .form-group input[type='text']{
+  height: 48px;
+padding: 12px 8px;
+align-items: left;
+border-radius: 6px;
+border: 1px solid  #DADADA;
+background: #FFF;
+}
+
+td.highlighted {
+  background-color: #F3F7FF !important;
+}
+
+table.sub-table {background-color: #fff !important;}
+
+table.sub-table tbody tr.highlighted {background-color: #fff !important;}
+table.sub-table thead tr th {background: #ECF0F4;}

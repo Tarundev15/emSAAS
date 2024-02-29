@@ -1,0 +1,100 @@
+<div style="display: flex;justify-content: center;">
+  <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; 
+                               border: 1px solid #cccccc;">
+	<!-- Photo part -->
+	<tr>
+		<td align="center" bgcolor="#00D394">
+			<img src="	https://c.animaapp.com/rt4s3Bfd/img/frame-1410089946@2x.png" alt="Creating Email Magic." width="100%" height="200px" style="display: block;" />
+            </td>
+	</tr>
+	<!-- Text Part -->
+	<tr>
+		<td bgcolor="#00D394" style="padding: 0px 5px 80px 5px; position: relative;">
+			<table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%"
+				style=" border-collapse: collapse;">
+				<tr>
+					<td align="center" bgcolor="#ffffff" style="padding-top:80px ;">
+						<img src="../../../assets/images/fast-logo.png" alt="Beatop." width="30%" height="70px" style="display: block;" />
+                        </td>
+				</tr>
+				<tr>
+        
+					<td style="padding: 40px; text-align: center; color: #153643; font-family: Arial, sans-serif;">
+						<h1 *ngIf="!resetpassword" style="font-size: 24px; margin: 0;">Almost there</h1>
+               <form  *ngIf="resetpassword" (ngSubmit)="onSubmit()" [formGroup]="resetForm">
+            <div class="frame-5">
+              <div class="frame-7">
+             
+                <label>New Password-</label>
+                <input class="form-group" type="text"  id="userName" formControlName="username" placeholder="User Name" />
+                <div class="frame-8">
+                  
+                  <label>Confirm Password-</label>
+                  <input class="form-group"id="user_password" placeholder="Password" type="password"  formControlName="password"  />
+                  <div class="frame-9">
+                    <div class="checkbox">
+                    
+    
+    
+              
+    
+    
+                    </div>
+                   
+                  </div>
+                </div>
+              </div>
+             
+              <!-- <button class="responsive-button-instance" id="login_button" >Reset</button> -->
+    
+           
+            </div>
+          </form> 
+					</td>
+				</tr>
+				<tr>
+					<td *ngIf="!resetpassword"
+						style="text-align: center; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; padding: 0 0 30px 0;">
+						<p style="margin: 0;"> Verify your email address to finish creating
+							your<br> ATM account! Just click button below</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%"
+							style="border-collapse: collapse;">
+							<tr>
+								<td width="260" valign="top">
+									<table border="0" cellpadding="0" cellspacing="0" width="100%"
+										style="border-collapse: collapse;">
+										<tr>
+											<td style=" vertical-align: middle;
+                                                            text-align: center; padding-left: 30px;">
+												<span *ngIf="!resetpassword" (click)="reset()" class="msohide es-button-border es-button-border-2" style=" border-style:solid;border-color:#00D394;background:#00D394;border-width:2px;display:inline-block;border-radius:3px;width:auto;mso-hide:all"><a class="es-button es-button-1" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'trebuchet ms', 'lucida grande', 'lucida sans unicode', 'lucida sans', tahoma, sans-serif;font-size:16px;color:#FFFFFF;border-style:solid;border-color:#00D394;border-width:10px 20px 10px 20px;display:inline-block;background:#00D394;border-radius:3px;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center" >Verify now</a></span>
+                        <span  *ngIf=" resetpassword" (click)="reset()" class="msohide es-button-border es-button-border-2" style=" border-style:solid;border-color:#00D394;background:#00D394;border-width:2px;display:inline-block;border-radius:3px;width:auto;mso-hide:all"><a class="es-button es-button-1" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'trebuchet ms', 'lucida grande', 'lucida sans unicode', 'lucida sans', tahoma, sans-serif;font-size:16px;color:#FFFFFF;border-style:solid;border-color:#00D394;border-width:10px 20px 10px 20px;display:inline-block;background:#00D394;border-radius:3px;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center" >Create Password</a></span>
+											
+                      </td>
+										</tr>
+										<tr>
+											<td
+												style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; padding: 25px 0 0 0;">
+											</td>
+										</tr>
+									</table>
+								</td>
+								<td style="font-size: 0; line-height: 0;" width="20">&nbsp;</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#00D394" style="padding: 30px 30px;">
+			<table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+			</table>
+		</td>
+	</tr>
+</table>
+</div>

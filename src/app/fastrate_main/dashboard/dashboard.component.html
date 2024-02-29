@@ -1,0 +1,355 @@
+<div class="">
+  <!-- <h2>FastRate Dashboard</h2>
+   </div> -->
+  <!-- <div class="addBillTripDetails">
+      <div class="tripDetails">
+        <div class="form-group labelWhiteBg">  
+          <input class="inputField"  type="text" id=""  value="CACACA9997" name="code" required>
+          <label class="inputLabel" for="code">Trip Details</label>
+        </div>
+      </div>
+      <div class="tripFlex">
+        <div class="moreTrip">Origin: <label>CA</label></div>
+        <div class="moreTrip">Destination: <label>CA</label></div>
+        <div class="moreTrip">Final Destination: <label>CA</label></div>
+        <div class="moreTrip">Trip Number: <label>9997</label></div>
+        <div class="moreTrip">Trip Date: <label>17 Sept,2023</label></div>
+        <a class="viewMoreTrip" href="#">
+          View More >
+        </a>
+      </div> 
+      
+    </div> -->
+  <!-- <div  class="addBillContainer">
+      <div class="addBillAccordian">
+        <div class="addressFlexBox">
+          <div id="calendar">
+
+            <full-calendar [options]="calendarOptions1" [events]="eventsPromise | async"></full-calendar>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  <div class="addBillContainer">
+    <div>
+      <div class="addBillAccordian">
+        <!-- <div class="addressDetailsHeader">
+                <div>
+                  <img src="../../../assets/images/arrow-blue-up-icon.svg"/>
+                </div>
+                <div class="billsubHeading">Address Details <span class="crtl">(Crtl + 2)</span></div>
+              </div> -->
+        <div class="addressFlexBox">
+          <div class="addressDetails row no-gap">
+
+            <div class="col-sm-4">
+              <div class="addressBox">
+                <h2><span>
+                    <!-- <button (click)="getuseraccount()">kkkkkk</button> -->
+                    <img src="../../../assets/images/calendar.png" />
+                  </span>Shift Calender</h2>
+                <div id="calendar">
+                  <full-calendar [options]="calendarOptions"
+                    class="fc fc-media-screen fc-direction-ltr fc-theme-standard"></full-calendar>
+                </div>
+                <!-- <div>
+                                    <div class="labelWhiteBg horizontal-filter">
+                                      <div class="form-group">  
+                                        <input class="inputField searchIcon" #myInputField type="text"   value="897456" name="code" required>
+                                        <label class="inputLabel" for="code">Shipper ID</label>
+                                      </div>
+                                    </div>
+                                  </div> -->
+                <!-- <div>
+                                    <h3>Express Delivery</h3>
+                                    <p>22519 Dewdney Trunk Rd, Maple Ridge, 25996</p>
+                                  </div> -->
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="addressBox">
+                <h2><span>
+                    <img src="../../../assets/images/calendar-holiday.png" />
+                  </span>Upcoming Holidays</h2>
+                <!-- <div>
+                                    <div class="labelWhiteBg horizontal-filter">
+                                      <div class="form-group">  
+                                        <input class="inputField searchIcon"  type="text" id=""  value="897456" name="code" required>
+                                        <label class="inputLabel" for="code">Shipper ID</label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <h3>Express Delivery</h3>
+                                    <p>22519 Dewdney Trunk Rd, Maple Ridge, 25996</p>
+                                  </div> -->
+                <br>
+                <table class="custom-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th class="centered">Holidays</th>
+                      <th class="centered">Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p><span>{{ currentDate | date: 'EEE, dd MMM yyyy' }}</span></p>
+                      </td>
+                      <td>
+                        <p><span>Maha Shivratri</span></p>
+                      </td>
+                      <td>
+                        <p><span>MH</span></p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p><span>{{ currentDate | date: 'EEE, dd MMM yyyy' }}</span></p>
+                      </td>
+                      <td>
+                        <p><span>Diwali</span></p>
+                      </td>
+                      <td>
+                        <p><span>MH</span></p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p><span>{{ currentDate | date: 'EEE, dd MMM yyyy' }}</span></p>
+                      </td>
+                      <td>
+                        <p><span>Buddha Purnima</span></p>
+                      </td>
+                      <td>
+                        <p><span>RH</span></p>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="addressBox">
+                <h2><span>
+                    <img src="../../../assets/images/talent-search.png" />
+                  </span>New Hires</h2>
+                <br>
+                <!-- <div class="table-container">-->
+                <table class="custom-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th class="centered">Department</th>
+                      <th class="centered">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p><span>Tarun </span></p>
+                      </td>
+                      <td>
+                        <p><span>Application - Development</span></p>
+                      </td>
+                      <td>
+                        <!-- <p><span>Mon, 01, DEC</span></p> -->
+                        <p><span>{{ currentDate | date: 'EEE, dd MMM' }}</span></p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p><span>Vaibhav Kumar Singh</span></p>
+                      </td>
+                      <td>
+                        <p><span>Application - Development </span></p>
+                      </td>
+                      <td>
+                        <!-- <p><span>Mon, 01, DEC</span></p> -->
+                        <p><span>{{ currentDate | date: 'EEE, dd MMM' }}</span></p>
+                        <!-- <p><span>{{ currentDate | date: 'dd/MM/yy' }}</span></p> -->
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p><span>Devasheesh</span></p>
+                      </td>
+                      <td>
+                        <p><span>Cloud</span></p>
+                      </td>
+                      <td>
+                        <!-- <p><span>Mon, 01, DEC</span></p> -->
+                        <p><span>{{ currentDate | date: 'EEE, dd MMM' }}</span></p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p><span>Ved</span></p>
+                      </td>
+                      <td>
+                        <p><span>Security</span></p>
+                      </td>
+                      <td>
+                        <!-- <p><span>Mon, 01, DEC</span></p> -->
+                        <p><span>{{ currentDate | date: 'EEE, dd MMM' }}</span></p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="addBillContainer">
+    <div>
+      <div class="addBillAccordian">
+        <!-- <div class="addressDetailsHeader">
+                <div>
+                  <img src="../../../assets/images/arrow-blue-up-icon.svg"/>
+                </div>
+                <div class="billsubHeading">Address Details <span class="crtl">(Crtl + 2)</span></div>
+              </div> -->
+        <div class="addressFlexBox">
+          <div class="addressDetails row no-gap">
+            <div class="col-sm-4">
+              <div class="addressBox">
+                <h2 style="margin-bottom: 10px;"><span>
+                    <img src="../../../assets/images/calendar.png" />
+                  </span>Birthday</h2>
+                <div class="scroll-container">
+                  <br>
+                  <div class="scroll-content">
+                    <div style="display: flex; align-items: center;">
+                      <div class="userIcon">
+                        <img src="../../../assets/images/Alex Williams.png" />
+                      </div>
+                      <div style="margin-left: 5px;">
+                        <h3>John</h3>
+                        <!-- <p>22519 Dewdney Trunk Rd</p> -->
+                        <p>{{currentDate | date: 'dd/MM/yy'}}</p>
+                      </div>
+                      <div style="margin-left:80px; margin-right: 4px; align-items: right; color:#ff0000;">
+                        <h3>6 days ago</h3>
+                      </div>
+                    </div>
+                    <hr style="opacity: 0.1; margin: 5px;">
+                    <div style="display: flex; align-items: center;">
+                      <div class="userIcon">
+                        <img src="../../../assets/images/Alex Williams.png" />
+                      </div>
+                      <div style="margin-left: 5px;">
+                        <h3>John 1 </h3>
+                        <!-- <p>22519 Dewdney Trunk Rd, 25996</p> -->
+                        <p>{{currentDate | date: 'dd/MM/yy'}}</p>
+                      </div>
+                      <div style="margin-left:80px; margin-right: 4px; align-items: right; color:#ff0000;">
+                        <h3>6 days ago</h3>
+                      </div>
+                    </div>
+                    <hr style="opacity: 0.1; margin: 5px;">
+                    <div style="display: flex; align-items: center;">
+                      <div class="userIcon">
+                        <img src="../../../assets/images/Alex Williams.png" />
+                      </div>
+                      <div style="margin-left: 5px;">
+                        <h3>John 2</h3>
+                        <!-- <p>22519 Dewdney, Maple Ridge, 25996</p> -->
+                        <p>{{currentDate | date: 'dd/MM/yy'}}</p>
+                      </div>
+                      <div style="margin-left:80px; margin-right: 4px; align-items: right; color:#ff0000;">
+                        <h3>4 days ago</h3>
+                      </div>
+                    </div>
+                    <hr style="opacity: 0.1; margin: 5px;">
+                    <div style="display: flex; align-items: center;">
+                      <div class="userIcon">
+                        <img src="../../../assets/images/Alex Williams.png" />
+                      </div>
+                      <div style="margin-left: 5px;">
+                        <h3>John 3</h3>
+                        <!-- <p>22519 Ridge, 25996</p> -->
+                        <p>{{currentDate | date: 'dd/MM/yy'}}</p>
+                      </div>
+                      <div style="margin-left:80px; margin-right: 4px; align-items: right; color:#ff0000;">
+                        <h3>2 days ago</h3>
+                      </div>
+                    </div>
+                    <hr style="opacity: 0.1; margin: 5px;">
+                    <!-- <br> -->
+                    <div style="display: flex; align-items: center;">
+                      <div class="userIcon">
+                        <img src="../../../assets/images/Alex Williams.png" />
+                      </div>
+                      <div style="margin-left: 5px;">
+                        <h3>John 4</h3>
+                        <!-- <p>22519 Dewdney Trunk Rd</p> -->
+                        <p>{{currentDate | date: 'dd/MM/yy'}}</p>
+                      </div>
+
+                      <div style="margin-left:80px; margin-right: 4px; align-items: right; color:#ff0000;">
+                        <h3>1 days ago</h3>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="addressBox">
+                <h2><span>
+                    <img src="../../../assets/images/Announcement.png" />
+                  </span>Announcement</h2>
+                <!-- <div>
+                              <div class="labelWhiteBg horizontal-filter">
+                                <div class="form-group">
+                                  <input class="inputField searchIcon" type="text" id="" value="897456" name="code" required>
+                                  <label class="inputLabel" for="code">Shipper ID</label>
+                                </div>
+                              </div>
+                            </div> -->
+                <br>
+                <div>
+                  <p>Reimbursement Voucher<a id="addUserLink"
+                      style='font-size: smalller; margin-left: 2px; color:slateblue; text-decoration:none; cursor: pointer;'
+                      href="https://emanager.supraesapp.com/eManagerWeb/viewCompanyNotificationDoc?notificationid=10"
+                      target="_blank">View more</a></p><br>
+                  <p>SupraITS Web Email (O365)</p><br>
+                  <p>Atomic North HR Policy<a id="addUserLink"
+                      style='font-size: smalller; margin-left: 2px; color:slateblue; text-decoration:none; cursor: pointer;'
+                      href="https://emanager.supraesapp.com/eManagerWeb/viewCompanyNotificationDoc?notificationid=22"
+                      target="_blank">View more</a></p><br>
+                  <!-- <p>22519 Dewdney Trunk Rd, Maple Ridge, 25996</p> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="addressBox">
+                <h2><span>
+                    <img src="../../../assets/images/link.png" />
+                  </span>Quick Links</h2>
+                <br>
+                <div>
+                  <p><a style='color:slateblue; text-decoration:none;' [routerLink]="['/eManager/user/add-user']">Add
+                      User</a>
+                  </p><br>
+                  <p><a style='color:slateblue; text-decoration:none;' [routerLink]="['/eManager/user/user-details']">Modify
+                      User</a></p><br>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
