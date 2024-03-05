@@ -1,3 +1,10 @@
+variables:
+  SSH_SERVICE_CONNECTION_USERNAME: 'tomcat'
+  SSH_SERVICE_CONNECTION_SERVER: '103.240.89.139'
+  SSH_SERVICE_CONNECTION_PORT: '9007'
+  SSH_SERVICE_CONNECTION_PATH: '/opt/emanager-uat/tomcat9/anplapps/ROOT/eMSAAS-az'
+
+
 trigger:
   - main
 
@@ -38,3 +45,9 @@ steps:
     artifactName: 'drop'
     publishLocation: 'Container'
   displayName: 'Publish Artifact'
+
+
+- script: |
+    scp -r -P $(SSH_SERVICE_CONNECTION_PORT) ./angular-app.zip $(SSH_SERVICE_CONNECTION_USERNAME)@$(SSH_SERVICE_CONNECTION_SERVER):$(SSH_SERVICE_CONNECTION_PATH)
+    ssh -p $(SSH_SERVICE_CONNECTION_PORT) $(SSH_SERVICE_CONNECTION_USERNAME)@$(SSH_SERVICE_CONNECTION_SERVER) "cd $(SSH_SERVICE_CONNECTION_PATH) && unzip -o angular-app.zip && rm angular-app.zip"
+  displayName: 'Deploy to Linux Server'
